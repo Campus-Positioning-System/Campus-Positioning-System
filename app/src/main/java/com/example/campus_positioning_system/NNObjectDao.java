@@ -1,12 +1,24 @@
 package com.example.campus_positioning_system;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
+import java.util.TreeSet;
 
 @Dao
 public interface NNObjectDao {
-    @Query("SELECT * FROM nnobject")
-    List<NNObject> getAll();
+
+    @Insert
+    void insertNNObjects(List<NNObject> list);
+
+    @Insert
+    void insert(NNObject obj);
+
+    @Query("Select * FROM NNObject")
+    List<NNObject> getAllData();
+
+    @Query("SELECT * FROM NNObject WHERE Mac IN (:list)")
+    List<NNObject> getRelevantData(List<String> list);
 }

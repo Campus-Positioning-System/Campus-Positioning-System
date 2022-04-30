@@ -1,19 +1,30 @@
 package com.example.campus_positioning_system;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-
-import org.w3c.dom.Node;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class NNObject implements Comparable<NNObject> {
-    private Node location;
-    private Integer angle;
-    private Float rssi;
-    private String mac;
 
-    public NNObject() {}
+    @PrimaryKey
+    public int id;
 
-    public NNObject(String mac, Float rssi, Node location, int angle) {
+    @ColumnInfo(name = "Location")
+    final private Node location;
+
+    @ColumnInfo(name = "Angle")
+    final private Integer angle;
+
+    @ColumnInfo(name = "RSSI")
+    final private Float rssi;
+
+    @ColumnInfo(name = "Mac")
+    final private String mac;
+
+
+
+    public NNObject(String mac, Float rssi, Node location, Integer angle) {
         this.location = location;
         this.angle = angle;
         this.rssi = rssi;
@@ -24,6 +35,7 @@ public class NNObject implements Comparable<NNObject> {
         this.location = other.location;
         this.rssi = other.rssi;
         this.mac = other.mac;
+        this.angle = other.angle;
     }
 
     public Integer getAngle() {
