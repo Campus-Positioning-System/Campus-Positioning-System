@@ -56,14 +56,17 @@ public class NearestWifiScanner implements Runnable{
             nearestWifiList = availableNetworks.stream()
                     .map(v-> new NNObject(v.BSSID,(float)v.level,null,scanAngle))
                     .collect(Collectors.toList());
-            /*
-            System.out.println(availableNetworks.get(0).BSSID);
-            System.out.println(availableNetworks.get(0).SSID);
-            System.out.println(availableNetworks.get(0).level);
-            System.out.println(scanAngle);
-             */
+
+            if(!availableNetworks.isEmpty()) {
+                System.out.println(availableNetworks.get(0).BSSID);
+                System.out.println(availableNetworks.get(0).SSID);
+                System.out.println(availableNetworks.get(0).level);
+                System.out.println(scanAngle);
+            }
+
+
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
             }
         }
