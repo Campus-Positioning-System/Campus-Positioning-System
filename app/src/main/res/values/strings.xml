@@ -11,4 +11,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="start_stop">Start/Stop</string>
     <string name="speichern">Speichern</string>
+    <string name="nav_open">Öffnen</string>
+    <string name="nav_close">Schließen</string>
+    <string name="nav_favorites">Favoriten</string>
+    <string name="nav_room_list">Liste</string>
+    <string name="nav_settings">Einstellungen</string>
 </resources>

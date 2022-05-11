@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="HFU_Main">#018A57</color>
+    <color name="HFU_Secondary">#08B772</color>
+    <color name="HFU_Gray_Primary">#FAFAFA</color>
+    <color name="HFU_Gray_Secondary">#EAEAEA</color>
+    <color name="HFU_Gray_Ternary">#D6D6D6</color>
+    <color name="HFU_Accent">#019DDF</color>
 </resources>

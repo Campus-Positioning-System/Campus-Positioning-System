@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.2994791666666667" />
         <entry key="..\:/Users/hato0/AndroidStudioProjects/CampusPositioningSystem/app/src/main/res/drawable/ic_launcher_background.xml" value="0.445" />
         <entry key="..\:/Users/hato0/AndroidStudioProjects/CampusPositioningSystem/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/hato0/AndroidStudioProjects/CampusPositioningSystem/app/src/main/res/layout/activity_sensor.xml" value="0.19959473150962512" />
@@ -10,6 +11,13 @@
         <entry key="..\:/Users/hato0/AndroidStudioProjects/CampusPositioningSystem/app/src/main/res/layout/fragment_first.xml" value="0.25" />
         <entry key="..\:/Users/hato0/AndroidStudioProjects/CampusPositioningSystem/app/src/main/res/layout/fragment_second.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/hato0/AndroidStudioProjects/CampusPositioningSystem/app/src/main/res/layout/main_activity.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable/bottom_nav_corners.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/icon_heart.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/nav_icon_favorite.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/nav_icon_room_list.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/nav_icon_settings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/main_activity.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/navbar_menu.xml" value="0.26197916666666665" />
       </map>
     </option>
   </component>
