@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity{
 
         NearestWifiScanner nearestWifiScanner = new NearestWifiScanner(getApplicationContext());
         Thread scannerThread = new Thread(nearestWifiScanner);
-        scannerThread.start();
+       // scannerThread.start();
 
 
 

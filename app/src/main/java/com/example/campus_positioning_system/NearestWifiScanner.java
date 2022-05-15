@@ -57,6 +57,10 @@ public class NearestWifiScanner implements Runnable{
                     .map(v-> new NNObject(v.BSSID,(float)v.level,null,scanAngle))
                     .collect(Collectors.toList());
 
+            List<String> relevantAdresses = availableNetworks.stream()
+                    .map(v->v.BSSID)
+                    .collect(Collectors.toList());
+
             if(!availableNetworks.isEmpty()) {
                 System.out.println(availableNetworks.get(0).BSSID);
                 System.out.println(availableNetworks.get(0).SSID);
@@ -64,7 +68,7 @@ public class NearestWifiScanner implements Runnable{
                 System.out.println(scanAngle);
             }
 
-
+            if(!(new PathfindingControl().updateCurrentLocation(new LocationControl().locate(nearestWifiList, relevantAdresses)) == null))
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
