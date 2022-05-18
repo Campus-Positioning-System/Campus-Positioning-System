@@ -12,17 +12,9 @@ import java.util.LinkedList;
 
 public class LocationControl {
 
-    private static AppDatabase db;
-    private static NNObjectDao dao;
+    private final static NNObjectDao dao = MainActivity.getNNObjectDaoFromDB();
 
     public LocationControl(){
-        if (db == null || dao == null)
-            createDB();
-    }
-    private static void createDB(){
-        Context context = ApplicationProvider.getApplicationContext();
-        db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
-        dao = db.getNNObjectDao();
     }
 
     /*----------------------------------------------------------------
