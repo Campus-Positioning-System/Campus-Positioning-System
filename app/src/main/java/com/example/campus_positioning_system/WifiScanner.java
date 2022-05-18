@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 
 
-public class NearestWifiScanner implements Runnable{
+public class WifiScanner implements Runnable{
 
     private final WifiManager wifiManager;
 
@@ -25,7 +25,7 @@ public class NearestWifiScanner implements Runnable{
 
     private boolean shouldRun = true;
 
-    public NearestWifiScanner(Context context){
+    public WifiScanner(Context context){
         wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 
         // Old code - don't need it
