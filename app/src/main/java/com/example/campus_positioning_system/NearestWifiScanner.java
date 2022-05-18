@@ -45,6 +45,16 @@ public class NearestWifiScanner implements Runnable{
         return null;
     }
 
+    public int adjustAngle(int angle){
+        if(angle <= 45 && angle > 135)
+            return 90;
+        if(angle <= 135 && angle > 215)
+            return 180;
+        if(angle <= 215 && angle > 315)
+            return 270;
+        return 0;
+    }
+
 
     @Override
     public void run() {
@@ -54,11 +64,12 @@ public class NearestWifiScanner implements Runnable{
             scanAngle = SensorActivity.getAngle();
 
             nearestWifiList = availableNetworks.stream()
-                    .map(v-> new NNObject(v.BSSID,(float)v.level,null,scanAngle))
+                    .map(v-> new NNObject(v.BSSID,(float)v.level,null,this.adjustAngle(scanAngle)))
                     .collect(Collectors.toList());
 
             List<String> relevantAdresses = availableNetworks.stream()
                     .map(v->v.BSSID)
+                    .distinct()
                     .collect(Collectors.toList());
 
             if(!availableNetworks.isEmpty()) {

@@ -13,18 +13,19 @@ import es.usc.citius.hipster.graph.GraphSearchProblem;
 import es.usc.citius.hipster.graph.HipsterGraph;
 import es.usc.citius.hipster.model.problem.SearchProblem;
 
-public class PathfindingControl {
+public class PathfindingControl{
     //If Distance to last location is larger than the Metric, the new Location is invalid
     private final double distanceMetric = 5.0;
 
     //Scaling factor to get true Distance values
-    private final double distanceScale = 0.3;
+    private final double distanceScale = 1.0;
 
 
     private Node currentLocation;
     private Node targetLocation;
 
-    private final HipsterGraph<Node, Double> graph = buildGraph("Hallo");
+    private static final HipsterGraph<Node, Double> graph = buildGraph("Hallo");
+    private static final TreeSet<Node> tree = new TreeSet<>();
 
     public synchronized Node updateCurrentLocation(Node newLocation){
         synchronized (currentLocation) {
@@ -40,6 +41,17 @@ public class PathfindingControl {
         }
     }
 
+    public synchronized Node getCurrentLocation(){
+        synchronized (currentLocation){
+            return currentLocation;
+        }
+    }
+    public synchronized Node getTargetLocation(){
+        synchronized (targetLocation){
+            return targetLocation;
+        }
+    }
+
     private double euclideanDistance(Node a, Node b){
         return Math.sqrt(Math.pow(a.getX() - b.getX(),2) + Math.pow(a.getY() - b.getY(), 2)) * distanceScale;
     }
@@ -48,7 +60,6 @@ public class PathfindingControl {
         try {
             File file = new File(filename);
             Scanner scanner = new Scanner(file);
-            TreeSet<Node> tree = new TreeSet<>();
             GraphBuilder<Node, Double> graph = GraphBuilder.<Node, Double>create(); //
             while (scanner.hasNextLine()) {
                 String[] arr = scanner.nextLine().split("[!-]+");
@@ -63,7 +74,7 @@ public class PathfindingControl {
                     tree.add(b);
                 else
                     b = tree.floor(b);
-                graph.connect(a).to(b).withEdge(Math.sqrt(Math.pow((a.getX() - b.getX()), 2) + Math.pow((a.getY() - b.getY()), 2)));
+                graph.connect(a).to(b).withEdge(new PathfindingControl().euclideanDistance(a,b));
             }
             scanner.close();
 
@@ -74,9 +85,15 @@ public class PathfindingControl {
 
 
     public List<Algorithm.SearchResult> calculatePath(){
-        SearchProblem p = GraphSearchProblem.startingFrom(currentLocation).in(graph).takeCostsFromEdges().build();
-        Algorithm.SearchResult x = Hipster.createAStar(p).search(targetLocation);
+        SearchProblem p = GraphSearchProblem.startingFrom(tree.floor(currentLocation)).in(graph).takeCostsFromEdges().build();
+        Algorithm.SearchResult x = Hipster.createAStar(p).search(tree.floor(targetLocation));
         return x.getOptimalPaths();
     }
+
+
+    public static TreeSet<Node> getTree(){
+        return tree;
+    }
+
 
 }
