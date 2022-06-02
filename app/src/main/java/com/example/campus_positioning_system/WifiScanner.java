@@ -21,7 +21,7 @@ public class WifiScanner implements Runnable{
     private List<ScanResult> availableNetworks;
     private int scanAngle;
     private List<NNObject> nearestWifiList;
-    private SensorEventListener listener;
+
 
     private boolean shouldRun = true;
 
@@ -54,6 +54,7 @@ public class WifiScanner implements Runnable{
             return 270;
         return 0;
     }
+
 
 
     @Override

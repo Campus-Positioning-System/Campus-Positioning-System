@@ -33,7 +33,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        //sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         textView = findViewById(R.id.textViewTest);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -57,7 +57,6 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
     @Override
     protected void onPause() {
         super.onPause();
-
         sensorManager.unregisterListener(this, accelerometer);
         sensorManager.unregisterListener(this, magneticField);
     }
@@ -84,6 +83,7 @@ public class SensorActivity extends AppCompatActivity implements SensorEventList
             lastUpdatedTime = System.currentTimeMillis();
 
             angle = (int) azimuthInDegree;
+
             textView.setText(angle + " Grad");
         }
     }

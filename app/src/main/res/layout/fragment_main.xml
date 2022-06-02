@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragment">
+
+    <com.ortiz.touchview.TouchImageView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/schlecht" />
+
+    <TextView
+        android:id="@+id/textViewTest"
+        android:layout_width="166dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="454dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</FrameLayout>

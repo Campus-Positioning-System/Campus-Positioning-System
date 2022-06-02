@@ -16,4 +16,7 @@
     <string name="nav_favorites">Favoriten</string>
     <string name="nav_room_list">Liste</string>
     <string name="nav_settings">Einstellungen</string>
+    <string name="ic_abc_1_og1">1OG_ABC</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

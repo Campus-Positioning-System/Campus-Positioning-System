@@ -1,39 +1,90 @@
 package com.example.campus_positioning_system;
 
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.widget.ImageView;
+// Standard Activity Library's
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
+
+import android.content.Context;
+import android.os.Bundle;
+
+// Wifi and Compass Manager
+
+
+// View
+
+// Room Database
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity{
+    //Room Database Object
     private static AppDatabase db;
+    private Context thisContext;
+    private BottomNavigationView navigationView;
 
-    //Scaleable Map Background
-    private ScaleGestureDetector scaleGestureDetector;
-    private float scaleFactor = 1f;
-    private ImageView imageView;
+    private static Boolean onlyNavigateOnce = true;
+    private static FragmentManager supportFragmentManager;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        System.out.println("On Create Main Activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        imageView = findViewById(R.id.map);
-        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
+        supportFragmentManager = getSupportFragmentManager();
 
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build();
+        navigationView = findViewById(R.id.bottom_navigation);
+        navigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.nav_room_list:
+                    if(onlyNavigateOnce) {
+                        NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
+                        NavController navController = navHostFragment.getNavController();
+                        navController.navigate(R.id.roomSelectionFragment);
+                        onlyNavigateOnce = false;
+                    }
+                    /*
+                    Intent intent = new Intent(thisContext, RoomSelectionActivity.class);
+                    startActivity(intent);
+                     */
             }
-        }).start();
+            return false;
+        });
+
+
+
+        System.out.println("On Create Ende Main Activity");
+    }
+
+    public static NNObjectDao getNNObjectDaoFromDB(){
+        return db.getNNObjectDao();
+    }
+
+    public static void setOnlyNavigateOnceTrue() {
+        onlyNavigateOnce = true;
+    }
+
+    public static FragmentManager getSupportFragmentManagerMain() {
+        return supportFragmentManager;
+    }
+
+
+}
+
+/*
+        DrawingAssistant drawingAssistant = new DrawingAssistant();
+
+        Intent wifiRights = new Intent(Settings.Panel.ACTION_WIFI);
+        startActivity(wifiRights);
+
+
+        new Thread(() -> db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build()).start();
 
         Intent intent = new Intent(this, SensorActivity.class);
         startActivity(intent);
@@ -41,32 +92,4 @@ public class MainActivity extends AppCompatActivity{
         WifiScanner nearestWifiScanner = new WifiScanner(getApplicationContext());
         Thread scannerThread = new Thread(nearestWifiScanner);
        // scannerThread.start();
-
-
-
-
-
-    }
-
-    public static NNObjectDao getNNObjectDaoFromDB(){
-        return db.getNNObjectDao();
-    }
-
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        scaleGestureDetector.onTouchEvent(motionEvent);
-        return true;
-    }
-    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-        @Override
-        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-            scaleFactor *= scaleGestureDetector.getScaleFactor();
-            scaleFactor = Math.max(1f, Math.min(scaleFactor, 10.0f));
-            imageView.setScaleX(scaleFactor);
-            imageView.setScaleY(scaleFactor);
-            return true;
-        }
-    }
-
-
-
-}
+        */

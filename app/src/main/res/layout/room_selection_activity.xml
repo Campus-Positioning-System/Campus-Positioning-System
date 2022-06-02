@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -35,19 +34,5 @@
 
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
-
-    <!--SearchView
-        android:id="@+id/search_bar_Room"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bottom_nav_corners"
-        android:elevation="8dp"
-        android:queryHint="Search for Room"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
