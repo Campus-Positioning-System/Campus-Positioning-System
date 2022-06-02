@@ -3,7 +3,7 @@
     android:id="@+id/nav_menu">
 
     <item
-        android:id="@+id/nav_account"
+        android:id="@+id/nav_favorites"
         android:title="@string/nav_favorites"
         android:icon="@drawable/nav_icon_favorite"
         />

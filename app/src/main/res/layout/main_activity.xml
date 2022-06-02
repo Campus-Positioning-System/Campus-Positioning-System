@@ -81,7 +81,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@android:layout/activity_list_item" />
+        tools:itemCount="8"
+        tools:listitem="@layout/room_list_item" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorites_list"
@@ -100,6 +101,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@android:layout/activity_list_item" />
+        tools:itemCount="6"
+        tools:listitem="@layout/favorites_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

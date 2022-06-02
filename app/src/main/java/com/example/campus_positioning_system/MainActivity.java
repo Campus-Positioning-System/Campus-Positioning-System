@@ -3,30 +3,30 @@ package com.example.campus_positioning_system;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.widget.ImageView;
+import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener{
     private AppDatabase db;
 
-    //Scaleable Map Background
-    private ScaleGestureDetector scaleGestureDetector;
-    private float scaleFactor = 1f;
-    private ImageView imageView;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        imageView = findViewById(R.id.map);
-        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(this);
 
 
         new Thread(new Runnable() {
@@ -49,19 +49,37 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    public boolean onTouchEvent(MotionEvent motionEvent) {
-        scaleGestureDetector.onTouchEvent(motionEvent);
-        return true;
-    }
-    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-        @Override
-        public boolean onScale(ScaleGestureDetector scaleGestureDetector) {
-            scaleFactor *= scaleGestureDetector.getScaleFactor();
-            scaleFactor = Math.max(1f, Math.min(scaleFactor, 10.0f));
-            imageView.setScaleX(scaleFactor);
-            imageView.setScaleY(scaleFactor);
-            return true;
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        System.out.println("Selected Item was " + item.getItemId());
+        switch (item.getItemId()) {
+            case R.id.nav_favorites:
+                RecyclerView fav_list = findViewById(R.id.favorites_list);
+                if(fav_list.getVisibility() == View.VISIBLE)
+                    fav_list.setVisibility(View.INVISIBLE);
+                else
+                    fav_list.setVisibility(View.VISIBLE);
+
+                return true;
+
+            case R.id.nav_room_list:
+
+                RecyclerView room_list = findViewById(R.id.room_list);
+                if(room_list.getVisibility() == View.VISIBLE)
+                    room_list.setVisibility(View.INVISIBLE);
+                else
+                    room_list.setVisibility(View.VISIBLE);
+
+                return true;
+
+            case R.id.nav_settings:
+
+                return true;
+
+
         }
+        return false;
     }
 
 
