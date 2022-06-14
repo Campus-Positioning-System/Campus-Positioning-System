@@ -1,6 +1,8 @@
-package com.example.campus_positioning_system;
+package com.example.campus_positioning_system.Database;
 
 import androidx.room.TypeConverter;
+
+import com.example.campus_positioning_system.Node;
 
 public class Converters {
     @TypeConverter
