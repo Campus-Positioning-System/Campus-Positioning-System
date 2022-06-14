@@ -1,5 +1,6 @@
-package com.example.campus_positioning_system;
+package com.example.campus_positioning_system.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.campus_positioning_system.Activitys.MainActivity;
+import com.example.campus_positioning_system.LocationNavigation.WifiScanner;
+import com.example.campus_positioning_system.Map.DrawingAssistant;
+import com.example.campus_positioning_system.R;
+import com.ortiz.touchview.TouchImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +30,8 @@ public class MainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static boolean onlyOnce = true;
 
     public MainFragment() {
         // Required empty public constructor
@@ -56,9 +65,29 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        /*
+        Also... der grobe Plan ist erstmal hier alles zu starten. Also. Sensor Activity - WifiScanner
+        Dann den Drawing Assistant damit zu füttern und ab geht die Party... Hoffentlich.
+         */
+
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        if(onlyOnce) {
+            TouchImageView mapView = rootView.findViewById(R.id.map);
+            TouchImageView dotView = rootView.findViewById(R.id.dot);
+
+            System.out.println();
+
+            WifiScanner wifiScanner = new WifiScanner(MainActivity.mainContext());
+            new Thread(wifiScanner).start();
+
+            DrawingAssistant drawingAssistant = new DrawingAssistant(dotView, mapView,wifiScanner);
+            drawingAssistant.start();
+
+            onlyOnce = false;
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return rootView;
     }
 }
