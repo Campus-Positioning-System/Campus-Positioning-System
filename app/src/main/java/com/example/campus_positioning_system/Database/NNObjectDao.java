@@ -1,8 +1,10 @@
-package com.example.campus_positioning_system;
+package com.example.campus_positioning_system.Database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.example.campus_positioning_system.NNObject;
 
 import java.util.List;
 import java.util.TreeSet;

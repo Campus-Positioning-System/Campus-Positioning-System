@@ -1,4 +1,7 @@
-package com.example.campus_positioning_system;
+package com.example.campus_positioning_system.LocationNavigation;
+
+import com.example.campus_positioning_system.Database.Converters;
+import com.example.campus_positioning_system.Node;
 
 import java.io.File;
 import java.io.FileNotFoundException;

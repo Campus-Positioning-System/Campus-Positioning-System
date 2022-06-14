@@ -1,4 +1,6 @@
-package com.example.campus_positioning_system;
+package com.example.campus_positioning_system.LocationNavigation;
+
+import com.example.campus_positioning_system.NNObject;
 
 import java.util.TreeSet;
 import java.util.NoSuchElementException;

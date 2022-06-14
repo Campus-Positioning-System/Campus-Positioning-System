@@ -1,10 +1,12 @@
-package com.example.campus_positioning_system;
+package com.example.campus_positioning_system.LocationNavigation;
 
 
 import android.content.Context;
-import android.hardware.SensorEventListener;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+
+import com.example.campus_positioning_system.Activitys.MainActivity;
+import com.example.campus_positioning_system.NNObject;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +36,7 @@ public class WifiScanner implements Runnable{
         }
 
         availableNetworks = wifiManager.getScanResults();
-        scanAngle = SensorActivity.getAngle();
+        scanAngle = MainActivity.getAngle();
     }
 
     public synchronized List<ScanResult> getWifiList() {
@@ -62,7 +64,7 @@ public class WifiScanner implements Runnable{
         while(shouldRun){
             wifiManager.startScan();
             availableNetworks = wifiManager.getScanResults();
-            scanAngle = SensorActivity.getAngle();
+            scanAngle = MainActivity.getAngle();
 
             nearestWifiList = availableNetworks.stream()
                     .map(v-> new NNObject(v.BSSID,(float)v.level,null,this.adjustAngle(scanAngle)))
@@ -80,7 +82,7 @@ public class WifiScanner implements Runnable{
                 System.out.println(scanAngle);
             }
 
-            if(!(new PathfindingControl().updateCurrentLocation(new LocationControl().locate(nearestWifiList, relevantAdresses)) == null))
+            //if(!(new PathfindingControl().updateCurrentLocation(new LocationControl().locate(nearestWifiList, relevantAdresses)) == null))
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
