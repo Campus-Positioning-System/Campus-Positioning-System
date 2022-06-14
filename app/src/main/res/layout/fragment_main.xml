@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
+    tools:context=".Fragments.MainFragment">
 
     <com.ortiz.touchview.TouchImageView
         android:id="@+id/map"
@@ -12,6 +12,12 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
         android:src="@drawable/schlecht" />
+
+    <com.ortiz.touchview.TouchImageView
+        android:id="@+id/dot"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/dot" />
 
     <TextView
         android:id="@+id/textViewTest"
