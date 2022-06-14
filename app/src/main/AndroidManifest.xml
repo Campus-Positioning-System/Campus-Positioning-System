@@ -17,17 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CampusPositioningSystem">
         <activity
-            android:name=".SensorActivity"
-            android:exported="false"
-            android:label="Sensor Activity"
-            android:theme="@style/Theme.CampusPositioningSystem.NoActionBar" />
-        <activity
-            android:name=".RoomSelectionActivity"
+            android:name=".Activitys.RoomSelectionActivity"
             android:exported="false"
             android:label="Room Selection Activity"
             android:theme="@style/Theme.CampusPositioningSystem.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activitys.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.CampusPositioningSystem.NoActionBar">
