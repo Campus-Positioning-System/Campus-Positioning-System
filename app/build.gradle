@@ -4,6 +4,7 @@ plugins {
 
 android {
     compileSdk 32
+
     defaultConfig {
         applicationId "com.example.campus_positioning_system"
         minSdk 29
@@ -44,6 +45,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.4.2'
     implementation 'com.opencsv:opencsv:5.6'
     implementation 'androidx.test:core:1.4.0'
+    implementation 'androidx.preference:preference:1.1.1'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

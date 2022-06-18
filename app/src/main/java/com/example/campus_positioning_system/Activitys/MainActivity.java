@@ -29,6 +29,8 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.example.campus_positioning_system.Database.AppDatabase;
@@ -38,6 +40,9 @@ import com.example.campus_positioning_system.Fragments.RoomSelectionFragment;
 import com.example.campus_positioning_system.NNObject;
 import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
+import com.example.campus_positioning_system.RoomList.NestedList.Child;
+import com.example.campus_positioning_system.RoomList.NestedList.ParentAdapter;
+import com.example.campus_positioning_system.RoomList.NestedList.ParentChild;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -79,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private boolean databaseIsPopulated = false;
 
+
     @Override
     protected void onStart() {
         new Thread(new Runnable() {
@@ -113,38 +119,34 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.main_activity);
 
 
-        supportFragmentManager = getSupportFragmentManager();
-
         //------------------------------------------------------------------------------
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
 
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magneticField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         //------------------------------------------------------------------------------
 
         thisContext = getApplicationContext();
-
         navigationView = findViewById(R.id.bottom_navigation);
+        supportFragmentManager = getSupportFragmentManager();
 
-        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                System.out.println("Item is: " + item.getItemId());
-                switch (item.getItemId()) {
-                    case R.id.nav_room_list:
-                        if (onlyNavigateOnce && databaseIsPopulated) {
-                            System.out.println("Navigating to View(Item): " + R.id.roomSelectionFragment);
-                            NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
-                            NavController navController = navHostFragment.getNavController();
-                            navController.navigate(R.id.roomSelectionFragment);
-                            Intent intent = new Intent(thisContext, RoomSelectionActivity.class);
-                            startActivity(intent);
-                            onlyNavigateOnce = false;
-                        }
-                }
-                return false;
+
+        navigationView.setOnItemSelectedListener(item -> {
+            System.out.println("Item is: " + item.getItemId());
+            switch (item.getItemId()) {
+                case R.id.nav_room_list:
+                    if (onlyNavigateOnce && databaseIsPopulated) {
+                        System.out.println("Navigating to View(Item): " + R.id.new_room_select);
+                        NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
+
+                        NavController navController = navHostFragment.getNavController();
+                        navController.navigate(R.id.new_room_select);
+                        Intent intent = new Intent(thisContext, RoomListActivity.class);
+                        startActivity(intent);
+                        onlyNavigateOnce = false;
+                    }
             }
+            return false;
         });
 
 
@@ -173,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public static Context mainContext() {
         return thisContext;
     }
+
+
 
 
     // Ab hier alles ehemalige Sensor Activity

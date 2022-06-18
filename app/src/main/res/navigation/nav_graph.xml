@@ -12,6 +12,9 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_roomSelectionFragment"
             app:destination="@id/roomSelectionFragment" />
     </fragment>
@@ -22,6 +25,14 @@
         tools:layout="@layout/fragment_room_selection" >
         <action
             android:id="@+id/action_roomSelectionFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.campus_positioning_system.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>
