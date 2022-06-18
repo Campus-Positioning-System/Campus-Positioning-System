@@ -51,6 +51,14 @@ public class DrawingAssistant extends Thread{
     @Override
     public void run() {
         Mover dotMover;
+        Float lastX = (float) 0;
+        Float lastY = (float) 0;
+
+        dotMover = new Mover("DotMover",lastX,lastY);
+        dotMover.setView(dotView);
+        dotMover.start();
+
+
 
         try {
             Thread.sleep(1000);
@@ -58,21 +66,29 @@ public class DrawingAssistant extends Thread{
             e.printStackTrace();
         }
 
+
         while(true) {
             if(!setHW && mapView.getHeight()!=0.0) {
                 this.height = mapView.getHeight();
                 this.width = mapView.getWidth();
+                setHW = true;
             }
 
-            dotView.setZoom(3-mapView.getCurrentZoom());
-            System.out.println(mapView.getScrollPosition());
+            dotView.setZoom((float) (2-mapView.getCurrentZoom()));
 
-            dotMover = new Mover("DotMover");
-            dotMover.setView(dotView);
+
+
+
             PointF pointF = mapView.getScrollPosition();
-            System.out.println(pointF.x + " " + height);
-            dotMover.setNewPosition(pointF.x*width,pointF.y*height);
-            dotMover.start();
+
+            lastX = (1-pointF.x)*width;
+            lastY = (1-pointF.y)*height;
+
+            System.out.println(pointF.x + " " + pointF.y);
+
+            dotMover.setNewPosition(lastX,lastY);
+            dotMover.animationStart();
+
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {

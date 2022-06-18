@@ -14,9 +14,19 @@ public class Mover extends HandlerThread {
     private TouchImageView view;
 
     private Float x,y;
+    private Float lastX,lastY;
 
-    public Mover(String name) {
+    private Handler handler;
+
+    private final Path path;
+
+    public Mover(String name, Float lastX, Float lastY) {
         super(name);
+        this.lastX = lastX;
+        this.lastY = lastY;
+        this.x = (float) 0.0;
+        this.y = (float) 0.0;
+        this.path = new Path();
     }
 
     public void setView(TouchImageView view) {
@@ -28,20 +38,34 @@ public class Mover extends HandlerThread {
         this.y = y;
     }
 
+    public void setOldPosition(Float lastX, Float lastY) {
+        this.lastX = lastX;
+        this.lastY = lastY;
+    }
+
 
     @Override
     public void run() {
         Looper.prepare();
-        new Handler().post(() -> {
-            System.out.println("Dot moving to: " +  x + " " + y);
-            Path path = new Path();
-            path.lineTo(x,y);
+        this.handler = new Handler();
+        Looper.loop();
+    }
+
+    public void animationStart() {
+        handler.postDelayed(() -> {
+            System.out.println("Dot moving to: " + x + " " + y);
+
+            path.moveTo(x, y);
             animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
-            animator.setDuration(2000);
             animator.start();
+             /*
+             path.lineTo(x, y);
+            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+            animator.setDuration(1500);
+            animator.start();
+            */
             view.setX(x);
             view.setY(y);
-        });
-        Looper.loop();
+        },50);
     }
 }
