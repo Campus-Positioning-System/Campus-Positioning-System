@@ -16,7 +16,15 @@
         <entry key="app/src/main/res/drawable/nav_icon_favorite.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/nav_icon_room_list.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/nav_icon_settings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_room_selection.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.29270833333333335" />
+        <entry key="app/src/main/res/layout/recycler_view_item.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/recycler_view_item_1.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/room_item.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/room_list_item.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/room_selection_activity.xml" value="0.21354166666666666" />
+        <entry key="app/src/main/res/layout/sensor_activity.xml" value="0.22037037037037038" />
+        <entry key="app/src/main/res/layout/text_row_item.xml" value="0.2125" />
         <entry key="app/src/main/res/menu/navbar_menu.xml" value="0.26197916666666665" />
       </map>
     </option>

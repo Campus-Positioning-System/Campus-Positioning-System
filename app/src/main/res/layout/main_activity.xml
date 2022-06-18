@@ -3,29 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/HFU_Secondary">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/map"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_abc_1_og1" />
-
-    <TextView
-        android:id="@+id/textViewTest"
-        android:layout_width="166dp"
-        android:layout_height="113dp"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="123dp"
-        android:layout_marginBottom="454dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -35,71 +14,40 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bottom_nav_corners"
-        android:backgroundTint="@color/HFU_Main"
-        android:backgroundTintMode="screen"
         android:elevation="8dp"
-        app:backgroundTint="@color/HFU_Main"
         app:elevation="12dp"
         app:itemIconTint="@color/HFU_Main"
         app:itemTextColor="@color/HFU_Main"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/map"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/map"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/navbar_menu" />
 
-    <SearchView
-        android:id="@+id/search_bar"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+
+    <!--SearchView
+        android:id="@+id/search_bar_Room"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/bottom_nav_corners"
         android:elevation="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintEnd_toStartOf="@+id/map"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/map"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/room_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/bottom_nav_corners"
-        android:overScrollMode="never"
-        android:paddingLeft="8dp"
-        android:paddingTop="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:queryHint="Search for Room"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@android:layout/activity_list_item" />
+        app:layout_constraintTop_toTopOf="parent" /-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favorites_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/bottom_nav_corners"
-        android:overScrollMode="never"
-        android:paddingLeft="8dp"
-        android:paddingTop="8dp"
-        android:paddingRight="8dp"
-        android:paddingBottom="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@android:layout/activity_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
