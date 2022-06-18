@@ -6,9 +6,6 @@ import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.example.campus_positioning_system.Database.AppDatabase;
-import com.example.campus_positioning_system.Database.NNObjectDao;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +23,9 @@ public class SimpleEntityReadWriteTest {
 
     @Before
     public void createDb() {
-        Context context = ApplicationProvider.getApplicationContext();
-        db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
-        nnObjectDao = db.nnObjectDao();
+      db = AppDatabaseSingelton.getInstance();
+        //   db.clearAllTables();
+        nnObjectDao = db.getNNObjectDao();
     }
 
     @After
@@ -38,12 +35,9 @@ public class SimpleEntityReadWriteTest {
 
     @Test
     public void writeUserAndReadInList() throws Exception {
-        NNObject nnObject = new NNObject("Hallo", (float)12, new Node("",1,2,3),1);
-        nnObjectDao.insert(nnObject);
-        List<String> macList = new ArrayList<>(Arrays.asList("Hallo"));
-        List<NNObject> byRelevantData = nnObjectDao.getRelevantData(macList);
-        //assert(nnObject.compareTo(byRelevantData.get(0)) == 0);
-        System.out.println(byRelevantData.get(0).toString());
+        List list = nnObjectDao.getAllData();
+        assert(list.size() == 46141);
+
     }
 }
 

@@ -79,31 +79,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private boolean databaseIsPopulated = false;
 
-    @Override
-    protected void onStart() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build(); //FixMe allowMainThreadQueries is the devil
-                System.out.println("Dir is: " + Environment.getRootDirectory());
-
-                List<NNObject> dataList = new ArrayList<>();
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("databaseAsCsv.csv")))) {
-                    br.readLine(); //FixMe Skip first line, its bad, real bad
-                    for(String line; (line = br.readLine()) != null; ) {
-                        dataList.add(Converters.nnObjectFromString(line));
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                db.nnObjectDao().insertNNObjects(dataList);
-                databaseIsPopulated = true;
-                System.out.println("Database was populated");
-            }
-        }).start();
-        super.onStart();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -159,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public static AppDatabase getDb(){
-        return db;
+        return AppDatabase.getInstance();
     }
 
     public static void setOnlyNavigateOnceTrue() {

@@ -44,7 +44,7 @@ public class LocationControl {
         };
         TreeSet<CNode> sort = new TreeSet<>(comparator);
         sort.addAll(check);
-        return sort.first().getParent();
+        return sort.last().getParent();
     }
 
     /*----------------------------------------------------------------
@@ -52,10 +52,11 @@ public class LocationControl {
     in a List.
     Values are then passed to findLocation().
     ----------------------------------------------------------------*/
-    public Node locate(List<NNObject> search, List<String> outOf) {
+    public Node locate(List<NNObject> search) {
         /*Was relevant for testing....
         TreeSet<NNObject> tree = DBMock.getTree();*/
         TreeSet<NNObject> tree = new TreeSet<>();
+        for(String s: search)
         tree.addAll(dao.getRelevantData(outOf));
 
         List<NNObject> found = new LinkedList<NNObject>();
