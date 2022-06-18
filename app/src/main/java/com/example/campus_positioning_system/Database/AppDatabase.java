@@ -12,7 +12,7 @@ import com.example.campus_positioning_system.NNObject;
 public abstract class AppDatabase extends RoomDatabase {
     public abstract NNObjectDao nnObjectDao();
 
-    public NNObjectDao getNNObjectDao() {
+    public NNObjectDao k() {
         return this.nnObjectDao();
     }
 }

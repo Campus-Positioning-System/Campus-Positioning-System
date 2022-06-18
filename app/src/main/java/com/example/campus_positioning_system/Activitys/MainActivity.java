@@ -2,6 +2,7 @@ package com.example.campus_positioning_system.Activitys;
 
 // Standard Activity Library's
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -11,8 +12,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 // Wifi and Compass Manager
@@ -27,9 +32,22 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.room.Room;
 
 import com.example.campus_positioning_system.Database.AppDatabase;
+import com.example.campus_positioning_system.Database.Converters;
 import com.example.campus_positioning_system.Database.NNObjectDao;
+import com.example.campus_positioning_system.Fragments.RoomSelectionFragment;
+import com.example.campus_positioning_system.NNObject;
+import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -59,18 +77,41 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private static int angle;
 
+    private boolean databaseIsPopulated = false;
+
+    @Override
+    protected void onStart() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).allowMainThreadQueries().build(); //FixMe allowMainThreadQueries is the devil
+                System.out.println("Dir is: " + Environment.getRootDirectory());
+
+                List<NNObject> dataList = new ArrayList<>();
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("databaseAsCsv.csv")))) {
+                    br.readLine(); //FixMe Skip first line, its bad, real bad
+                    for(String line; (line = br.readLine()) != null; ) {
+                        dataList.add(Converters.nnObjectFromString(line));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                db.nnObjectDao().insertNNObjects(dataList);
+                databaseIsPopulated = true;
+                System.out.println("Database was populated");
+            }
+        }).start();
+        super.onStart();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         System.out.println("On Create Main Activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                db = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class).build();
-            }
-        }).start();
 
         supportFragmentManager = getSupportFragmentManager();
 
@@ -85,19 +126,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         thisContext = getApplicationContext();
 
         navigationView = findViewById(R.id.bottom_navigation);
-        navigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.nav_room_list:
-                    if(onlyNavigateOnce) {
-                        NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
-                        NavController navController = navHostFragment.getNavController();
-                        navController.navigate(R.id.roomSelectionFragment);
-                        Intent intent = new Intent(thisContext, RoomSelectionActivity.class);
-                        startActivity(intent);
-                        onlyNavigateOnce = false;
-                    }
+
+        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                System.out.println("Item is: " + item.getItemId());
+                switch (item.getItemId()) {
+                    case R.id.nav_room_list:
+                        if (onlyNavigateOnce && databaseIsPopulated) {
+                            System.out.println("Navigating to View(Item): " + R.id.roomSelectionFragment);
+                            NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
+                            NavController navController = navHostFragment.getNavController();
+                            navController.navigate(R.id.roomSelectionFragment);
+                            Intent intent = new Intent(thisContext, RoomSelectionActivity.class);
+                            startActivity(intent);
+                            onlyNavigateOnce = false;
+                        }
+                }
+                return false;
             }
-            return false;
         });
 
 
@@ -108,7 +155,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
     public static NNObjectDao getNNObjectDaoFromDB(){
-        return db.getNNObjectDao();
+        return db.k();
+    }
+
+    public static AppDatabase getDb(){
+        return db;
     }
 
     public static void setOnlyNavigateOnceTrue() {

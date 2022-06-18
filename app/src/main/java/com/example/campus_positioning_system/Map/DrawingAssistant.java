@@ -41,8 +41,8 @@ public class DrawingAssistant extends Thread{
 
     public void run() {
         while(true) {
-            System.out.println("In Drawing Assistant run()");
-            System.out.println(mapView.getCurrentZoom());
+            //System.out.println("In Drawing Assistant run()");
+            //System.out.println(mapView.getCurrentZoom());
 
             dotView.setZoom(mapView.getCurrentZoom());
 

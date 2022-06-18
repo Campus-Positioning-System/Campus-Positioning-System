@@ -28,7 +28,7 @@ public class SimpleEntityReadWriteTest {
     public void createDb() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
-        nnObjectDao = db.getNNObjectDao();
+        nnObjectDao = db.nnObjectDao();
     }
 
     @After
