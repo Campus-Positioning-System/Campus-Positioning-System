@@ -1,5 +1,9 @@
 package com.example.campus_positioning_system.Map;
 
+import android.animation.ObjectAnimator;
+import android.graphics.PointF;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -18,10 +22,14 @@ public class DrawingAssistant extends Thread{
     private int y = 88;
     private int z = 5;
 
-    //Map View
-    TouchImageView mapView, dotView;
+    private int height;
+    private int width;
+    private boolean setHW = false;
 
-    WifiScanner wifiScanner;
+    //Map View
+    private TouchImageView mapView, dotView;
+
+    private WifiScanner wifiScanner;
 
     public DrawingAssistant(TouchImageView dotView, TouchImageView mapView, WifiScanner wifiScanner) {
         this.mapView = mapView;
@@ -37,21 +45,36 @@ public class DrawingAssistant extends Thread{
         this.destination = destination;
     }
 
-    //https://developer.android.com/training/animation/reposition-view
+    // https://developer.android.com/training/animation/reposition-view
 
+
+    @Override
     public void run() {
+        Mover dotMover;
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         while(true) {
-            //System.out.println("In Drawing Assistant run()");
-            //System.out.println(mapView.getCurrentZoom());
+            if(!setHW && mapView.getHeight()!=0.0) {
+                this.height = mapView.getHeight();
+                this.width = mapView.getWidth();
+            }
 
-            dotView.setZoom(mapView.getCurrentZoom());
+            dotView.setZoom(3-mapView.getCurrentZoom());
+            System.out.println(mapView.getScrollPosition());
 
-            dotView.setZ(100);
-            dotView.setX(100);
-            dotView.setZ(100);
-
+            dotMover = new Mover("DotMover");
+            dotMover.setView(dotView);
+            PointF pointF = mapView.getScrollPosition();
+            System.out.println(pointF.x + " " + height);
+            dotMover.setNewPosition(pointF.x*width,pointF.y*height);
+            dotMover.start();
             try {
-                Thread.sleep(3000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
