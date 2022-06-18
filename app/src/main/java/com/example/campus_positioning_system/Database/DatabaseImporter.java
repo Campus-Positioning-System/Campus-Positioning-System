@@ -1,8 +1,10 @@
-package com.example.campus_positioning_system;
+package com.example.campus_positioning_system.Database;
 
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
+
+import com.example.campus_positioning_system.NNObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class DatabaseImporter {
            reader.lines()
                    .map(v->v.split("[!;]+"))
                     .forEach(v->dao.insert(new NNObject
-                            (v[2],v[3],Float.parseFloat(v[4]),
+                            (v[3],Float.parseFloat(v[4]),
                                     Converters.fromString(v[0]),Integer.parseInt(v[1]))));
         }catch(IOException e){
             System.out.println(e.getMessage());

@@ -32,6 +32,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.room.Room;
 
 import com.example.campus_positioning_system.Database.AppDatabase;
+import com.example.campus_positioning_system.Database.AppDatabaseSingelton;
 import com.example.campus_positioning_system.Database.Converters;
 import com.example.campus_positioning_system.Database.NNObjectDao;
 import com.example.campus_positioning_system.Fragments.RoomSelectionFragment;
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     public static AppDatabase getDb(){
-        return AppDatabase.getInstance();
+        return AppDatabaseSingelton.getInstance();
     }
 
     public static void setOnlyNavigateOnceTrue() {
