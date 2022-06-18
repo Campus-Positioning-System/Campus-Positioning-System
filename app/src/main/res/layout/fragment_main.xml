@@ -17,7 +17,7 @@
         android:id="@+id/dot"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/dot" />
+        android:src="@drawable/dotnew" />
 
     <TextView
         android:id="@+id/textViewTest"
