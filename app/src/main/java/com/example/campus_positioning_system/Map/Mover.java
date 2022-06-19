@@ -9,9 +9,25 @@ import android.view.View;
 
 import com.ortiz.touchview.TouchImageView;
 
+
+/*
+*   Moves a given View to a given Position
+*
+*   View:
+*   View Class or Class which extends View (for Example TouchImageView, TextView etc.)
+*
+*   Position:
+*   is defined by Display Pixels x and y axe
+*   Example:
+*   - px(X): 0 px(Y): 0
+*     is the bottom left corner
+*   - X: DisplayWidth Y: DisplayHeight
+*     is the top right corner
+ */
+
 public class Mover extends HandlerThread {
     private ObjectAnimator animator;
-    private TouchImageView view;
+    private View view;
 
     private Float x,y;
     private Float lastX,lastY;
@@ -29,7 +45,7 @@ public class Mover extends HandlerThread {
         this.path = new Path();
     }
 
-    public void setView(TouchImageView view) {
+    public void setView(View view) {
         this.view = view;
     }
 
@@ -51,19 +67,18 @@ public class Mover extends HandlerThread {
         Looper.loop();
     }
 
-    public void animationStart() {
+    public synchronized void animationStart() {
         handler.postDelayed(() -> {
             System.out.println("Dot moving to: " + x + " " + y);
-
+            /*
             path.moveTo(x, y);
             animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
             animator.start();
-             /*
-             path.lineTo(x, y);
-            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
-            animator.setDuration(1500);
-            animator.start();
             */
+            path.lineTo(x, y);
+            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+            animator.setDuration(500);
+            animator.start();
             view.setX(x);
             view.setY(y);
         },50);
