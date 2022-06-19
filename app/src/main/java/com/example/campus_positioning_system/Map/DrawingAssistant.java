@@ -4,9 +4,12 @@ import android.animation.ObjectAnimator;
 import android.graphics.PointF;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 
+import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.LocationNavigation.WifiScanner;
 import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
@@ -24,6 +27,16 @@ public class DrawingAssistant extends Thread{
 
     private int height;
     private int width;
+
+    private int dotHeight;
+    private int dotWidth;
+
+    private int mapHeight;
+    private int mapWidth;
+
+    private int navigationBarHeight;
+    private int statusBarHeight;
+
     private boolean setHW = false;
 
     //Map View
@@ -68,9 +81,24 @@ public class DrawingAssistant extends Thread{
 
 
         while(true) {
-            if(!setHW && mapView.getHeight()!=0.0) {
-                this.height = mapView.getHeight();
-                this.width = mapView.getWidth();
+            if(!setHW && mapView.getHeight() != 0.0) {
+                this.height = MainActivity.height;
+                this.width = MainActivity.width;
+
+                this.mapHeight = mapView.getHeight();
+                this.mapWidth = mapView.getWidth();
+
+                this.dotHeight = dotView.getHeight();
+                this.dotWidth = dotView.getWidth();
+
+                this.navigationBarHeight = MainActivity.navigationBarHeight;
+                this.statusBarHeight = MainActivity.statusBarHeight;
+
+                System.out.println("Drawing assistant received Device height: " + height + " and width: " + width);
+                System.out.println("Dot height: " + dotHeight + " and width: " + dotWidth);
+                System.out.println("Map height: " + mapHeight + " and width: " + mapWidth);
+                System.out.println("Navigation Bar height: " + navigationBarHeight);
+                System.out.println("Status Bar height: " + statusBarHeight);
                 setHW = true;
             }
 
@@ -78,19 +106,22 @@ public class DrawingAssistant extends Thread{
 
 
 
+            //The getScrollPosition is dependant on the View.
+            //So x:0 y:0 would be the left top corner of the VIEW
+            PointF mapViewCenter = mapView.getScrollPosition();
+            PointF dotViewCenter = dotView.getScrollPosition();
+            System.out.println("Center of mapView(x,y): " + mapViewCenter.x + " " + mapViewCenter.y);
+            System.out.println("Center of dotView(x,y): " + dotViewCenter.x + " " + dotViewCenter.y);
 
-            PointF pointF = mapView.getScrollPosition();
-
-            lastX = (1-pointF.x)*width;
-            lastY = (1-pointF.y)*height;
-
-            System.out.println(pointF.x + " " + pointF.y);
+            lastX = (1-mapViewCenter.x) * mapWidth - dotHeight/2;
+            lastY = (1-mapViewCenter.y) * mapHeight - dotHeight/2;
 
             dotMover.setNewPosition(lastX,lastY);
             dotMover.animationStart();
 
+
             try {
-                Thread.sleep(5000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
