@@ -34,13 +34,13 @@ public class MapConverter {
         return null;
     }
 
-    public float getRealCenter(float toConvert) {
+    public float getRealCenter(float toConvert, float factor) {
         float result;
         currentZoom = mapView.getCurrentZoom();
         if(0 > 0.5 - toConvert) {
-            result = (float) (0.5 - (Math.abs(0.5 - toConvert)*currentZoom));
+            result = (float) (0.5 - (Math.abs(0.5 - toConvert)*(currentZoom-factor)));
         } else {
-            result = (float) (0.5 + (Math.abs(0.5 - toConvert)*currentZoom));
+            result = (float) (0.5 + (Math.abs(0.5 - toConvert)*(currentZoom-factor)));
         }
         return result;
     }

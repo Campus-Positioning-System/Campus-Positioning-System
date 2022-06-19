@@ -34,7 +34,7 @@ public class Mover extends HandlerThread {
 
     private Handler handler;
 
-    private final Path path;
+    private Path path;
 
     public Mover(String name, Float lastX, Float lastY) {
         super(name);
@@ -43,6 +43,7 @@ public class Mover extends HandlerThread {
         this.x = (float) 0.0;
         this.y = (float) 0.0;
         this.path = new Path();
+
     }
 
     public void setView(View view) {
@@ -50,6 +51,8 @@ public class Mover extends HandlerThread {
     }
 
     public void setNewPosition(Float x, Float y) {
+        this.lastX = this.x;
+        this.lastY = this.y;
         this.x = x;
         this.y = y;
     }
@@ -68,19 +71,21 @@ public class Mover extends HandlerThread {
     }
 
     public synchronized void animationStart() {
-        handler.postDelayed(() -> {
-            System.out.println("Dot moving to: " + x + " " + y);
-            /*
-            path.moveTo(x, y);
-            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+        System.out.println("Dot moving to: " + x + " " + y);
+        System.out.println("From: " + lastX + " " + lastY);
+        this.path = new Path();
+
+        path.moveTo(lastX,lastY);
+        path.lineTo(x,y);
+        path.moveTo(x,y);
+
+        path.close();
+        animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path).setDuration(900);
+
+        handler.post(() -> {
             animator.start();
-            */
-            path.lineTo(x, y);
-            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
-            animator.setDuration(500);
-            animator.start();
-            view.setX(x);
-            view.setY(y);
-        },50);
+        });
+        view.setX(x);
+        view.setY(y);
     }
 }

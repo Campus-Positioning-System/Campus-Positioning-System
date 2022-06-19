@@ -54,10 +54,10 @@ public class DrawingAssistant extends Thread{
     @Override
     public void run() {
         Mover dotMover;
-        float lastX = (float) 0;
-        float lastY = (float) 0;
+        float newX = (float) 0;
+        float newY = (float) 0;
 
-        dotMover = new Mover("DotMover",lastX,lastY);
+        dotMover = new Mover("DotMover",newX,newY);
         dotMover.setView(dotView);
         dotMover.start();
 
@@ -108,20 +108,22 @@ public class DrawingAssistant extends Thread{
             PointF dotViewCenter = dotView.getScrollPosition();
 
             //Calculate Center:
-            float centerX = mapConverter.getRealCenter(mapViewCenter.x);
-            float centerY = mapConverter.getRealCenter(mapViewCenter.y);
+            float centerX = mapConverter.getRealCenter(mapViewCenter.x, (float) 0.0);
+            float centerY = mapConverter.getRealCenter(mapViewCenter.y, (float) 1.65);
 
             System.out.println("Center of mapView(x,y): " + centerX + " " + centerY);
+            System.out.println(mapConverter.getCurrentZoom());
 
-            lastX = centerX * (mapWidth) - (dotWidth/(float) 2);
-            lastY = centerY * (mapHeight) - (dotHeight/(float)2);
 
-            dotMover.setNewPosition(lastX,lastY);
+            newX = centerX * (mapWidth) - (dotWidth/(float) 2);
+            newY = centerY * (mapHeight) - (dotHeight/(float)2);
+
+            dotMover.setNewPosition(newX,newY);
             dotMover.animationStart();
 
             System.out.println(" ");
             try {
-                Thread.sleep(600);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
