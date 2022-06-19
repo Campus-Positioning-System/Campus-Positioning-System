@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<campus>
+    <campusName>HFU Furtwangen</campusName>
+
+    <building buildingname="A-Bau">
+        <floor floorname="1. OG">
+            <room roomname="A1.01">
+                <roomalias>A 1 01</roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+            <room roomname="A1.02">
+                <roomalias>A 1 02</roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+        </floor>
+
+        <floor floorname="EG">
+            <room roomname="A0.01">
+                <roomalias> A EG 01</roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+        </floor>
+
+    </building>
+
+
+    <building buildingname="B-Bau">
+        <floor floorname="EG">
+            <room roomname="B0.01">
+                <roomname></roomname>
+                <roomalias>Butze</roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+        </floor>
+    </building>
+
+</campus>

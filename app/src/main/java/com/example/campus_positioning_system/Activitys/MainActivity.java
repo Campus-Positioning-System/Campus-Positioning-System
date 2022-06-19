@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private static int angle;
 
-    private boolean databaseIsPopulated = false;
 
 
     @Override
@@ -109,11 +108,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 System.out.println("Item is: " + item.getItemId());
                 switch (item.getItemId()) {
                     case R.id.nav_room_list:
-                        if (onlyNavigateOnce && databaseIsPopulated) {
-                            System.out.println("Navigating to View(Item): " + R.id.roomSelectionFragment);
+                        if (onlyNavigateOnce) {
+                            System.out.println("Navigating to View(Item): " + R.id.roomSelectionActivity);
                             NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
                             NavController navController = navHostFragment.getNavController();
-                            navController.navigate(R.id.roomSelectionFragment);
+                            navController.navigate(R.id.roomSelectionActivity);
                             Intent intent = new Intent(thisContext, RoomSelectionActivity.class);
                             startActivity(intent);
                             onlyNavigateOnce = false;

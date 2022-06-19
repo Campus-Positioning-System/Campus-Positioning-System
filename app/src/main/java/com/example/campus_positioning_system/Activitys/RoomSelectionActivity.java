@@ -9,33 +9,42 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.campus_positioning_system.Database.NNObjectDao;
-import com.example.campus_positioning_system.NNObject;
-import com.example.campus_positioning_system.R;
-import com.example.campus_positioning_system.RoomList.RoomListViewHolder;
-import com.example.campus_positioning_system.RoomList.RoomListViewHolderAdapter;
 
+import com.amrdeveloper.treeview.TreeNode;
+import com.amrdeveloper.treeview.TreeViewAdapter;
+import com.amrdeveloper.treeview.TreeViewHolderFactory;
+import com.example.campus_positioning_system.R;
+import com.example.campus_positioning_system.RoomList.RoomListConverter;
+import com.example.campus_positioning_system.RoomList.RoomListViewHolder;
+
+import java.util.ArrayList;
 import java.util.List;
 
+
+
+
+
 public class RoomSelectionActivity extends AppCompatActivity {
+
+    RecyclerView list;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.room_selection_activity);
-        System.out.println("On Create RoomSelect Activity");
 
-        RecyclerView list = findViewById(R.id.room_list);
-        System.out.println("Retrieving DAO");
-        System.out.println("Converting to list");
-        List<NNObject> rooms = MainActivity.getDb().k().getAllData();
-        System.out.println("Conversion successful");
+        list = findViewById(R.id.room_list);
         list.setLayoutManager(new LinearLayoutManager(this));
-        list.setHasFixedSize(true);
-        RecyclerView.Adapter<RoomListViewHolder> mAdapter = new RoomListViewHolderAdapter(this, rooms);
-        System.out.println("Setting Adapter");
-        list.setAdapter(mAdapter);
-        System.out.println("Adapter is now " + list.getAdapter());
+
+        TreeViewHolderFactory factory = (v, layout) -> new RoomListViewHolder(v);
+        TreeViewAdapter treeViewAdapter = new TreeViewAdapter(factory);
+        list.setAdapter(treeViewAdapter);
+
+        treeViewAdapter.updateTreeNodes(RoomListConverter.printList(this));
+
+        RoomListConverter.printList(this);
+
+
 
     }
     @Override
@@ -45,7 +54,7 @@ public class RoomSelectionActivity extends AppCompatActivity {
 
         NavHostFragment navHostFragment = (NavHostFragment) MainActivity.getSupportFragmentManagerMain().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
-        navController.navigate(R.id.roomSelectionFragment);
+        navController.navigate(R.id.mainFragment);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         MainActivity.setOnlyNavigateOnceTrue();

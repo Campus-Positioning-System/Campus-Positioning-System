@@ -12,16 +12,11 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_mainFragment_to_roomSelectionFragment"
-            app:destination="@id/roomSelectionFragment" />
+            android:id="@+id/action_mainFragment_to_roomSelectionActivity"
+            app:destination="@id/roomSelectionActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/roomSelectionFragment"
-        android:name="com.example.campus_positioning_system.Fragments.RoomSelectionFragment"
-        android:label="fragment_room_selection"
-        tools:layout="@layout/fragment_room_selection" >
-        <action
-            android:id="@+id/action_roomSelectionFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
+    <activity
+        android:id="@+id/roomSelectionActivity"
+        android:name="com.example.campus_positioning_system.Activitys.RoomSelectionActivity"
+        android:label="RoomSelectionActivity" />
 </navigation>
