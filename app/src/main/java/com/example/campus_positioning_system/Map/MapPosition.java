@@ -9,6 +9,10 @@ public class MapPosition {
         this.y = y;
     }
 
+    public MapPosition() {
+
+    }
+
     public float getX() {
         return x;
     }

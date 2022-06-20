@@ -12,16 +12,15 @@ public class DrawingAssistant extends Thread{
     private Node destination;
 
 
-    //x y z from our Coordinate System that we put on the map
-    private final int x = 124;
-    private final int y = 88;
-    private final int z = 5;
+
 
     //Height and Width of our View's
     private int dotHeight;
     private int dotWidth;
     private int mapHeight;
     private int mapWidth;
+    private int displayWidth;
+    private int displayHeight;
 
     //Set Height and View -> Only needs to be done Once -> is in while(true)
     //because its depending on when the Views got inflated and we need to wait for that to happen
@@ -71,8 +70,8 @@ public class DrawingAssistant extends Thread{
         }
         while(!setHW) {
             if(mapView.getHeight() != 0.0) {
-                int height = MainActivity.height;
-                int width = MainActivity.width;
+                this.displayHeight = MainActivity.height;
+                this.displayWidth = MainActivity.width;
 
                 this.mapHeight = mapView.getHeight();
                 this.mapWidth = mapView.getWidth();
@@ -82,7 +81,7 @@ public class DrawingAssistant extends Thread{
 
                 int navigationBarHeight = MainActivity.navigationBarHeight;
                 int statusBarHeight = MainActivity.statusBarHeight;
-                System.out.println("Drawing assistant received Device height: " + height + " and width: " + width);
+                System.out.println("Drawing assistant received Device height: " + displayHeight + " and width: " + displayWidth);
                 System.out.println("Dot height: " + dotHeight + " and width: " + dotWidth);
                 System.out.println("Map height: " + mapHeight + " and width: " + mapWidth);
                 System.out.println("Navigation Bar height: " + navigationBarHeight);
@@ -97,33 +96,22 @@ public class DrawingAssistant extends Thread{
         }
 
 
+
         while(true) {
             System.out.println("----------------------------------------------------------------------");
             dotView.setZoom((float) (2-mapView.getCurrentZoom()));
 
+            Node pos11 = new Node( "",62,50,1);
+            MapPosition position = mapConverter.convertNode(pos11);
 
-            //The getScrollPosition is dependant on the View.
-            //So x:0 y:0 would be the left top corner of the VIEW
-            PointF mapViewCenter = mapView.getScrollPosition();
-            PointF dotViewCenter = dotView.getScrollPosition();
-
-            //Calculate Center:
-            float centerX = mapConverter.getRealCenter(mapViewCenter.x, (float) 0.0);
-            float centerY = mapConverter.getRealCenter(mapViewCenter.y, (float) 1.65);
-
-            System.out.println("Center of mapView(x,y): " + centerX + " " + centerY);
-            System.out.println(mapConverter.getCurrentZoom());
-
-
-            newX = centerX * (mapWidth) - (dotWidth/(float) 2);
-            newY = centerY * (mapHeight) - (dotHeight/(float)2);
+            newX = position.getX() * (mapWidth) - (dotWidth/(float)2);
+            newY = position.getY() * (mapHeight) - (dotHeight/(float)2);
 
             dotMover.setNewPosition(newX,newY);
             dotMover.animationStart();
 
-            System.out.println(" ");
             try {
-                Thread.sleep(1000);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
