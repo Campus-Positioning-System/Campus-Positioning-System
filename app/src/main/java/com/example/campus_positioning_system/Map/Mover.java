@@ -9,16 +9,32 @@ import android.view.View;
 
 import com.ortiz.touchview.TouchImageView;
 
+
+/*
+*   Moves a given View to a given Position
+*
+*   View:
+*   View Class or Class which extends View (for Example TouchImageView, TextView etc.)
+*
+*   Position:
+*   is defined by Display Pixels x and y axe
+*   Example:
+*   - px(X): 0 px(Y): 0
+*     is the bottom left corner
+*   - X: DisplayWidth Y: DisplayHeight
+*     is the top right corner
+ */
+
 public class Mover extends HandlerThread {
     private ObjectAnimator animator;
-    private TouchImageView view;
+    private View view;
 
     private Float x,y;
     private Float lastX,lastY;
 
     private Handler handler;
 
-    private final Path path;
+    private Path path;
 
     public Mover(String name, Float lastX, Float lastY) {
         super(name);
@@ -27,13 +43,16 @@ public class Mover extends HandlerThread {
         this.x = (float) 0.0;
         this.y = (float) 0.0;
         this.path = new Path();
+
     }
 
-    public void setView(TouchImageView view) {
+    public void setView(View view) {
         this.view = view;
     }
 
     public void setNewPosition(Float x, Float y) {
+        this.lastX = this.x;
+        this.lastY = this.y;
         this.x = x;
         this.y = y;
     }
@@ -51,21 +70,22 @@ public class Mover extends HandlerThread {
         Looper.loop();
     }
 
-    public void animationStart() {
-        handler.postDelayed(() -> {
-            System.out.println("Dot moving to: " + x + " " + y);
+    public synchronized void animationStart() {
+        System.out.println("Dot moving to: " + x + " " + y);
+        System.out.println("From: " + lastX + " " + lastY);
+        this.path = new Path();
 
-            path.moveTo(x, y);
-            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+        path.moveTo(lastX,lastY);
+        path.lineTo(x,y);
+        path.moveTo(x,y);
+
+        path.close();
+        animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path).setDuration(900);
+
+        handler.post(() -> {
             animator.start();
-             /*
-             path.lineTo(x, y);
-            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
-            animator.setDuration(1500);
-            animator.start();
-            */
-            view.setX(x);
-            view.setY(y);
-        },50);
+        });
+        view.setX(x);
+        view.setY(y);
     }
 }

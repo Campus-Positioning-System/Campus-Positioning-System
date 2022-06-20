@@ -1,38 +1,47 @@
 package com.example.campus_positioning_system.RoomList;
 
 
+import android.icu.util.ValueIterator;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
+import androidx.annotation.NonNull;
+
+import com.amrdeveloper.treeview.TreeNode;
+import com.amrdeveloper.treeview.TreeViewHolder;
 import com.example.campus_positioning_system.R;
 
+import org.w3c.dom.Element;
 
-public class RoomListViewHolder extends RecyclerView.ViewHolder {
+import java.io.File;
 
-    // data variables to link with
-    // the respective id from the view
-    TextView name, attempted, correct, time;
-    //ExpandableListView building, level,rooms;
-    //TextView buildingLabel, levelLabel;
+
+
+
+public class RoomListViewHolder extends TreeViewHolder {
+
+    private TextView text;
+
+    //ToDo Fill other fields with text
+    //ToDo add eventListener for navigation start
+    //ToDo Styling
 
     public RoomListViewHolder(@NonNull View itemView) {
         super(itemView);
-        /*
-        building = itemView.findViewById(R.id.buildingSelectExpendableList);
-        level = itemView.findViewById(R.id.levelSelectExpandableList);
-        rooms = itemView.findViewById(R.id.roomSelectExpandableList);
+        text = itemView.findViewById(R.id.room_item_desc);
+    }
 
-        buildingLabel = itemView.findViewById(R.id.buildingListItem);
-        levelLabel = itemView.findViewById(R.id.levelSelectListItem);*/
-
-        name = itemView.findViewById(R.id.userName);
-        attempted = itemView.findViewById(R.id.attempted);
-        correct = itemView.findViewById(R.id.correct);
-        time = itemView.findViewById(R.id.time);
+    @Override
+    public void bindTreeNode(TreeNode node) {
+        super.bindTreeNode(node);
+        System.out.println("Binding value with class " + node.getValue().getClass().toString());
+        if (node.getValue() instanceof Element){
+            text.setText(((Element) (node.getValue())).getAttribute("roomname"));
+        }else {
+            text.setText(node.getValue().toString());
+        }
 
     }
 }

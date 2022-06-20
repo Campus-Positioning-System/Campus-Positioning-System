@@ -7,16 +7,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
@@ -78,7 +83,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private static int angle;
 
-    private boolean databaseIsPopulated = false;
+
+    //Static height and width of the display
+    public static int height;
+    public static int width;
+    public static int navigationBarHeight;
+    public static int statusBarHeight;
 
 
     @Override
@@ -87,19 +97,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         System.out.println("On Create Main Activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        thisContext = getApplicationContext();
 
 
         supportFragmentManager = getSupportFragmentManager();
 
         //------------------------------------------------------------------------------
+        //Sensors
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
 
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magneticField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         //------------------------------------------------------------------------------
+        //Display height and width
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        height = displayMetrics.heightPixels + getNavigationBarHeight();
+        width = displayMetrics.widthPixels;
+        navigationBarHeight = getNavigationBarHeight();
+        statusBarHeight = getStatusBarHeight();
+        //------------------------------------------------------------------------------
 
-        thisContext = getApplicationContext();
 
         navigationView = findViewById(R.id.bottom_navigation);
 
@@ -109,11 +128,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 System.out.println("Item is: " + item.getItemId());
                 switch (item.getItemId()) {
                     case R.id.nav_room_list:
-                        if (onlyNavigateOnce && databaseIsPopulated) {
-                            System.out.println("Navigating to View(Item): " + R.id.roomSelectionFragment);
+                        if (onlyNavigateOnce) {
+                            System.out.println("Navigating to View(Item): " + R.id.roomSelectionActivity);
                             NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
                             NavController navController = navHostFragment.getNavController();
-                            navController.navigate(R.id.roomSelectionFragment);
+                            navController.navigate(R.id.roomSelectionActivity);
                             Intent intent = new Intent(thisContext, RoomSelectionActivity.class);
                             startActivity(intent);
                             onlyNavigateOnce = false;
@@ -205,6 +224,30 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         return angle;
     }
 
+    //Function to get Navigation Bar Height
+    private int getNavigationBarHeight() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            int usableHeight = metrics.heightPixels;
+            getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+            int realHeight = metrics.heightPixels;
+            if (realHeight > usableHeight)
+                return realHeight - usableHeight;
+            else
+                return 0;
+        }
+        return 0;
+    }
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 }
 
 /*

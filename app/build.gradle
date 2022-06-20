@@ -44,6 +44,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.4.2'
     implementation 'com.opencsv:opencsv:5.6'
     implementation 'androidx.test:core:1.4.0'
+    implementation 'io.github.amrdeveloper:treeview:1.0.0'
+
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
