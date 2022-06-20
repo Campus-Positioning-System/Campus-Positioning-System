@@ -32,18 +32,18 @@ public class RoomListConverter {
                 if(nList.item(temp).getNodeType() == Node.ELEMENT_NODE) {
                     NodeList building = nList.item(temp).getChildNodes(); // Floors
                     System.out.println("We are in building " + ((Element) nList.item(temp)).getAttribute("buildingname"));
-                    TreeNode buildingNode = new TreeNode(((Element) nList.item(temp)).getAttribute("buildingname"), R.layout.room_item);
+                    TreeNode buildingNode = new TreeNode(((Element) nList.item(temp)).getAttribute("buildingname"), R.layout.room_list_building_item);
 
                     for (int i = 0; i < building.getLength(); i++) {
                         if (building.item(i).getNodeType() == Node.ELEMENT_NODE) {
                             NodeList floors = building.item(i).getChildNodes();
                             System.out.println("\tWe are in floor " + ((Element) building.item(i)).getAttribute("floorname"));
-                            TreeNode floorNode = new TreeNode(((Element) building.item(i)).getAttribute("floorname"), R.layout.room_item);
+                            TreeNode floorNode = new TreeNode(((Element) building.item(i)).getAttribute("floorname"), R.layout.room_list_level_item);
 
                             for (int j = 0; j < floors.getLength(); j++) {
                                 if (floors.item(j).getNodeType() == Node.ELEMENT_NODE) {
                                     System.out.println("\t\tWe are in room " + ((Element) floors.item(j)).getAttribute("roomname"));
-                                    TreeNode roomNode = new TreeNode(((Element) floors.item(j)),R.layout.room_item);
+                                    TreeNode roomNode = new TreeNode(((Element) floors.item(j)),R.layout.room_list_room_item);
                                     NodeList roomAttributes = floors.item(j).getChildNodes();
                                     for (int k = 0; k < roomAttributes.getLength(); k++) {
                                         if (roomAttributes.item(k).getNodeType() == Node.ELEMENT_NODE){

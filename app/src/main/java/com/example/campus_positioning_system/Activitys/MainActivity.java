@@ -40,6 +40,7 @@ import com.example.campus_positioning_system.Database.AppDatabase;
 import com.example.campus_positioning_system.Database.Converters;
 import com.example.campus_positioning_system.Database.NNObjectDao;
 import com.example.campus_positioning_system.Fragments.RoomSelectionFragment;
+import com.example.campus_positioning_system.Fragments.SettingsFragment;
 import com.example.campus_positioning_system.NNObject;
 import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
@@ -136,6 +137,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                             startActivity(intent);
                             onlyNavigateOnce = false;
                         }
+                        break;
+                    case R.id.nav_settings:
+                        //FixMe Implement
+                        if (onlyNavigateOnce && false) {
+                            System.out.println("Navigating to View(Item): " + R.xml.root_preferences);
+                            NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.xml.root_preferences);
+                            NavController navController = navHostFragment.getNavController();
+                            navController.navigate(R.xml.root_preferences);
+                            Intent intent = new Intent(thisContext, SettingsFragment.class);
+                            startActivity(intent);
+                            onlyNavigateOnce = false;
+                        }
+                        break;
                 }
                 return false;
             }

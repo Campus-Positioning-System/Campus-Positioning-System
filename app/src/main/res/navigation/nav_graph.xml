@@ -14,9 +14,16 @@
         <action
             android:id="@+id/action_mainFragment_to_roomSelectionActivity"
             app:destination="@id/roomSelectionActivity" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <activity
         android:id="@+id/roomSelectionActivity"
         android:name="com.example.campus_positioning_system.Activitys.RoomSelectionActivity"
         android:label="RoomSelectionActivity" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.campus_positioning_system.Fragments.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

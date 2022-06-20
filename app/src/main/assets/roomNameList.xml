@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+The basic structure of this file is the following
+Campus
+has buildings
+    has floors
+        has rooms
+            has Attributes
+
+The following attributes are implemented so far. All are mandatory unless specified otherwise
+Campus:
+    <campusName>XXX</campusName> : String - Name of a campus, not currently used
+Building:
+    <building buildingname="XXX"> : String - Name of the building
+Floor:
+    <floor floorname="XXX"> : String - Name of a floor
+Room:
+    <room roomname="XXX"> : String - The full name of the room including building and level e.g A2.04
+    <roomalias>XXX<roomalias> : String - Alias of a Room, like Aula, optional
+    <roomclosestnode> : String - The closest node to the room. This is set as navigation destination
+
+-->
+
 <campus>
     <campusName>HFU Furtwangen</campusName>
 
@@ -6,18 +29,17 @@
         <floor floorname="1. OG">
             <room roomname="A1.01">
                 <roomalias>A 1 01</roomalias>
-                <roomclosestnode></roomclosestnode>
+                <roomclosestnode>A11</roomclosestnode>
             </room>
             <room roomname="A1.02">
-                <roomalias>A 1 02</roomalias>
-                <roomclosestnode></roomclosestnode>
+                <roomclosestnode>A12</roomclosestnode>
             </room>
         </floor>
 
         <floor floorname="EG">
             <room roomname="A0.01">
                 <roomalias> A EG 01</roomalias>
-                <roomclosestnode></roomclosestnode>
+                <roomclosestnode>A01</roomclosestnode>
             </room>
         </floor>
 
@@ -29,7 +51,7 @@
             <room roomname="B0.01">
                 <roomname></roomname>
                 <roomalias>Butze</roomalias>
-                <roomclosestnode></roomclosestnode>
+                <roomclosestnode>B01</roomclosestnode>
             </room>
         </floor>
     </building>

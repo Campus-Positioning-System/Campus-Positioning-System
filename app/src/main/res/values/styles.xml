@@ -2,7 +2,7 @@
 <resources>
     <style name="NavItems" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/HFU_Main</item>
-        <item name="android:background">@drawable/bottom_nav_corners</item>
+        <item name="android:background">@drawable/bottom_nav_corners_secondary_grey</item>
         <item name="android:textColorHighlight">@color/HFU_Secondary</item>
         <item name="android:textColorHint">@color/HFU_Accent</item>
         <item name="android:textColorLink">#ff0000</item>
