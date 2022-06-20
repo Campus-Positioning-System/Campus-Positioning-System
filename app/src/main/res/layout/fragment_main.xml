@@ -17,13 +17,10 @@
         android:id="@+id/dot"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/dotnew" />
+        android:contentDescription="@string/dot"
+        android:src="@drawable/dotnew"
+        tools:ignore="TouchTargetSizeCheck" />
 
-    <com.ortiz.touchview.TouchImageView
-        android:id="@+id/testline"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="#274BA3" />
 
     <TextView
         android:id="@+id/textViewTest"

@@ -76,7 +76,6 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         if(onlyOnce) {
-            TouchImageView testview = rootView.findViewById(R.id.testline);
             TouchImageView mapView = rootView.findViewById(R.id.map1);
             TouchImageView dotView = rootView.findViewById(R.id.dot);
 

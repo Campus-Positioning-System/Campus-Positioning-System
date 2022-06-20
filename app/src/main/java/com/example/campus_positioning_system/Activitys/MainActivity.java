@@ -7,22 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 // Wifi and Compass Manager
@@ -32,28 +24,12 @@ import android.widget.TextView;
 
 // Room Database
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.room.Room;
 
 import com.example.campus_positioning_system.Database.AppDatabase;
-import com.example.campus_positioning_system.Database.Converters;
 import com.example.campus_positioning_system.Database.NNObjectDao;
-import com.example.campus_positioning_system.Fragments.RoomSelectionFragment;
-import com.example.campus_positioning_system.Fragments.SettingsFragment;
-import com.example.campus_positioning_system.NNObject;
-import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -96,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         System.out.println("On Create Main Activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
         thisContext = getApplicationContext();
 
 
