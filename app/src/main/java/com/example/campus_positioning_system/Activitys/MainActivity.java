@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static Context thisContext;
     private BottomNavigationView navigationView;
 
-    private static Boolean onlyNavigateOnce = true;
     private static FragmentManager supportFragmentManager;
 
     //Sensor Activity Variables
@@ -128,28 +127,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 System.out.println("Item is: " + item.getItemId());
                 switch (item.getItemId()) {
                     case R.id.nav_room_list:
-                        if (onlyNavigateOnce) {
-                            System.out.println("Navigating to View(Item): " + R.id.roomSelectionActivity);
-                            NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment);
-                            NavController navController = navHostFragment.getNavController();
-                            navController.navigate(R.id.roomSelectionActivity);
-                            Intent intent = new Intent(thisContext, RoomSelectionActivity.class);
-                            startActivity(intent);
-                            onlyNavigateOnce = false;
-                        }
+                        switchActivities();
                         break;
+
                     case R.id.nav_settings:
-                        //FixMe Implement
-                        if (onlyNavigateOnce && false) {
-                            System.out.println("Navigating to View(Item): " + R.xml.root_preferences);
-                            NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.xml.root_preferences);
-                            NavController navController = navHostFragment.getNavController();
-                            navController.navigate(R.xml.root_preferences);
-                            Intent intent = new Intent(thisContext, SettingsFragment.class);
-                            startActivity(intent);
-                            onlyNavigateOnce = false;
-                        }
-                        break;
                 }
                 return false;
             }
@@ -159,6 +140,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         System.out.println("On Create Ende Main Activity");
     }
 
+    private void switchActivities() {
+        Intent switchActivityIntent = new Intent(this, RoomSelectionActivity.class);
+        startActivity(switchActivityIntent);
+    }
 
 
 
@@ -168,10 +153,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public static AppDatabase getDb(){
         return AppDatabase.getInstance();
-    }
-
-    public static void setOnlyNavigateOnceTrue() {
-        onlyNavigateOnce = true;
     }
 
     public static FragmentManager getSupportFragmentManagerMain() {
