@@ -75,13 +75,6 @@ public class WifiScanner implements Runnable{
                     .distinct()
                     .collect(Collectors.toList());
 
-            if(!availableNetworks.isEmpty()) {
-                System.out.println(availableNetworks.get(0).BSSID);
-                System.out.println(availableNetworks.get(0).SSID);
-                System.out.println(availableNetworks.get(0).level);
-                System.out.println(scanAngle);
-            }
-
             //if(!(new PathfindingControl().updateCurrentLocation(new LocationControl().locate(nearestWifiList, relevantAdresses)) == null))
             try {
                 Thread.sleep(1500);

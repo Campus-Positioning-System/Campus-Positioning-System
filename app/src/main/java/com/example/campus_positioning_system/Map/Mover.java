@@ -80,7 +80,7 @@ public class Mover extends HandlerThread {
         path.moveTo(x,y);
 
         path.close();
-        animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path).setDuration(900);
+        animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path).setDuration(250);
 
         handler.post(() -> {
             animator.start();
