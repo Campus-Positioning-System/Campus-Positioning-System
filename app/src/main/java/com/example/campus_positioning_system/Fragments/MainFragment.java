@@ -14,6 +14,9 @@ import com.example.campus_positioning_system.Map.DrawingAssistant;
 import com.example.campus_positioning_system.R;
 import com.ortiz.touchview.TouchImageView;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MainFragment#newInstance} factory method to
@@ -73,15 +76,14 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         if(onlyOnce) {
-            TouchImageView mapView = rootView.findViewById(R.id.map);
+            TouchImageView testview = rootView.findViewById(R.id.testline);
+            TouchImageView mapView = rootView.findViewById(R.id.map1);
             TouchImageView dotView = rootView.findViewById(R.id.dot);
-
-            System.out.println();
 
             WifiScanner wifiScanner = new WifiScanner(MainActivity.mainContext());
             new Thread(wifiScanner).start();
 
-            DrawingAssistant drawingAssistant = new DrawingAssistant(dotView, mapView,wifiScanner);
+            DrawingAssistant drawingAssistant = new DrawingAssistant(dotView, mapView, wifiScanner);
             drawingAssistant.start();
 
             onlyOnce = false;

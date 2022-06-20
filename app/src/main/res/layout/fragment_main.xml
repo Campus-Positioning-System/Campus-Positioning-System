@@ -7,11 +7,11 @@
     tools:context=".Fragments.MainFragment">
 
     <com.ortiz.touchview.TouchImageView
-        android:id="@+id/map"
+        android:id="@+id/map1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/schlecht22" />
+        android:src="@drawable/og1example" />
 
     <com.ortiz.touchview.TouchImageView
         android:id="@+id/dot"
@@ -19,11 +19,11 @@
         android:layout_height="20dp"
         android:src="@drawable/dotnew" />
 
-    <View
+    <com.ortiz.touchview.TouchImageView
         android:id="@+id/testline"
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:background="#ffffff" />
+        android:background="#274BA3" />
 
     <TextView
         android:id="@+id/textViewTest"

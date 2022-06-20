@@ -1,11 +1,14 @@
 package com.example.campus_positioning_system.Map;
 
 import android.graphics.PointF;
+import android.view.View;
 
 import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.LocationNavigation.WifiScanner;
 import com.example.campus_positioning_system.Node;
+import com.example.campus_positioning_system.R;
 import com.ortiz.touchview.TouchImageView;
+
 
 public class DrawingAssistant extends Thread{
     private Node currentPosition;
@@ -28,7 +31,7 @@ public class DrawingAssistant extends Thread{
     private boolean setHW = false;
 
     //View's
-    private final TouchImageView mapView;
+    private TouchImageView mapView;
     private final TouchImageView dotView;
 
     //Map Converter Node to Px on Screen
@@ -49,7 +52,6 @@ public class DrawingAssistant extends Thread{
 
     // https://developer.android.com/training/animation/reposition-view
 
-
     @Override
     public void run() {
         Mover dotMover;
@@ -59,9 +61,6 @@ public class DrawingAssistant extends Thread{
         dotMover = new Mover("DotMover",newX,newY);
         dotMover.setView(dotView);
         dotMover.start();
-
-
-
 
         try {
             Thread.sleep(1000);
@@ -95,15 +94,23 @@ public class DrawingAssistant extends Thread{
             }
         }
 
+        Node pos11 = new Node( "",62,40,1);
 
+        if(pos11.getZ() == 0) {
+            mapView.setImageResource(R.drawable.eg);
+        } else if(pos11.getZ() == 1) {
+            mapView.setImageResource(R.drawable.og1example);
+        } else if(pos11.getZ() == 2) {
+            mapView.setImageResource(R.drawable.og2);
+        } else if(pos11.getZ() == 3) {
+            mapView.setImageResource(R.drawable.og345);
+        }
 
         while(true) {
             System.out.println("----------------------------------------------------------------------");
             dotView.setZoom((float) (2-mapView.getCurrentZoom()));
 
-            Node pos11 = new Node( "",62,40,1);
             MapPosition position = mapConverter.convertNode(pos11);
-
             newX = position.getX() * (mapWidth) - (dotWidth/(float)2);
             newY = position.getY() * (mapHeight) - (dotHeight/(float)2);
 
