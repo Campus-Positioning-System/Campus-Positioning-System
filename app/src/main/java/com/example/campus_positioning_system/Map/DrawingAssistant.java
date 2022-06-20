@@ -101,7 +101,7 @@ public class DrawingAssistant extends Thread{
             System.out.println("----------------------------------------------------------------------");
             dotView.setZoom((float) (2-mapView.getCurrentZoom()));
 
-            Node pos11 = new Node( "",62,50,1);
+            Node pos11 = new Node( "",62,40,1);
             MapPosition position = mapConverter.convertNode(pos11);
 
             newX = position.getX() * (mapWidth) - (dotWidth/(float)2);
@@ -111,7 +111,7 @@ public class DrawingAssistant extends Thread{
             dotMover.animationStart();
 
             try {
-                Thread.sleep(300);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
