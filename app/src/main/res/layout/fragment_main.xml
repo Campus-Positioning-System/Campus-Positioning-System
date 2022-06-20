@@ -19,10 +19,16 @@
         android:layout_height="20dp"
         android:src="@drawable/dotnew" />
 
+    <View
+        android:id="@+id/testline"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#ffffff" />
+
     <TextView
         android:id="@+id/textViewTest"
-        android:layout_width="166dp"
-        android:layout_height="113dp"
+        android:layout_width="178dp"
+        android:layout_height="155dp"
         android:layout_marginStart="122dp"
         android:layout_marginTop="164dp"
         android:layout_marginEnd="123dp"
