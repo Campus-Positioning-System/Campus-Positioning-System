@@ -13,6 +13,7 @@
         <entry key="..\:/Users/hato0/AndroidStudioProjects/CampusPositioningSystem/app/src/main/res/layout/fragment_second.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/hato0/AndroidStudioProjects/CampusPositioningSystem/app/src/main/res/layout/main_activity.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/bottom_nav_corners.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/ic_baseline_play_circle_filled_24.xml" value="0.1905" />
         <entry key="app/src/main/res/drawable/ic_expand_more_white_24dp.xml" value="0.2545" />
         <entry key="app/src/main/res/drawable/icon_heart.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/nav_icon_favorite.xml" value="0.25" />
@@ -24,7 +25,7 @@
         <entry key="app/src/main/res/layout/nested_recycler_item_parent.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/recycler_view_item.xml" value="0.24739583333333334" />
         <entry key="app/src/main/res/layout/recycler_view_item_1.xml" value="0.24739583333333334" />
-        <entry key="app/src/main/res/layout/room_item.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/room_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/room_list_item.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/room_selection_activity.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/sensor_activity.xml" value="0.22037037037037038" />
