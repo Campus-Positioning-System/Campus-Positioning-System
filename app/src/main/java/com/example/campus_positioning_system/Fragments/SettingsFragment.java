@@ -27,7 +27,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         navController.navigate(R.id.mainFragment);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
-        MainActivity.setOnlyNavigateOnceTrue();
+        //MainActivity.setOnlyNavigateOnceTrue();
 
         System.out.println("Navigating from Room List back to Main");
     }
