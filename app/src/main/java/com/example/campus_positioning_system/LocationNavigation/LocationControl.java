@@ -1,7 +1,7 @@
 package com.example.campus_positioning_system.LocationNavigation;
 
-import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.CNode;
+import com.example.campus_positioning_system.Database.AppDatabase;
 import com.example.campus_positioning_system.NNObject;
 import com.example.campus_positioning_system.Database.NNObjectDao;
 import com.example.campus_positioning_system.Node;
@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 public class LocationControl {
 
-    private final static NNObjectDao dao = MainActivity.getNNObjectDaoFromDB();
+    private final static NNObjectDao dao = AppDatabase.getInstance().nnObjectDao();
 
     public LocationControl(){
     }

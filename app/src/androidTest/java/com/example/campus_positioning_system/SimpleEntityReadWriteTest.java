@@ -1,10 +1,9 @@
 package com.example.campus_positioning_system;
 
-import android.content.Context;
-
-import androidx.room.Room;
-import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.example.campus_positioning_system.Database.AppDatabase;
+import com.example.campus_positioning_system.Database.NNObjectDao;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,8 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -23,9 +20,8 @@ public class SimpleEntityReadWriteTest {
 
     @Before
     public void createDb() {
-      db = AppDatabaseSingelton.getInstance();
-        //   db.clearAllTables();
-        nnObjectDao = db.getNNObjectDao();
+      db = AppDatabase.getInstance();
+      nnObjectDao = db.nnObjectDao();
     }
 
     @After
@@ -36,7 +32,7 @@ public class SimpleEntityReadWriteTest {
     @Test
     public void writeUserAndReadInList() throws Exception {
         List list = nnObjectDao.getAllData();
-        assert(list.size() == 46141);
+        assert(list.size() == 46140);
 
     }
 }

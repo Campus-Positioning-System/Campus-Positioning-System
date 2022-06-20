@@ -19,7 +19,7 @@ public class DatabaseImporter {
 
     private static InputStream getStream() throws IOException{
         Context context = ApplicationProvider.getApplicationContext();
-        return context.getAssets().open("databaseAsCsv.csv");
+        return context.getAssets().open("csv_combined_filtered.csv");
     }
 
     public static void readFile(AppDatabase db){

@@ -1,20 +1,16 @@
 package com.example.campus_positioning_system;
 /**/
 
-import android.content.Context;
-
-import androidx.room.Room;
-import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import org.junit.After;
+import com.example.campus_positioning_system.Database.AppDatabase;
+import com.example.campus_positioning_system.Database.NNObjectDao;
+import com.example.campus_positioning_system.LocationNavigation.LocationControl;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -48,28 +44,28 @@ public class LocationControlTest {
     private AppDatabase db;
     private NNObjectDao dao;
     public static List<NNObject> createWifiData(){
-        NNObject n1 = new NNObject("","C2:FB:E4:80:84:21",(float)-81,null,270);
-        NNObject n2 = new NNObject("","B4:FB:E4:84:78:80",(float)-77,null,270);
-        NNObject n3 = new NNObject("","BE:FB:E4:84:75:A4",(float)-75,null,270);
-        NNObject n4 = new NNObject("","B6:FB:E4:21:B2:B7",(float)-86,null,270);
-        NNObject n5 = new NNObject("","BE:FB:E4:84:72:FD",(float)-70,null,270);
-        NNObject n6 = new NNObject("","C2:FB:E4:84:78:81",(float)-63,null,270);
-        NNObject n7 = new NNObject("","B4:FB:E4:84:75:A4",(float)-65,null,270);
-        NNObject n8 = new NNObject("","B4:FB:E4:21:B2:B7",(float)-83,null,270);
-        NNObject n9 = new NNObject("","BE:FB:E4:80:96:D9",(float)-89,null,270);
-        NNObject n10 = new NNObject("","86:8A:20:0F:32:C3",(float)-91,null,270);
-        NNObject n11 = new NNObject("","86:8A:20:0A:F9:7E",(float)90,null,270);
-        NNObject n12 = new NNObject("","C2:FB:E4:84:72:FC",(float)-77,null,270);
-        NNObject n13 = new NNObject("","B6:FB:E4:31:B2:B7",(float)-88,null,270);
-        NNObject n14 = new NNObject("","C2:FB:E4:84:78:81",(float)-73,null,270);
-        NNObject n15 = new NNObject("","C2:FB:E4:84:75:A4",(float)-76,null,270);
-        NNObject n16 = new NNObject("","C2:FB:E4:84:72:FD",(float)-69,null,270);
-        NNObject n17 = new NNObject("","B4:FB:E4:80:96:D9",(float)-88,null,270);
-        NNObject n18 = new NNObject("","B4:FB:E4:C4:CE:42",(float)-87,null,270);
-        NNObject n19 = new NNObject("","BE:FB:E4:84:78:80",(float)-78,null,270);
-        NNObject n20 = new NNObject("","BE:FB:E4:84:72:FC",(float)-77,null,270);
-        NNObject n21 = new NNObject("","BE:FB:E4:84:78:81",(float)-73,null,270);
-        NNObject n22 = new NNObject("","B6:FB:E4:21:B2:B6",(float)-84,null,270);
+        NNObject n1 = new NNObject("C2:FB:E4:80:84:21",(float)-81,null,270);
+        NNObject n2 = new NNObject("B4:FB:E4:84:78:80",(float)-77,null,270);
+        NNObject n3 = new NNObject("BE:FB:E4:84:75:A4",(float)-75,null,270);
+        NNObject n4 = new NNObject("B6:FB:E4:21:B2:B7",(float)-86,null,270);
+        NNObject n5 = new NNObject("BE:FB:E4:84:72:FD",(float)-70,null,270);
+        NNObject n6 = new NNObject("C2:FB:E4:84:78:81",(float)-63,null,270);
+        NNObject n7 = new NNObject("B4:FB:E4:84:75:A4",(float)-65,null,270);
+        NNObject n8 = new NNObject("B4:FB:E4:21:B2:B7",(float)-83,null,270);
+        NNObject n9 = new NNObject("BE:FB:E4:80:96:D9",(float)-89,null,270);
+        NNObject n10 = new NNObject("86:8A:20:0F:32:C3",(float)-91,null,270);
+        NNObject n11 = new NNObject("86:8A:20:0A:F9:7E",(float)90,null,270);
+        NNObject n12 = new NNObject("C2:FB:E4:84:72:FC",(float)-77,null,270);
+        NNObject n13 = new NNObject("B6:FB:E4:31:B2:B7",(float)-88,null,270);
+        NNObject n14 = new NNObject("C2:FB:E4:84:78:81",(float)-73,null,270);
+        NNObject n15 = new NNObject("C2:FB:E4:84:75:A4",(float)-76,null,270);
+        NNObject n16 = new NNObject("C2:FB:E4:84:72:FD",(float)-69,null,270);
+        NNObject n17 = new NNObject("B4:FB:E4:80:96:D9",(float)-88,null,270);
+        NNObject n18 = new NNObject("B4:FB:E4:C4:CE:42",(float)-87,null,270);
+        NNObject n19 = new NNObject("BE:FB:E4:84:78:80",(float)-78,null,270);
+        NNObject n20 = new NNObject("BE:FB:E4:84:72:FC",(float)-77,null,270);
+        NNObject n21 = new NNObject("BE:FB:E4:84:78:81",(float)-73,null,270);
+        NNObject n22 = new NNObject("B6:FB:E4:21:B2:B6",(float)-84,null,270);
         List<NNObject> res = new LinkedList<>();
         res.add(n1);
         res.add(n2);
@@ -97,24 +93,27 @@ public class LocationControlTest {
 
     @Before
     public void createDB(){
-        db = AppDatabaseSingelton.getInstance();
+        db = AppDatabase.getInstance();
         dao = db.nnObjectDao();
     }
 
-    @After
-    public void closeDB(){
-        db.close();
-    }
+
     @Test
     public void locaterTest(){
-        List<String> outOf = new LinkedList<>();
-        for(NNObject o: list)
-            outOf.add(o.getMac());
-        List<NNObject> data = dao.getRelevantData(outOf);
-       Node loc = new LocationControl(dao).locate(list);
+        Double accuracy = 3.0;
+        Node res1 = new Node("",58,19,3);
+       Node test1 = new LocationControl().locate(list);
+       assert(euclideanDistance(res1,test1) <= accuracy);
     }
 
 
 
 
+
+
+    private double euclideanDistance(Node a, Node b){
+        return Math.sqrt(Math.pow(a.getX() - b.getX(),2) + Math.pow(a.getY() - b.getY(), 2));
+    }
+
 }
+
