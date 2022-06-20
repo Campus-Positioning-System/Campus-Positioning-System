@@ -10,12 +10,18 @@
     android:paddingBottom="15dp">
 
 
-
+        <ImageView
+            android:id="@+id/list_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.1"
+            android:src="@drawable/ic_baseline_house_24" />
 
         <TextView
             android:id="@+id/room_item_desc"
-            android:layout_width="233dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="0.5"
             android:gravity="center"
@@ -23,26 +29,23 @@
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/room_item_alias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="alias"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/room_item_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Value"
             android:textColor="@color/black"
             android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/item_start_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="0.5"
+            android:src="@drawable/ic_baseline_play_circle_filled_24" />
 
 </LinearLayout>
