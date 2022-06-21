@@ -4,15 +4,12 @@ import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.Database.Converters;
 import com.example.campus_positioning_system.Node;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.TreeSet;
 
-import es.usc.citius.hipster.algorithm.Algorithm;
 import es.usc.citius.hipster.algorithm.Hipster;
 import es.usc.citius.hipster.graph.GraphBuilder;
 import es.usc.citius.hipster.graph.GraphSearchProblem;
@@ -97,7 +94,8 @@ public class PathfindingControl{
 
     public static List<Node> calculatePath(){
         SearchProblem p = GraphSearchProblem.startingFrom(tree.floor(currentLocation)).in(graph).takeCostsFromEdges().build();
-        return Hipster.createAStar(p).search(tree.floor(targetLocation)).getOptimalPaths();
+        List<List<Node>> listTest = Hipster.createAStar(p).search(tree.floor(targetLocation)).getOptimalPaths();
+        return listTest.get(0);
     }
 
 

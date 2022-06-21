@@ -15,13 +15,14 @@ import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
 import com.ortiz.touchview.TouchImageView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class DrawingAssistant extends Thread{
     private static Node currentPosition;
-    private static List<Node> path = new LinkedList<>();
+    private static List<Node> path = new ArrayList<>();
 
     private static boolean pathDrawn = false;
 
@@ -53,36 +54,27 @@ public class DrawingAssistant extends Thread{
         currentPosition = new Node("PointZero",62,44,1);
     }
 
-    public List<Node> getPath() {
-        return path;
-    }
-
-    public synchronized void setPath(List<Node> path) {
-        DrawingAssistant.path = path;
-    }
-
-    public static void setCurrentPosition(Node currentPosition) {
-        DrawingAssistant.currentPosition = currentPosition;
+    public static void setCurrentPosition(Node currentPosition1) {
+        currentPosition = currentPosition1;
         // Hier fehlt noch ein Argument, dass die Image Source nur geaendert werden kann, wenn
         // der Path nicht angezeigt werden muss.
         if(currentPosition.getZ() == 0) {
-            mapView.setImageResource(R.drawable.eg);
+           // mapView.setImageResource(R.drawable.eg);
             currentMap = R.drawable.eg;
         } else if(currentPosition.getZ() == 1) {
-            mapView.setImageResource(R.drawable.og1example);
+           // mapView.setImageResource(R.drawable.og1example);
             currentMap = R.drawable.og1example;
         } else if(currentPosition.getZ() == 2) {
-            mapView.setImageResource(R.drawable.og2);
+            //mapView.setImageResource(R.drawable.og2);
             currentMap = R.drawable.og2;
         } else if(currentPosition.getZ() == 3) {
-            mapView.setImageResource(R.drawable.og345);
+           // mapView.setImageResource(R.drawable.og345);
             currentMap = R.drawable.og345;
         }
     }
 
     public static void setPathToDestination(List<Node> pathToDestination) {
-        System.out.println("Locationcontrol got path: " + pathToDestination.toString());
-        path = pathToDestination;
+        path =  new ArrayList<>(pathToDestination);
     }
 
     // https://developer.android.com/training/animation/reposition-view
@@ -93,7 +85,7 @@ public class DrawingAssistant extends Thread{
         this.testView = view;
     }
 
-    public static void drawPath() {
+    public void drawPath() {
         Bitmap mapBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
 
         float einx = (float) mapBitmap.getWidth()/124f;
@@ -103,25 +95,26 @@ public class DrawingAssistant extends Thread{
         Canvas canvas = new Canvas(mutableBitmap);
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(20);
+        paint.setStrokeWidth(15);
 
         List<MapPosition> mapPositions = new LinkedList<>();
 
-        for(Node n : path) {
+        for(int i = 0; i< path.size(); i++) {
+            System.out.println(path.getClass());
+            Node n = path.get(i);
             System.out.println("Da: " + n.getX() + " " + n.getY());
             MapPosition mapPosition = new MapPosition();
             mapPosition.setX(n.getX()*einx);
             mapPosition.setY(n.getY()*einy);
             mapPositions.add(mapPosition);
         }
-        int i;
+
         System.out.println(mapPositions.size());
-        for(i=0;i<(mapPositions.size()-1); i++) {
+        for(int i=0;i<(mapPositions.size()-1); i++) {
             System.out.println("Hier: " +  mapPositions.get(i).getX() + " " + mapPositions.get(i).getY());
             System.out.println("Hier: " +  mapPositions.get(i+1).getX() + " " + mapPositions.get(i+1).getY());
             canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paint);
         }
-        System.out.println(i);
         pathDrawn = true;
         mapView.setImageBitmap(mutableBitmap);
     }
@@ -171,16 +164,13 @@ public class DrawingAssistant extends Thread{
             }
         }
 
-        Node node1 = new Node("",0,0,0);
-        Node node2 = new Node("",62,44,0);
-        path.add(node1);
-        path.add(node2);
-
         while(true) {
             //System.out.println("----------------------------------------------------------------------");
             dotView.setZoom((float) (2-mapView.getCurrentZoom()));
 
             if(!path.isEmpty() && !pathDrawn) {
+                System.out.println("Dada");
+                mapView.setZoom(1.0f);
                 drawPath();
             }
 

@@ -15,8 +15,8 @@
 
     <com.ortiz.touchview.TouchImageView
         android:id="@+id/dot"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:contentDescription="@string/dot"
         android:src="@drawable/dotnew"
         tools:ignore="TouchTargetSizeCheck" />
