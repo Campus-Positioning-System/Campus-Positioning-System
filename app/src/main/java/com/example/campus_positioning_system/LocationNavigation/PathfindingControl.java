@@ -1,5 +1,9 @@
 package com.example.campus_positioning_system.LocationNavigation;
 
+import android.content.Context;
+
+import androidx.test.core.app.ApplicationProvider;
+
 import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.Database.Converters;
 import com.example.campus_positioning_system.Node;
@@ -56,10 +60,11 @@ public class PathfindingControl{
     private static double euclideanDistance(Node a, Node b){
         return Math.sqrt(Math.pow(a.getX() - b.getX(),2) + Math.pow(a.getY() - b.getY(), 2)) * distanceScale;
     }
+    
 
     public static HipsterGraph<Node, Double> buildGraph(String filename){
         try {
-            Scanner scanner = new Scanner(MainActivity.mainContext().getAssets().open(filename));
+            Scanner scanner = new Scanner(ApplicationProvider.getApplicationContext().getAssets().open(filename));
             GraphBuilder<Node, Double> graph = GraphBuilder.<Node, Double>create(); //
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

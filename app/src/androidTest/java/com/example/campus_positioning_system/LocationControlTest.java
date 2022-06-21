@@ -1,9 +1,9 @@
 package com.example.campus_positioning_system;
-/**/
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.campus_positioning_system.Database.AppDatabase;
+import com.example.campus_positioning_system.Database.DatabaseImporter;
 import com.example.campus_positioning_system.Database.NNObjectDao;
 import com.example.campus_positioning_system.LocationNavigation.LocationControl;
 
@@ -40,10 +40,11 @@ public class LocationControlTest {
 60/20/3;0;HFU Guest;;;36
 60/20/3;0;HFU Guest;;;44
 */
-    public static final List<NNObject> list = createWifiData();
     private AppDatabase db;
     private NNObjectDao dao;
-    public static List<NNObject> createWifiData(){
+
+
+    public static List<NNObject> createData1() {    //Node = 58/19/3
         NNObject n1 = new NNObject("C2:FB:E4:80:84:21",(float)-81,null,270);
         NNObject n2 = new NNObject("B4:FB:E4:84:78:80",(float)-77,null,270);
         NNObject n3 = new NNObject("BE:FB:E4:84:75:A4",(float)-75,null,270);
@@ -91,6 +92,7 @@ public class LocationControlTest {
         return res;
     }
 
+
     @Before
     public void createDB(){
         db = AppDatabase.getInstance();
@@ -100,10 +102,36 @@ public class LocationControlTest {
 
     @Test
     public void locaterTest(){
-        Double accuracy = 3.0;
+        Double accuracy = 11.0;
+        List<NNObject> search = new LinkedList<>();
+
+
+        search = createData1();
         Node res1 = new Node("",58,19,3);
-       Node test1 = new LocationControl().locate(list);
+       Node test1 = new LocationControl().locate(search);
        assert(euclideanDistance(res1,test1) <= accuracy);
+
+
+        search = DatabaseImporter.getTestData("Text_3.txt");
+        Node res4 = new Node("",45,11,1);
+        Node test4 = new LocationControl().locate(search);
+        assert(euclideanDistance(res4,test4) <= accuracy);
+
+        search = DatabaseImporter.getTestData("Text_4.txt");
+        Node res5 = new Node("",46,30,1);
+        Node test5 = new LocationControl().locate(search);
+        assert(euclideanDistance(res5,test5) <= accuracy);
+
+        search = DatabaseImporter.getTestData("Text.txt");
+        Node res2 = new Node("",90,21,1);
+        Node test2 = new LocationControl().locate(search);
+        //assert(euclideanDistance(res2,test2) <= accuracy);
+
+        search = DatabaseImporter.getTestData("Text_2.txt");
+        Node res3 = new Node("",97,25,1);
+        Node test3 = new LocationControl().locate(search);
+       // assert(euclideanDistance(res3,test3) <= accuracy);
+
     }
 
 

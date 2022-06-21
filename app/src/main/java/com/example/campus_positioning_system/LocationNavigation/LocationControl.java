@@ -38,8 +38,8 @@ public class LocationControl {
 
 
             public int compare(final CNode o1, final CNode o2) {
-                return o1.getParent().equals(o2.getParent()) ? o1.getCount().compareTo(o2.getCount())
-                        : o1.getParent().compareTo(o2.getParent());
+                return o1.getCount().equals(o2.getCount()) ? o1.getParent().compareTo(o2.getParent())
+                        : o1.getCount().compareTo(o2.getCount());
             }
         };
         TreeSet<CNode> sort = new TreeSet<>(comparator);
@@ -64,7 +64,10 @@ public class LocationControl {
         List<NNObject> found = new LinkedList<NNObject>();
         for (; !search.isEmpty(); search.remove(0))
             found.addAll(new NNControl().getKNN(search.get(0), 3, tree));
-        return findLocation(found);
+
+        Node loc = findLocation(found);
+        PathfindingControl.updateCurrentLocation(loc);
+        return loc;
     }
 
 }

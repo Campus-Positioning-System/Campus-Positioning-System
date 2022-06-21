@@ -12,20 +12,34 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DatabaseImporter {
 
-    private static InputStream getStream() throws IOException{
+    private static InputStream getStream(String s) throws IOException{
         Context context = ApplicationProvider.getApplicationContext();
-        return context.getAssets().open("csv_combined_filtered.csv");
+        return context.getAssets().open(s);
+    }
+
+    public static List<NNObject> getTestData(String filepath){
+        List<NNObject> res = new LinkedList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getStream(filepath)));
+            reader.readLine();
+            reader.lines().map(v->v.split("[!,]+"))
+                    .forEach(v->res.add(new NNObject
+                            (v[1].replace('\"',' ').trim(),Float.parseFloat(v[2].replace('\"',' ').trim()),
+                                    null,0)));
+        }catch(Exception e){e.printStackTrace();}
+        return res;
     }
 
     public static void readFile(AppDatabase db){
         NNObjectDao dao = db.nnObjectDao();
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getStream("csv_combined_filtered.csv")));
             reader.readLine();
            reader.lines()
                    .map(v->v.split("[!;]+"))
