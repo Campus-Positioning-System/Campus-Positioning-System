@@ -53,6 +53,14 @@ public class DrawingAssistant extends Thread{
         this.currentPosition = new Node("PointZero",62,44,1);
     }
 
+    public List<Node> getPath() {
+        return path;
+    }
+
+    public void setPath(List<Node> path) {
+        this.path = path;
+    }
+
     public void setCurrentPosition(Node currentPosition) {
         this.currentPosition = currentPosition;
         // Hier fehlt noch ein Argument, dass die Image Source nur geaendert werden kann, wenn
@@ -86,6 +94,10 @@ public class DrawingAssistant extends Thread{
 
     public void drawPath() {
         Bitmap mapBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
+
+        float einx = (float) mapBitmap.getWidth()/124f;
+        float einy = (float) mapBitmap.getHeight()/88f;
+
         Bitmap mutableBitmap = mapBitmap.copy(Bitmap.Config.ARGB_8888, true);
         Canvas canvas = new Canvas(mutableBitmap);
         Paint paint = new Paint();
@@ -95,13 +107,20 @@ public class DrawingAssistant extends Thread{
         List<MapPosition> mapPositions = new LinkedList<>();
 
         for(Node n : path) {
-            MapPosition mapPosition = mapConverter.convertNode(n,mapBitmap.getWidth(),mapBitmap.getHeight());
+            System.out.println("Da: " + n.getX() + " " + n.getY());
+            MapPosition mapPosition = new MapPosition();
+            mapPosition.setX(n.getX()*einx);
+            mapPosition.setY(n.getY()*einy);
             mapPositions.add(mapPosition);
         }
-
-        for(int i=0;i<path.size()-1; ++i) {
+        int i;
+        System.out.println(mapPositions.size());
+        for(i=0;i<(mapPositions.size()-1); i++) {
+            System.out.println("Hier: " +  mapPositions.get(i).getX() + " " + mapPositions.get(i).getY());
+            System.out.println("Hier: " +  mapPositions.get(i+1).getX() + " " + mapPositions.get(i+1).getY());
             canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paint);
         }
+        System.out.println(i);
         pathDrawn = true;
         mapView.setImageBitmap(mutableBitmap);
     }
@@ -153,13 +172,8 @@ public class DrawingAssistant extends Thread{
 
         Node node1 = new Node("",0,0,0);
         Node node2 = new Node("",62,44,0);
-        Node node3 = new Node("",124,88,0);
-        Node node4 = new Node("",110,50,0);
-
         path.add(node1);
         path.add(node2);
-        path.add(node3);
-        path.add(node4);
 
         while(true) {
             //System.out.println("----------------------------------------------------------------------");

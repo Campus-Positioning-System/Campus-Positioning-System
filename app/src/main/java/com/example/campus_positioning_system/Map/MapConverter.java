@@ -55,31 +55,12 @@ public class MapConverter {
 
     public MapPosition convertNode(Node toConvert, float canvasSizeX, float canvasSizeY) {
         MapPosition mapPos = new MapPosition();
-        //The getScrollPosition is dependant on the View.
-        //So x:0 y:0 would be the left top corner of the VIEW
-        PointF mapViewCenter = mapView.getScrollPosition();
 
-        //Calculate Center:
-        float centerX = getXCenter(mapViewCenter.x);
-        float centerY = getYCenter(mapViewCenter.y);
-      //  System.out.println("Center of mapView(x,y) without Shift: " + mapViewCenter.x + " " + mapViewCenter.y);
-      //  System.out.println("Center of mapView(x,y): " + centerX + " " + centerY);
+        float xForNode = (toConvert.getX()*xCoordinatesGap);
+        float yForNode = ((toConvert.getY()*yCoordinatesGap));
 
-        float xShift;
-        float yShift;
-
-        currentZoom = mapView.getCurrentZoom();
-
-        xShift = -(mapViewCenter.x - (float) 0.5)*currentZoom;
-        yShift = -(mapViewCenter.y - (float) 0.5)*(float)(1+(1/currentZoom)-0.1);
-
-        float xForNode = getXCenter((toConvert.getX()*xCoordinatesGap))+xShift;
-        float yForNode = getYCenter((toConvert.getY()*yCoordinatesGap)+ yShiftMap)+yShift;
-       // System.out.println(xForNode);
-       // System.out.println(yForNode);
         float posX = xForNode * (canvasSizeX) - (dotWidth/(float)2);
-        float posY = yForNode * (mapWidth) - (dotHeight/(float)2);
-
+        float posY = yForNode * (canvasSizeY) - (dotHeight/(float)2);
         mapPos.setX(posX);
         mapPos.setY(posY);
         return mapPos;
@@ -87,28 +68,17 @@ public class MapConverter {
 
     public MapPosition convertNode(Node toConvert) {
         MapPosition mapPos = new MapPosition();
-        //The getScrollPosition is dependant on the View.
-        //So x:0 y:0 would be the left top corner of the VIEW
         PointF mapViewCenter = mapView.getScrollPosition();
-
-        //Calculate Center:
-        float centerX = getXCenter(mapViewCenter.x);
-        float centerY = getYCenter(mapViewCenter.y);
-        //  System.out.println("Center of mapView(x,y) without Shift: " + mapViewCenter.x + " " + mapViewCenter.y);
-        //  System.out.println("Center of mapView(x,y): " + centerX + " " + centerY);
 
         float xShift;
         float yShift;
-
         currentZoom = mapView.getCurrentZoom();
-
         xShift = -(mapViewCenter.x - (float) 0.5)*currentZoom;
         yShift = -(mapViewCenter.y - (float) 0.5)*(float)(1+(1/currentZoom)-0.1);
 
         float xForNode = getXCenter((toConvert.getX()*xCoordinatesGap))+xShift;
         float yForNode = getYCenter((toConvert.getY()*yCoordinatesGap)+ yShiftMap)+yShift;
-        // System.out.println(xForNode);
-        // System.out.println(yForNode);
+
         mapPos.setX(xForNode * (mapWidth) - (dotWidth/(float)2));
         mapPos.setY(yForNode * (mapHeight) - (dotHeight/(float)2));
         return mapPos;
