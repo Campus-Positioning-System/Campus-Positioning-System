@@ -6,6 +6,7 @@ import com.example.campus_positioning_system.NNObject;
 import com.example.campus_positioning_system.Database.NNObjectDao;
 import com.example.campus_positioning_system.Node;
 
+import java.util.Locale;
 import java.util.TreeSet;
 import java.util.Comparator;
 import java.util.List;
@@ -55,11 +56,10 @@ public class LocationControl {
     public Node locate(List<NNObject> search) {
         /*Was relevant for testing....
         TreeSet<NNObject> tree = DBMock.getTree();*/
-        TreeSet<NNObject> tree = new TreeSet<>();
         List<String> outOf = new LinkedList<>();
         for(NNObject s: search)
-            outOf.add(s.getMac());
-        tree.addAll(dao.getRelevantData(outOf));
+            outOf.add(s.getMac().toUpperCase());
+        TreeSet<NNObject> tree = new TreeSet<>(dao.getRelevantData(outOf));
 
         List<NNObject> found = new LinkedList<NNObject>();
         for (; !search.isEmpty(); search.remove(0))

@@ -6,6 +6,7 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 
 import com.example.campus_positioning_system.Activitys.MainActivity;
+import com.example.campus_positioning_system.Map.DrawingAssistant;
 import com.example.campus_positioning_system.NNObject;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  */
 
 
-public class WifiScanner implements Runnable{
+public class WifiScanner extends Thread{
 
     private final WifiManager wifiManager;
 
@@ -75,7 +76,10 @@ public class WifiScanner implements Runnable{
                     .distinct()
                     .collect(Collectors.toList());
 
-            //if(!(new PathfindingControl().updateCurrentLocation(new LocationControl().locate(nearestWifiList, relevantAdresses)) == null))
+            //if(!() == null))
+            //PathfindingControl.updateCurrentLocation(new LocationControl().locate(nearestWifiList));
+            DrawingAssistant.setCurrentPosition(new LocationControl().locate(nearestWifiList));
+
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {

@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.campus_positioning_system.Database.AppDatabase;
 import com.example.campus_positioning_system.Database.NNObjectDao;
+import com.example.campus_positioning_system.LocationNavigation.LocationControl;
 import com.example.campus_positioning_system.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         navigationBarHeight = getNavigationBarHeight();
         statusBarHeight = getStatusBarHeight();
         //------------------------------------------------------------------------------
+
 
 
         navigationView = findViewById(R.id.bottom_navigation);

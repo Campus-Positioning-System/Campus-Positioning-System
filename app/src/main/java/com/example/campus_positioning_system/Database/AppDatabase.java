@@ -8,6 +8,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.NNObject;
 
 import java.io.Serializable;
@@ -26,8 +27,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static AppDatabase getInstance(){
         if(db == null){
-            Context context = ApplicationProvider.getApplicationContext();
+            Context context = MainActivity.mainContext();
             db = Room.databaseBuilder(context, AppDatabase.class,"ReferenceData").build();
+            //db.clearAllTables();
             if(db.nnObjectDao().getAllData().size() == 0)
                 DatabaseImporter.readFile(db);
         }

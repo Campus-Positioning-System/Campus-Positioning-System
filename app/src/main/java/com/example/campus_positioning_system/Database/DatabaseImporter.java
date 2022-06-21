@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.NNObject;
 
 import java.io.BufferedReader;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 public class DatabaseImporter {
 
     private static InputStream getStream(String s) throws IOException{
-        Context context = ApplicationProvider.getApplicationContext();
+        Context context = MainActivity.mainContext();
         return context.getAssets().open(s);
     }
 

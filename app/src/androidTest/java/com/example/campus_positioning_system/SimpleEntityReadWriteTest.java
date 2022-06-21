@@ -21,6 +21,7 @@ public class SimpleEntityReadWriteTest {
     @Before
     public void createDb() {
       db = AppDatabase.getInstance();
+      db.clearAllTables();
       nnObjectDao = db.nnObjectDao();
     }
 
