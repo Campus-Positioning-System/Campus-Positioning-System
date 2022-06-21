@@ -64,7 +64,7 @@ public class PathfindingControl{
 
     public static HipsterGraph<Node, Double> buildGraph(String filename){
         try {
-            Scanner scanner = new Scanner(ApplicationProvider.getApplicationContext().getAssets().open(filename));
+            Scanner scanner = new Scanner(MainActivity.mainContext().getAssets().open(filename));
             GraphBuilder<Node, Double> graph = GraphBuilder.<Node, Double>create(); //
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

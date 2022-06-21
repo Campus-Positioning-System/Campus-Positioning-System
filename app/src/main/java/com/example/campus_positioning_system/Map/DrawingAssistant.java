@@ -173,7 +173,7 @@ public class DrawingAssistant extends Thread{
                 mapView.setZoom(1.0f);
                 drawPath();
             }
-            System.out.println(mapView.getScrollPosition().x);
+            //System.out.println(mapView.getScrollPosition().x);
             MapPosition position = mapConverter.convertNode(currentPosition);
 
             dotMover.setNewPosition(position.getX(), position.getY());
