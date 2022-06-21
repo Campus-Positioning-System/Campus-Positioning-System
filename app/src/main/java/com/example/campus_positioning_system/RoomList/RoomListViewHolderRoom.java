@@ -87,6 +87,5 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
                 System.out.println("User wants to favorite Room " + ((Element) (node.getValue())).getAttribute("roomname"));
             }
         });
-
     }
 }

@@ -48,7 +48,7 @@ public class DrawingAssistant extends Thread{
     //Map Converter Node to Px on Screen
     private static MapConverter mapConverter;
 
-    public DrawingAssistant(TouchImageView dotView, TouchImageView mapView, WifiScanner wifiScanner) {
+    public DrawingAssistant(TouchImageView dotView, TouchImageView mapView) {
         DrawingAssistant.mapView = mapView;
         this.dotView = dotView;
         currentPosition = new Node("PointZero",62,44,1);
@@ -59,16 +59,16 @@ public class DrawingAssistant extends Thread{
         // Hier fehlt noch ein Argument, dass die Image Source nur geaendert werden kann, wenn
         // der Path nicht angezeigt werden muss.
         if(currentPosition.getZ() == 0) {
-           // mapView.setImageResource(R.drawable.eg);
+            mapView.setImageResource(R.drawable.eg);
             currentMap = R.drawable.eg;
         } else if(currentPosition.getZ() == 1) {
-           // mapView.setImageResource(R.drawable.og1example);
+            mapView.setImageResource(R.drawable.og1example);
             currentMap = R.drawable.og1example;
         } else if(currentPosition.getZ() == 2) {
-            //mapView.setImageResource(R.drawable.og2);
+            mapView.setImageResource(R.drawable.og2);
             currentMap = R.drawable.og2;
         } else if(currentPosition.getZ() == 3) {
-           // mapView.setImageResource(R.drawable.og345);
+            mapView.setImageResource(R.drawable.og345);
             currentMap = R.drawable.og345;
         }
     }
@@ -173,7 +173,7 @@ public class DrawingAssistant extends Thread{
                 mapView.setZoom(1.0f);
                 drawPath();
             }
-
+            System.out.println(mapView.getScrollPosition().x);
             MapPosition position = mapConverter.convertNode(currentPosition);
 
             dotMover.setNewPosition(position.getX(), position.getY());

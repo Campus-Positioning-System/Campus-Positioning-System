@@ -82,7 +82,7 @@ public class MainFragment extends Fragment {
             WifiScanner wifiScanner = new WifiScanner(MainActivity.mainContext());
             new Thread(wifiScanner).start();
 
-            DrawingAssistant drawingAssistant = new DrawingAssistant(dotView, mapView, wifiScanner);
+            DrawingAssistant drawingAssistant = new DrawingAssistant(dotView, mapView);
             drawingAssistant.start();
 
             onlyOnce = false;

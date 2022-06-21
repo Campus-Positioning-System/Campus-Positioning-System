@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-
         System.out.println("On Create Ende Main Activity");
     }
 
