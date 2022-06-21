@@ -29,7 +29,7 @@ Room:
         <floor floorname="1. OG">
             <room roomname="A1.01">
                 <roomalias>A 1 01</roomalias>
-                <roomclosestnode>A11</roomclosestnode>
+                <roomclosestnode>46/28/1</roomclosestnode>
             </room>
             <room roomname="A1.02">
                 <roomclosestnode>A12</roomclosestnode>

@@ -3,7 +3,7 @@ package com.example.campus_positioning_system;
 import java.util.List;
 import java.util.LinkedList;
 
-public class Node {
+public class Node implements Comparable<Node>{
     private String identifier;
     private Integer x, y, z;
 
@@ -44,5 +44,4 @@ public class Node {
         if(this.z.equals(other.z)) return this.x.equals(other.x) ? this.y.compareTo(other.y) : this.x.compareTo(other.x);
         return this.z.compareTo(other.z);
     }
-
 }

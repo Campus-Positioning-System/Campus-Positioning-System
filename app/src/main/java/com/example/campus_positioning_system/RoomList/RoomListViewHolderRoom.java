@@ -10,9 +10,14 @@ import androidx.annotation.NonNull;
 
 import com.amrdeveloper.treeview.TreeNode;
 import com.amrdeveloper.treeview.TreeViewHolder;
+import com.example.campus_positioning_system.LocationNavigation.PathfindingControl;
+import com.example.campus_positioning_system.Map.DrawingAssistant;
+import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
 
 import org.w3c.dom.Element;
+
+import java.util.List;
 
 
 public class RoomListViewHolderRoom extends TreeViewHolder {
@@ -48,6 +53,30 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
             @Override
             public void onClick(View v) {
                 //ToDo Here the navigation can start
+                new Thread(() -> { // Lambda Expression
+                    String [] coords = ((Element) (node.getValue())).getElementsByTagName("roomclosestnode").item(0).getTextContent().split("/");
+                    Node targetNode = new Node("",Integer.parseInt(coords[0]), Integer.parseInt(coords[1]), Integer.parseInt(coords[2]));
+                    System.out.println("Target node is: " + targetNode);
+                    Node currentPosition = new Node("PointZero",62,56,1);
+                    // Set current location im Pathfinding control
+                    System.out.println("Updating current Position of PathfindingControl");
+                    PathfindingControl.updateCurrentLocation(currentPosition);
+                    // Set target location
+                    System.out.println("Updating target location of PathfindingControl");
+                    PathfindingControl.updateTargetLocation(targetNode);
+                    // Set current position im Drawing assistant
+                    System.out.println("Setting current Position of DrawingAssistant");
+                    DrawingAssistant.setCurrentPosition(currentPosition);
+                    // Calculate Path
+
+                    // Set path to destination with Path
+                    System.out.println("Calculating Path");
+
+                    List<Node> path = PathfindingControl.calculatePath();
+                    System.out.println("Setting Path to Destination in DrawingAssistant");
+                    DrawingAssistant.setPathToDestination(path);
+                    //Erstmal innerhalb des ersten 1.OG
+                }).start();
                 System.out.println("User wants to start navigating to " + ((Element) (node.getValue())).getElementsByTagName("roomclosestnode").item(0).getTextContent());
             }
         });

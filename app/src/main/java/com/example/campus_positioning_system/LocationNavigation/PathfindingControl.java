@@ -1,10 +1,13 @@
 package com.example.campus_positioning_system.LocationNavigation;
 
+import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.Database.Converters;
 import com.example.campus_positioning_system.Node;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -18,56 +21,59 @@ import es.usc.citius.hipster.model.problem.SearchProblem;
 
 public class PathfindingControl{
     //If Distance to last location is larger than the Metric, the new Location is invalid
-    private final double distanceMetric = 5.0;
+    private static final double distanceMetric = 5.0;
 
     //Scaling factor to get true Distance values
-    private final double distanceScale = 1.0;
+    private static final double distanceScale = 1.0;
 
 
-    private Node currentLocation;
-    private Node targetLocation;
+    private static Node currentLocation = null;
+    private static Node targetLocation = null;
 
-    private static final HipsterGraph<Node, Double> graph = buildGraph("Hallo");
-    private static final TreeSet<Node> tree = new TreeSet<>();
+    private static final HipsterGraph<Node, Double> graph = buildGraph("GraphRef.txt");
+    private static TreeSet<Node> tree;
 
-    public synchronized Node updateCurrentLocation(Node newLocation){
-        synchronized (currentLocation) {
-            if (!(euclideanDistance(currentLocation, newLocation) > distanceMetric) || currentLocation == null)
-             return this.currentLocation = newLocation;
+    public static synchronized Node updateCurrentLocation(Node newLocation){
+            if(currentLocation == null)
+                return currentLocation = newLocation;
+            if (!(euclideanDistance(currentLocation, newLocation) > distanceMetric))
+             return currentLocation = newLocation;
             return null;
-        }
     }
 
-    public synchronized Node updateTargetLocation(Node newLocation){
-        synchronized (targetLocation){
-            return this.targetLocation = newLocation;
-        }
+    public static synchronized Node updateTargetLocation(Node newLocation){
+        return targetLocation = newLocation;
     }
 
     public synchronized Node getCurrentLocation(){
-        synchronized (currentLocation){
+
             return currentLocation;
-        }
+
     }
     public synchronized Node getTargetLocation(){
-        synchronized (targetLocation){
+
             return targetLocation;
-        }
+
     }
 
-    private double euclideanDistance(Node a, Node b){
+    private static double euclideanDistance(Node a, Node b){
         return Math.sqrt(Math.pow(a.getX() - b.getX(),2) + Math.pow(a.getY() - b.getY(), 2)) * distanceScale;
     }
 
     public static HipsterGraph<Node, Double> buildGraph(String filename){
         try {
-            File file = new File(filename);
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(MainActivity.mainContext().getAssets().open(filename));
             GraphBuilder<Node, Double> graph = GraphBuilder.<Node, Double>create(); //
             while (scanner.hasNextLine()) {
-                String[] arr = scanner.nextLine().split("[!-]+");
+                String line = scanner.nextLine();
+                if(line.startsWith("//")) // Skip "commented" lines
+                    continue;
+                String[] arr = line.split("[!-]+");
                 Node a = Converters.fromString(arr[0]);
                 Node b = Converters.fromString(arr[1]);
+                if(tree == null)
+                    tree = new TreeSet<>();
+
                 if (!tree.contains(a))
                     tree.add(a);
                 else
@@ -82,15 +88,16 @@ public class PathfindingControl{
             scanner.close();
 
             return graph.createUndirectedGraph();
-        }catch(FileNotFoundException e){}
-    return null;
+        }catch(FileNotFoundException e){} catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
-    public List<Algorithm.SearchResult> calculatePath(){
+    public static List<Node> calculatePath(){
         SearchProblem p = GraphSearchProblem.startingFrom(tree.floor(currentLocation)).in(graph).takeCostsFromEdges().build();
-        Algorithm.SearchResult x = Hipster.createAStar(p).search(tree.floor(targetLocation));
-        return x.getOptimalPaths();
+        return Hipster.createAStar(p).search(tree.floor(targetLocation)).getOptimalPaths();
     }
 
 

@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/nav_icon_favorite.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/nav_icon_room_list.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/nav_icon_settings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/layout/fragment_room_selection.xml" value="0.1734375" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.29270833333333335" />
         <entry key="app/src/main/res/layout/nested_recycler_item_child.xml" value="0.2125" />

@@ -20,18 +20,18 @@ import java.util.List;
 
 
 public class DrawingAssistant extends Thread{
-    private Node currentPosition;
-    private List<Node> path = new LinkedList<>();
+    private static Node currentPosition;
+    private static List<Node> path = new LinkedList<>();
 
-    private boolean pathDrawn = false;
+    private static boolean pathDrawn = false;
 
     //Height and Width of our View's
-    private int dotHeight;
-    private int dotWidth;
-    private int mapHeight;
-    private int mapWidth;
-    private int displayWidth;
-    private int displayHeight;
+    private static int dotHeight;
+    private static int dotWidth;
+    private static int mapHeight;
+    private static int mapWidth;
+    private static int displayWidth;
+    private static int displayHeight;
 
     //Set Height and View -> Only needs to be done Once -> is in while(true)
     //because its depending on when the Views got inflated and we need to wait for that to happen
@@ -39,30 +39,30 @@ public class DrawingAssistant extends Thread{
     private boolean setHW = false;
 
     //View's
-    private final TouchImageView mapView;
-    private int currentMap;
+    private static TouchImageView mapView = null;
+    private static int currentMap;
 
     private final TouchImageView dotView;
 
     //Map Converter Node to Px on Screen
-    private MapConverter mapConverter;
+    private static MapConverter mapConverter;
 
     public DrawingAssistant(TouchImageView dotView, TouchImageView mapView, WifiScanner wifiScanner) {
-        this.mapView = mapView;
+        DrawingAssistant.mapView = mapView;
         this.dotView = dotView;
-        this.currentPosition = new Node("PointZero",62,44,1);
+        currentPosition = new Node("PointZero",62,44,1);
     }
 
     public List<Node> getPath() {
         return path;
     }
 
-    public void setPath(List<Node> path) {
-        this.path = path;
+    public synchronized void setPath(List<Node> path) {
+        DrawingAssistant.path = path;
     }
 
-    public void setCurrentPosition(Node currentPosition) {
-        this.currentPosition = currentPosition;
+    public static void setCurrentPosition(Node currentPosition) {
+        DrawingAssistant.currentPosition = currentPosition;
         // Hier fehlt noch ein Argument, dass die Image Source nur geaendert werden kann, wenn
         // der Path nicht angezeigt werden muss.
         if(currentPosition.getZ() == 0) {
@@ -80,8 +80,9 @@ public class DrawingAssistant extends Thread{
         }
     }
 
-    public void setPathToDestination(List<Node> pathToDestination) {
-        this.path = pathToDestination;
+    public static void setPathToDestination(List<Node> pathToDestination) {
+        System.out.println("Locationcontrol got path: " + pathToDestination.toString());
+        path = pathToDestination;
     }
 
     // https://developer.android.com/training/animation/reposition-view
@@ -92,7 +93,7 @@ public class DrawingAssistant extends Thread{
         this.testView = view;
     }
 
-    public void drawPath() {
+    public static void drawPath() {
         Bitmap mapBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
 
         float einx = (float) mapBitmap.getWidth()/124f;

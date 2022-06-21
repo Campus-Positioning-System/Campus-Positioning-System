@@ -71,8 +71,8 @@ public class Mover extends HandlerThread {
     }
 
     public synchronized void animationStart() {
-        System.out.println("Dot moving to: " + x + " " + y);
-        System.out.println("From: " + lastX + " " + lastY);
+        //System.out.println("Dot moving to: " + x + " " + y);
+        //System.out.println("From: " + lastX + " " + lastY);
         this.path = new Path();
 
         path.moveTo(lastX,lastY);
