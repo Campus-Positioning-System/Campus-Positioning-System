@@ -64,9 +64,9 @@ public class PathfindingControl{
             GraphBuilder<Node, Double> graph = GraphBuilder.<Node, Double>create(); //
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                if(line.startsWith("//")) // Skip "commented" lines
+                if(line.startsWith("//") || line.isEmpty()) // Skip "commented" lines and empty lines
                     continue;
-                String[] arr = line.split("[!-]+");
+                String[] arr = line.split("-");
                 Node a = Converters.fromString(arr[0]);
                 Node b = Converters.fromString(arr[1]);
                 if(tree == null)

@@ -20,7 +20,8 @@ import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 
-/*  NearestWifiScanner
+/*
+NearestWifiScanner
  */
 
 
