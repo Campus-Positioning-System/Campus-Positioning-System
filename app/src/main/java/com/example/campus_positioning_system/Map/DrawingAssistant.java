@@ -58,18 +58,20 @@ public class DrawingAssistant extends Thread{
         currentPosition = currentPosition1;
         // Hier fehlt noch ein Argument, dass die Image Source nur geaendert werden kann, wenn
         // der Path nicht angezeigt werden muss.
-        if(currentPosition.getZ() == 0) {
-            mapView.setImageResource(R.drawable.eg);
-            currentMap = R.drawable.eg;
-        } else if(currentPosition.getZ() == 1) {
-            mapView.setImageResource(R.drawable.og1example);
-            currentMap = R.drawable.og1example;
-        } else if(currentPosition.getZ() == 2) {
-            mapView.setImageResource(R.drawable.og2);
-            currentMap = R.drawable.og2;
-        } else if(currentPosition.getZ() == 3) {
-            mapView.setImageResource(R.drawable.og345);
-            currentMap = R.drawable.og345;
+        if(!pathDrawn) {
+            if(currentPosition.getZ() == 0) {
+                mapView.setImageResource(R.drawable.eg);
+                currentMap = R.drawable.eg;
+            } else if(currentPosition.getZ() == 1) {
+                mapView.setImageResource(R.drawable.og1example);
+                currentMap = R.drawable.og1example;
+            } else if(currentPosition.getZ() == 2) {
+                mapView.setImageResource(R.drawable.og2);
+                currentMap = R.drawable.og2;
+            } else if(currentPosition.getZ() == 3) {
+                mapView.setImageResource(R.drawable.og345);
+                currentMap = R.drawable.og345;
+            }
         }
     }
 
@@ -86,7 +88,7 @@ public class DrawingAssistant extends Thread{
     }
 
     public void drawPath() {
-        Bitmap mapBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
+        Bitmap mapBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), currentMap);
 
         float einx = (float) mapBitmap.getWidth()/124f;
         float einy = (float) mapBitmap.getHeight()/88f;
@@ -169,7 +171,6 @@ public class DrawingAssistant extends Thread{
             dotView.setZoom((float) (2-mapView.getCurrentZoom()));
 
             if(!path.isEmpty() && !pathDrawn) {
-                System.out.println("Dada");
                 mapView.setZoom(1.0f);
                 drawPath();
             }
