@@ -62,6 +62,8 @@ public class LocationControl {
         TreeSet<NNObject> tree = new TreeSet<>(dao.getRelevantData(outOf));
 
         List<NNObject> found = new LinkedList<NNObject>();
+        if(tree.isEmpty() || search.isEmpty())
+            return new Node("default",55,67,1);
         for (; !search.isEmpty(); search.remove(0))
             found.addAll(new NNControl().getKNN(search.get(0), 3, tree));
 

@@ -52,7 +52,7 @@ public class NNControl {
                 result.add(getNN(search, tree));
                 tree.remove(result.getLast());
             } catch (NoSuchElementException e) {
-                System.out.println(e.getMessage());
+               // System.out.println(e.getMessage());
                 i = k;
             }
         }
