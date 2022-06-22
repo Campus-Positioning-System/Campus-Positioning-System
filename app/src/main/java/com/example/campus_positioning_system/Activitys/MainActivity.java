@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 availableNetworks = wifiManager.getScanResults();
             }
         };
+        callback.onScanResultsAvailable();
     }
 
     public static List<ScanResult> getAvailableNetworks() {
