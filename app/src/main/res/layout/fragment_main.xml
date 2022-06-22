@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/og1example" />
+        android:src="@drawable/og1fancy" />
 
     <com.ortiz.touchview.TouchImageView
         android:id="@+id/dot"

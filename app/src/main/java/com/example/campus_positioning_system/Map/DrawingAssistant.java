@@ -67,10 +67,10 @@ public class DrawingAssistant extends Thread{
                 currentMap = R.drawable.eg;
             } else if(currentPosition.getZ() == 1) {
                 mapView.setImageBitmap(allBitmaps.get(1));
-                currentMap = R.drawable.og1example;
+                currentMap = R.drawable.og1fancy;
             } else if(currentPosition.getZ() == 2) {
                 mapView.setImageBitmap(allBitmaps.get(2));
-                currentMap = R.drawable.og2;
+                currentMap = R.drawable.og2fancy;
             } else if(currentPosition.getZ() == 3) {
                 mapView.setImageBitmap(allBitmaps.get(3));
                 currentMap = R.drawable.og345;
@@ -80,11 +80,11 @@ public class DrawingAssistant extends Thread{
                 mapView.setImageResource(R.drawable.eg);
                 currentMap = R.drawable.eg;
             } else if(currentPosition.getZ() == 1) {
-                mapView.setImageResource(R.drawable.og1example);
-                currentMap = R.drawable.og1example;
+                mapView.setImageResource(R.drawable.og1fancy);
+                currentMap = R.drawable.og1fancy;
             } else if(currentPosition.getZ() == 2) {
-                mapView.setImageResource(R.drawable.og2);
-                currentMap = R.drawable.og2;
+                mapView.setImageResource(R.drawable.og2fancy);
+                currentMap = R.drawable.og2fancy;
             } else if(currentPosition.getZ() == 3) {
                 mapView.setImageResource(R.drawable.og345);
                 currentMap = R.drawable.og345;
@@ -136,7 +136,7 @@ public class DrawingAssistant extends Thread{
     }
 
     public void removePath() {
-        mapView.setImageResource(R.drawable.og1example);
+        mapView.setImageResource(R.drawable.og1fancy);
     }
 
     @Override
@@ -180,9 +180,9 @@ public class DrawingAssistant extends Thread{
 
                 Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
                 Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
-                Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
+                Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1fancy);
                 Bitmap mutableBitmapOG1 = og1Bitmap.copy(Bitmap.Config.ARGB_8888, true);
-                Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2);
+                Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2fancy);
                 Bitmap mutableBitmapOG2 = og2Bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og345);
                 Bitmap mutableBitmapOG3 = og345Bitmap.copy(Bitmap.Config.ARGB_8888, true);
