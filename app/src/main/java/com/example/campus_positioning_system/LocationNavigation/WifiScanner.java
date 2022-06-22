@@ -1,7 +1,9 @@
 package com.example.campus_positioning_system.LocationNavigation;
 
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.example.campus_positioning_system.Activitys.MainActivity;
+import com.example.campus_positioning_system.Database.DatabaseAccessThread;
 import com.example.campus_positioning_system.Map.DrawingAssistant;
 import com.example.campus_positioning_system.NNObject;
 import com.example.campus_positioning_system.Node;
@@ -27,7 +30,7 @@ NearestWifiScanner
 
 public class WifiScanner extends Thread{
 
-    private static int scanInterval = 10000;
+    private static int scanInterval = 5000;
     private final WifiManager wifiManager;
 
     private List<ScanResult> availableNetworks;
@@ -51,19 +54,12 @@ public class WifiScanner extends Thread{
         scanAngle = MainActivity.getAngle();
     }
 
-    public synchronized List<ScanResult> getWifiList() {
-        return this.availableNetworks;
-    }
-
-    public synchronized List<NNObject> getNearestWifiList() {
-        return null;
-    }
-
     public void setScanIntervall(int intervall){
         this.scanInterval = intervall;
     }
 
     public int adjustAngle(int angle){
+        /*
         if(angle <= 45 && angle > 135)
             return 90;
         if(angle <= 135 && angle > 215)
@@ -71,18 +67,45 @@ public class WifiScanner extends Thread{
         if(angle <= 215 && angle > 315)
             return 270;
         return 0;
-      /*  if(angle >= -45 && angle < 45)
+        */
+        if(angle >= -45 && angle < 45)
             return 0;
         if(angle >= 45 && angle < 135)
             return 90;
         if(angle < -45 && angle >= -135)
             return 270;
-        return 180;*/
+        return 180;
     }
 
 
     public static void setStockwerkView (TextView view) {
         stockwerkView = view;
+    }
+
+    BroadcastReceiver wifiScanReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context c, Intent intent) {
+            boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
+            if (success) {
+                System.out.println("Scan did succeed in BroadcastReceiver");
+                scanSuccess();
+            } else {
+                System.out.println("Scan did not succeed.");
+            }
+        }
+    };
+
+    private long lastUpdatedTime = 0;
+
+    private void scanSuccess() {
+        availableNetworks = wifiManager.getScanResults();
+        scanAngle = MainActivity.getAngle();
+
+        if(!availableNetworks.isEmpty() && System.currentTimeMillis() - lastUpdatedTime > 2000) {
+            System.out.println(System.currentTimeMillis() - lastUpdatedTime);
+            new DatabaseAccessThread(availableNetworks,adjustAngle(scanAngle),stockwerkView).start();
+            lastUpdatedTime = System.currentTimeMillis();
+        }
     }
 
 
@@ -91,36 +114,17 @@ public class WifiScanner extends Thread{
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void run() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+        MainActivity.mainContext().registerReceiver(wifiScanReceiver, intentFilter);
+
         while(shouldRun){
-            wifiManager.startScan();
-            availableNetworks = wifiManager.getScanResults();
-
-            scanAngle = MainActivity.getAngle();
-
-            if(!availableNetworks.isEmpty()) {
-                System.out.println("Scan hat funktioniert");
-                System.out.println(availableNetworks.size());
-                for(ScanResult s : availableNetworks) {
-                    System.out.print(s.BSSID + " ");
-                    System.out.println(s.level);
-                }
-                nearestWifiList = availableNetworks.stream()
-                        .map(v-> new NNObject(v.BSSID,(float)v.level,null,this.adjustAngle(scanAngle)))
-                        .collect(Collectors.toList());
-
-                List<String> relevantAdresses = availableNetworks.stream()
-                        .map(v->v.BSSID)
-                        .distinct()
-                        .collect(Collectors.toList());
-
-                //if(!() == null))
-                //PathfindingControl.updateCurrentLocation(new LocationControl().locate(nearestWifiList));
-                Node currentPosition = new LocationControl().locate(nearestWifiList);
-                DrawingAssistant.setCurrentPosition(currentPosition);
-                if(stockwerkView != null) {
-                    stockwerkView.setText(currentPosition.toString());
-                }
-
+            boolean success = wifiManager.startScan();
+            if (success) {
+                System.out.println("Scan did succeed in run()");
+                scanSuccess();
+            } else {
+                System.out.println("Scan did not succeed.");
             }
             try {
                 Thread.sleep(scanInterval);
