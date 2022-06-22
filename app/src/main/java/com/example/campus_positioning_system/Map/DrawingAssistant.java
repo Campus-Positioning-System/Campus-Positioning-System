@@ -181,11 +181,11 @@ public class DrawingAssistant extends Thread{
                 Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
                 Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
                 Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
-                Bitmap mutableBitmapOG1 = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                Bitmap mutableBitmapOG1 = og1Bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2);
-                Bitmap mutableBitmapOG2 = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                Bitmap mutableBitmapOG2 = og2Bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og345);
-                Bitmap mutableBitmapOG3 = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                Bitmap mutableBitmapOG3 = og345Bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 allBitmaps.add(mutableBitmapEG);
                 allBitmaps.add(mutableBitmapOG1);
                 allBitmaps.add(mutableBitmapOG2);
