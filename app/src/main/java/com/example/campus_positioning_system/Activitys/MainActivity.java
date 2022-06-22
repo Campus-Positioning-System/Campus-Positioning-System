@@ -3,19 +3,26 @@ package com.example.campus_positioning_system.Activitys;
 // Standard Activity Library's
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // Wifi and Compass Manager
 
@@ -31,6 +38,9 @@ import com.example.campus_positioning_system.LocationNavigation.LocationControl;
 import com.example.campus_positioning_system.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -64,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public static int navigationBarHeight;
     public static int statusBarHeight;
 
+    //Wifi Manager Variables
+    private static WifiManager wifiManager;
+    private static List<ScanResult> availableNetworks;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +106,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         navigationBarHeight = getNavigationBarHeight();
         statusBarHeight = getStatusBarHeight();
         //------------------------------------------------------------------------------
+        //Wifi Scan Test
+        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (!wifiManager.isWifiEnabled()) {
+            Toast.makeText(this, "WiFi is disabled ... We need to enable it", Toast.LENGTH_LONG).show();
+            wifiManager.setWifiEnabled(true);
+        }
+        //------------------------------------------------------------------------------
 
 
 
@@ -120,6 +140,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Intent switchActivityIntent = new Intent(this, RoomSelectionActivity.class);
         startActivity(switchActivityIntent);
     }
+
+    //*********************************************
+    //Methods for WifiScan new
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    public static void scanWifi() {
+        WifiManager.ScanResultsCallback callback = new WifiManager.ScanResultsCallback() {
+            @Override
+            public void onScanResultsAvailable() {
+                availableNetworks = wifiManager.getScanResults();
+            }
+        };
+    }
+
+    public static List<ScanResult> getAvailableNetworks() {
+        return availableNetworks;
+    }
+
+    //*********************************************
+
 
 
 

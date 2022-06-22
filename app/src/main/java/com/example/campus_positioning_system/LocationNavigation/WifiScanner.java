@@ -2,14 +2,19 @@ package com.example.campus_positioning_system.LocationNavigation;
 
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.Map.DrawingAssistant;
 import com.example.campus_positioning_system.NNObject;
 
 import java.util.List;
+import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 
@@ -19,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class WifiScanner extends Thread{
 
-    private static int scanIntervall = 500;
+    private static int scanInterval = 500;
     private final WifiManager wifiManager;
 
     private List<ScanResult> availableNetworks;
@@ -51,7 +56,7 @@ public class WifiScanner extends Thread{
     }
 
     public void setScanIntervall(int intervall){
-        this.scanIntervall = intervall;
+        this.scanInterval = intervall;
     }
 
     public int adjustAngle(int angle){
@@ -68,28 +73,35 @@ public class WifiScanner extends Thread{
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void run() {
         while(shouldRun){
-            wifiManager.startScan();
-            availableNetworks = wifiManager.getScanResults();
+            //wifiManager.startScan();
+            //availableNetworks = wifiManager.getScanResults();
+
+            MainActivity.scanWifi();
+            availableNetworks = MainActivity.getAvailableNetworks();
+
             scanAngle = MainActivity.getAngle();
 
-            nearestWifiList = availableNetworks.stream()
-                    .map(v-> new NNObject(v.BSSID,(float)v.level,null,this.adjustAngle(scanAngle)))
-                    .collect(Collectors.toList());
+            if(availableNetworks != null) {
+                System.out.println("Scan hat funktioniert");
+                nearestWifiList = availableNetworks.stream()
+                        .map(v-> new NNObject(v.BSSID,(float)v.level,null,this.adjustAngle(scanAngle)))
+                        .collect(Collectors.toList());
 
-            List<String> relevantAdresses = availableNetworks.stream()
-                    .map(v->v.BSSID)
-                    .distinct()
-                    .collect(Collectors.toList());
+                List<String> relevantAdresses = availableNetworks.stream()
+                        .map(v->v.BSSID)
+                        .distinct()
+                        .collect(Collectors.toList());
 
-            //if(!() == null))
-            //PathfindingControl.updateCurrentLocation(new LocationControl().locate(nearestWifiList));
-            DrawingAssistant.setCurrentPosition(new LocationControl().locate(nearestWifiList));
-
+                //if(!() == null))
+                //PathfindingControl.updateCurrentLocation(new LocationControl().locate(nearestWifiList));
+                DrawingAssistant.setCurrentPosition(new LocationControl().locate(nearestWifiList));
+            }
             try {
-                Thread.sleep(scanIntervall);
+                Thread.sleep(scanInterval);
             } catch (InterruptedException e) {
             }
         }
