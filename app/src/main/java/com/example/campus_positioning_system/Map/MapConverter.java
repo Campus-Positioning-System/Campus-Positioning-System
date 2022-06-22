@@ -53,19 +53,6 @@ public class MapConverter {
         this.dotWidth = dotWidth;
     }
 
-    public MapPosition convertNode(Node toConvert, float canvasSizeX, float canvasSizeY) {
-        MapPosition mapPos = new MapPosition();
-
-        float xForNode = (toConvert.getX()*xCoordinatesGap);
-        float yForNode = ((toConvert.getY()*yCoordinatesGap));
-
-        float posX = xForNode * (canvasSizeX) - (dotWidth/(float)2);
-        float posY = yForNode * (canvasSizeY) - (dotHeight/(float)2);
-        mapPos.setX(posX);
-        mapPos.setY(posY);
-        return mapPos;
-    }
-
     public MapPosition convertNode(Node toConvert) {
         MapPosition mapPos = new MapPosition();
         PointF mapViewCenter = mapView.getScrollPosition();

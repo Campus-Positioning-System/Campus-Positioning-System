@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private final float[] rotationMatrix = new float[9];
     private final float[] orientationAngles = new float[3];
 
-    private TextView textView;
-
     boolean isCopied = false;
     boolean isCopied2 = false;
 
@@ -187,8 +185,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             lastUpdatedTime = System.currentTimeMillis();
 
             angle = (int) azimuthInDegree;
-            textView = findViewById(R.id.textViewTest);
-            textView.setText(angle + " Grad");
         }
     }
 

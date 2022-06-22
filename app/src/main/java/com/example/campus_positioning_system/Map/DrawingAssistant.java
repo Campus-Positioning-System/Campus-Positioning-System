@@ -155,14 +155,14 @@ public class DrawingAssistant extends Thread{
         }
         while(!setHW) {
             if(mapView.getHeight() != 0.0) {
-                this.displayHeight = MainActivity.height;
-                this.displayWidth = MainActivity.width;
+                displayHeight = MainActivity.height;
+                displayWidth = MainActivity.width;
 
-                this.mapHeight = mapView.getHeight();
-                this.mapWidth = mapView.getWidth();
+                mapHeight = mapView.getHeight();
+                mapWidth = mapView.getWidth();
 
-                this.dotHeight = dotView.getHeight();
-                this.dotWidth = dotView.getWidth();
+                dotHeight = dotView.getHeight();
+                dotWidth = dotView.getWidth();
 
                 int navigationBarHeight = MainActivity.navigationBarHeight;
                 int statusBarHeight = MainActivity.statusBarHeight;
