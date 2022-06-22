@@ -36,8 +36,6 @@ public class LocationControl {
 
         }
         Comparator<CNode> comparator = new Comparator<CNode>() {
-
-
             public int compare(final CNode o1, final CNode o2) {
                 return o1.getCount().equals(o2.getCount()) ? o1.getParent().compareTo(o2.getParent())
                         : o1.getCount().compareTo(o2.getCount());
@@ -54,6 +52,7 @@ public class LocationControl {
     Values are then passed to findLocation().
     ----------------------------------------------------------------*/
     public Node locate(List<NNObject> search) {
+        System.out.println("Location starting...");
         /*Was relevant for testing....
         TreeSet<NNObject> tree = DBMock.getTree();*/
         List<String> outOf = new LinkedList<>();
@@ -69,6 +68,7 @@ public class LocationControl {
 
         Node loc = findLocation(found);
         PathfindingControl.updateCurrentLocation(loc);
+        System.out.println("Location located at: " + loc.toString());
         return loc;
     }
 

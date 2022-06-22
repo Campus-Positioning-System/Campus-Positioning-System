@@ -105,6 +105,7 @@ public class DrawingAssistant extends Thread{
     }
 
     public void drawPath() {
+        removePath();
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStrokeWidth(15);
@@ -136,7 +137,22 @@ public class DrawingAssistant extends Thread{
     }
 
     public void removePath() {
-        mapView.setImageResource(R.drawable.og1fancy);
+        pathDrawn = false;
+        path = new LinkedList<>();
+        setCurrentPosition(currentPosition);
+        allBitmaps = new LinkedList<>();
+        Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
+        Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1fancy);
+        Bitmap mutableBitmapOG1 = og1Bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2fancy);
+        Bitmap mutableBitmapOG2 = og2Bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og345);
+        Bitmap mutableBitmapOG3 = og345Bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        allBitmaps.add(mutableBitmapEG);
+        allBitmaps.add(mutableBitmapOG1);
+        allBitmaps.add(mutableBitmapOG2);
+        allBitmaps.add(mutableBitmapOG3);
     }
 
     @Override

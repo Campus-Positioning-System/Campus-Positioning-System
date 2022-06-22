@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.LocationNavigation.WifiScanner;
@@ -78,6 +79,10 @@ public class MainFragment extends Fragment {
         if(onlyOnce) {
             TouchImageView mapView = rootView.findViewById(R.id.map1);
             TouchImageView dotView = rootView.findViewById(R.id.dot);
+
+            TextView textView = rootView.findViewById(R.id.stockwerkView);
+
+            WifiScanner.setStockwerkView(textView);
 
             WifiScanner wifiScanner = new WifiScanner(MainActivity.mainContext());
             new Thread(wifiScanner).start();

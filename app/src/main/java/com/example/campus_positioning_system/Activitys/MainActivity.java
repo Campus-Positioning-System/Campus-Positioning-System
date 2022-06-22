@@ -99,17 +99,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         navigationBarHeight = getNavigationBarHeight();
         statusBarHeight = getStatusBarHeight();
         //------------------------------------------------------------------------------
-        //Wifi Scan Test
-        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        WifiManager.ScanResultsCallback callback = new WifiManager.ScanResultsCallback() {
-            @Override
-            public void onScanResultsAvailable() {
-                availableNetworks = wifiManager.getScanResults();
-            }
-        };
-        wifiManager.registerScanResultsCallback(mainContext().getMainExecutor(),callback);
-
-        //------------------------------------------------------------------------------
 
 
 
@@ -134,19 +123,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Intent switchActivityIntent = new Intent(this, RoomSelectionActivity.class);
         startActivity(switchActivityIntent);
     }
-
-    //*********************************************
-    //Methods for WifiScan new
-    @RequiresApi(api = Build.VERSION_CODES.R)
-    public static void scanWifi() {
-
-    }
-
-    public static List<ScanResult> getAvailableNetworks() {
-        return availableNetworks;
-    }
-
-    //*********************************************
 
 
 

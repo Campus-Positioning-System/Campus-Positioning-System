@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".Fragments.MainFragment">
+    tools:context=".Fragments.MainFragment"
+    android:background="@color/white">
 
     <com.ortiz.touchview.TouchImageView
         android:id="@+id/map1"
@@ -19,4 +20,13 @@
         android:contentDescription="@string/dot"
         android:src="@drawable/dotnew"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/stockwerkView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="1. Obergeschoss"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        />
 </FrameLayout>
