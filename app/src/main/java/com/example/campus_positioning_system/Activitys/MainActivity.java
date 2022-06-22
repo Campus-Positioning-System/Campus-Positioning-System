@@ -2,14 +2,12 @@ package com.example.campus_positioning_system.Activitys;
 
 // Standard Activity Library's
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.BroadcastReceiver;
+
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,10 +17,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 // Wifi and Compass Manager
 
@@ -34,15 +29,12 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.campus_positioning_system.Database.AppDatabase;
 import com.example.campus_positioning_system.Database.NNObjectDao;
-import com.example.campus_positioning_system.LocationNavigation.LocationControl;
 import com.example.campus_positioning_system.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 
-
+@SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     //Room Database Object
     private static AppDatabase db;
@@ -78,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static WifiManager wifiManager;
     private static List<ScanResult> availableNetworks;
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -108,29 +101,30 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //------------------------------------------------------------------------------
         //Wifi Scan Test
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        if (!wifiManager.isWifiEnabled()) {
-            Toast.makeText(this, "WiFi is disabled ... We need to enable it", Toast.LENGTH_LONG).show();
-            wifiManager.setWifiEnabled(true);
-        }
+        WifiManager.ScanResultsCallback callback = new WifiManager.ScanResultsCallback() {
+            @Override
+            public void onScanResultsAvailable() {
+                availableNetworks = wifiManager.getScanResults();
+            }
+        };
+        wifiManager.registerScanResultsCallback(mainContext().getMainExecutor(),callback);
+
         //------------------------------------------------------------------------------
 
 
 
         navigationView = findViewById(R.id.bottom_navigation);
 
-        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                System.out.println("Item is: " + item.getItemId());
-                switch (item.getItemId()) {
-                    case R.id.nav_room_list:
-                        switchActivities();
-                        break;
+        navigationView.setOnItemSelectedListener(item -> {
+            System.out.println("Item is: " + item.getItemId());
+            switch (item.getItemId()) {
+                case R.id.nav_room_list:
+                    switchActivities();
+                    break;
 
-                    case R.id.nav_settings:
-                }
-                return false;
+                case R.id.nav_settings:
             }
+            return false;
         });
 
         System.out.println("On Create Ende Main Activity");
@@ -145,13 +139,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     //Methods for WifiScan new
     @RequiresApi(api = Build.VERSION_CODES.R)
     public static void scanWifi() {
-        WifiManager.ScanResultsCallback callback = new WifiManager.ScanResultsCallback() {
-            @Override
-            public void onScanResultsAvailable() {
-                availableNetworks = wifiManager.getScanResults();
-            }
-        };
-        callback.onScanResultsAvailable();
+
     }
 
     public static List<ScanResult> getAvailableNetworks() {

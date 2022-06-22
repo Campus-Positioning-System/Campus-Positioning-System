@@ -28,7 +28,7 @@ public class PathfindingControl{
     private static final double distanceScale = 1.0;
 
 
-    private static Node currentLocation = null;
+    private static Node currentLocation = new Node("", 64,44,0);
     private static Node targetLocation = null;
 
     private static final HipsterGraph<Node, Double> graph = buildGraph("GraphRef.txt");
@@ -47,14 +47,10 @@ public class PathfindingControl{
     }
 
     public synchronized Node getCurrentLocation(){
-
             return currentLocation;
-
     }
     public synchronized Node getTargetLocation(){
-
             return targetLocation;
-
     }
 
     private static double euclideanDistance(Node a, Node b){
