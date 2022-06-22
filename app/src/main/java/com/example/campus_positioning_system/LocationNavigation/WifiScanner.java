@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 public class WifiScanner extends Thread{
 
+    private static int scanIntervall = 500;
     private final WifiManager wifiManager;
 
     private List<ScanResult> availableNetworks;
@@ -27,6 +28,7 @@ public class WifiScanner extends Thread{
 
 
     private boolean shouldRun = true;
+
 
     public WifiScanner(Context context){
         wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -48,6 +50,10 @@ public class WifiScanner extends Thread{
         return null;
     }
 
+    public void setScanIntervall(int intervall){
+        this.scanIntervall = intervall;
+    }
+
     public int adjustAngle(int angle){
         if(angle <= 45 && angle > 135)
             return 90;
@@ -57,6 +63,8 @@ public class WifiScanner extends Thread{
             return 270;
         return 0;
     }
+
+
 
 
 
@@ -81,7 +89,7 @@ public class WifiScanner extends Thread{
             DrawingAssistant.setCurrentPosition(new LocationControl().locate(nearestWifiList));
 
             try {
-                Thread.sleep(1500);
+                Thread.sleep(scanIntervall);
             } catch (InterruptedException e) {
             }
         }

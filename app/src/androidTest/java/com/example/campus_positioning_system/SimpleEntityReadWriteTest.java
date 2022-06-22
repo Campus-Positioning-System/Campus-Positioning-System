@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.TreeSet;
 
 @RunWith(AndroidJUnit4.class)
 public class SimpleEntityReadWriteTest {
@@ -33,6 +34,7 @@ public class SimpleEntityReadWriteTest {
     @Test
     public void writeUserAndReadInList() throws Exception {
         List list = nnObjectDao.getAllData();
+        TreeSet<NNObject> tree = new TreeSet<>(list);
         assert(list.size() == 46140);
 
     }

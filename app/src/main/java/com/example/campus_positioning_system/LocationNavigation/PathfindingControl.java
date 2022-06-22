@@ -60,7 +60,7 @@ public class PathfindingControl{
     private static double euclideanDistance(Node a, Node b){
         return Math.sqrt(Math.pow(a.getX() - b.getX(),2) + Math.pow(a.getY() - b.getY(), 2)) * distanceScale;
     }
-    
+
 
     public static HipsterGraph<Node, Double> buildGraph(String filename){
         try {
