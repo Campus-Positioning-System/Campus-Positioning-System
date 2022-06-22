@@ -25,6 +25,7 @@ public class DatabaseAccessThread extends Thread{
         this.stockwerkView = stockwerkView;
     }
 
+
     @Override
     public void run() {
         System.out.println(availableNetworks.size());
