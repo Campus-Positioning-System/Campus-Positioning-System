@@ -71,6 +71,13 @@ public class WifiScanner extends Thread{
         if(angle <= 215 && angle > 315)
             return 270;
         return 0;
+      /*  if(angle >= -45 && angle < 45)
+            return 0;
+        if(angle >= 45 && angle < 135)
+            return 90;
+        if(angle < -45 && angle >= -135)
+            return 270;
+        return 180;*/
     }
 
 
