@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class WifiScanner extends Thread{
 
-    private static int scanInterval = 500;
+    private static int scanInterval = 30000;
     private final WifiManager wifiManager;
 
     private List<ScanResult> availableNetworks;
@@ -77,16 +77,17 @@ public class WifiScanner extends Thread{
     @Override
     public void run() {
         while(shouldRun){
-            //wifiManager.startScan();
-            //availableNetworks = wifiManager.getScanResults();
+            wifiManager.startScan();
+            availableNetworks = wifiManager.getScanResults();
 
-            MainActivity.scanWifi();
-            availableNetworks = MainActivity.getAvailableNetworks();
+            //MainActivity.scanWifi();
+            //availableNetworks = MainActivity.getAvailableNetworks();
 
             scanAngle = MainActivity.getAngle();
 
-            if(availableNetworks != null) {
+            if(!availableNetworks.isEmpty()) {
                 System.out.println("Scan hat funktioniert");
+                System.out.println(availableNetworks.get(0).BSSID);
                 nearestWifiList = availableNetworks.stream()
                         .map(v-> new NNObject(v.BSSID,(float)v.level,null,this.adjustAngle(scanAngle)))
                         .collect(Collectors.toList());
