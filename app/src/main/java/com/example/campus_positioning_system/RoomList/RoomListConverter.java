@@ -17,6 +17,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 public class RoomListConverter {
+
+    public static void addFavorite(TreeNode nodeItem){
+
+    }
+
     public static List<TreeNode> printList(Context c){
         List<TreeNode> roots = new ArrayList<>();
         try {
@@ -24,6 +29,7 @@ public class RoomListConverter {
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(c.getAssets().open("roomNameList.xml"));
             doc.getDocumentElement().normalize();
+
             System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
             NodeList nList = doc.getElementsByTagName("building");
             System.out.println("----------------------------");
@@ -44,6 +50,7 @@ public class RoomListConverter {
                                 if (floors.item(j).getNodeType() == Node.ELEMENT_NODE) {
                                     System.out.println("\t\tWe are in room " + ((Element) floors.item(j)).getAttribute("roomname"));
                                     TreeNode roomNode = new TreeNode(((Element) floors.item(j)),R.layout.room_list_room_item);
+
                                     NodeList roomAttributes = floors.item(j).getChildNodes();
                                     for (int k = 0; k < roomAttributes.getLength(); k++) {
                                         if (roomAttributes.item(k).getNodeType() == Node.ELEMENT_NODE){

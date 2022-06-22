@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
     <activity
         android:id="@+id/roomSelectionActivity"
@@ -26,4 +29,9 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.campus_positioning_system.Fragments.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.campus_positioning_system.Fragments.FavoriteListFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_favorites_list" />
 </navigation>

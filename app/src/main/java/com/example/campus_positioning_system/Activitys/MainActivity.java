@@ -2,12 +2,14 @@ package com.example.campus_positioning_system.Activitys;
 
 // Standard Activity Library's
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -17,7 +19,10 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 // Wifi and Compass Manager
 
@@ -31,6 +36,8 @@ import com.example.campus_positioning_system.Database.AppDatabase;
 import com.example.campus_positioning_system.Database.NNObjectDao;
 import com.example.campus_positioning_system.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -104,23 +111,28 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         navigationView = findViewById(R.id.bottom_navigation);
 
-        navigationView.setOnItemSelectedListener(item -> {
-            System.out.println("Item is: " + item.getItemId());
-            switch (item.getItemId()) {
-                case R.id.nav_room_list:
-                    switchActivities();
-                    break;
+        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                System.out.println("Item is: " + item.getItemId());
+                switch (item.getItemId()) {
+                    case R.id.nav_room_list:
+                        switchActivities(RoomSelectionActivity.class);
+                        break;
 
-                case R.id.nav_settings:
+                    case R.id.nav_settings:
+                        switchActivities(SettingsActivity.class);
+                        break;
+                }
+                return false;
             }
-            return false;
         });
 
         System.out.println("On Create Ende Main Activity");
     }
 
-    private void switchActivities() {
-        Intent switchActivityIntent = new Intent(this, RoomSelectionActivity.class);
+    private void switchActivities(Class<?> activityClass) {
+        Intent switchActivityIntent = new Intent(this, activityClass);
         startActivity(switchActivityIntent);
     }
 

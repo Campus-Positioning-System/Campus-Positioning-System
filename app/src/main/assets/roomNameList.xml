@@ -26,32 +26,300 @@ Room:
     <campusName>HFU Furtwangen</campusName>
 
     <building buildingname="A-Bau">
-        <floor floorname="1. OG">
-            <room roomname="A1.01">
-                <roomalias>A 1 01</roomalias>
-                <roomclosestnode>46/28/1</roomclosestnode>
-            </room>
-            <room roomname="A1.02">
-                <roomclosestnode>A12</roomclosestnode>
-            </room>
-        </floor>
-
         <floor floorname="EG">
             <room roomname="A0.01">
-                <roomalias> A EG 01</roomalias>
-                <roomclosestnode>A01</roomclosestnode>
+                <roomalias>Cafeteria</roomalias>
+                <roomclosestnode>43/60/0</roomclosestnode>
             </room>
         </floor>
-
+        <floor floorname="1. OG">
+            <room roomname="A1.01">
+                <roomalias>Pforte</roomalias>
+                <roomclosestnode>49/61/1</roomclosestnode>
+            </room>
+            <room roomname="A1.19">
+                <roomalias>Prüfungsamt</roomalias>
+                <roomclosestnode>66/56/1</roomclosestnode>
+            </room>
+            <room roomname="A1.25">
+                <roomalias>Zulassungsamt</roomalias>
+                <roomclosestnode>62/56/1</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="2. OG">
+            <room roomname="A2.01">
+                <roomalias></roomalias>
+                <roomclosestnode>41/60/2</roomclosestnode>
+            </room>
+            <room roomname="A2.02">
+                <roomalias></roomalias>
+                <roomclosestnode>36/62/2</roomclosestnode>
+            </room>
+            <room roomname="A2.03">
+                <roomalias></roomalias>
+                <roomclosestnode>32/63/2</roomclosestnode>
+            </room>
+            <room roomname="A2.05">
+                <roomalias></roomalias>
+                <roomclosestnode>32/63/2</roomclosestnode>
+            </room>
+            <room roomname="A2.07">
+                <roomalias></roomalias>
+                <roomclosestnode>41/60/2</roomclosestnode>
+            </room>
+            <room roomname="A2.16">
+                <roomalias></roomalias>
+                <roomclosestnode>59/57/2</roomclosestnode>
+            </room>
+            <room roomname="A2.17">
+                <roomalias></roomalias>
+                <roomclosestnode>64/57/2</roomclosestnode>
+            </room>
+            <room roomname="A2.19">
+                <roomalias></roomalias>
+                <roomclosestnode>74/56/2</roomclosestnode>
+            </room>
+            <room roomname="A2.26">
+                <roomalias></roomalias>
+                <roomclosestnode>74/56/2</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="3. OG">
+            <room roomname="A3.02">
+                <roomalias>Bibliothek</roomalias>
+                <roomclosestnode>55/51/3</roomclosestnode>
+            </room>
+            <room roomname="A2.11">
+                <roomalias></roomalias>
+                <roomclosestnode>64/47/3</roomclosestnode>
+            </room>
+            <room roomname="A3.13">
+                <roomalias></roomalias>
+                <roomclosestnode>74/46/3</roomclosestnode>
+            </room>
+            <room roomname="A3.15">
+                <roomalias></roomalias>
+                <roomclosestnode>79/46/3</roomclosestnode>
+            </room>
+            <room roomname="A3.18">
+                <roomalias></roomalias>
+                <roomclosestnode>79/46/3</roomclosestnode>
+            </room>
+            <room roomname="A3.20">
+                <roomalias></roomalias>
+                <roomclosestnode>74/46/3</roomclosestnode>
+            </room>
+            <room roomname="A3.22">
+                <roomalias></roomalias>
+                <roomclosestnode>64/47/3</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="Toiletten">
+            <room roomname="A0.02-04">
+                <roomalias>Toiletten Cafeteria</roomalias>
+                <roomclosestnode>43/60/0</roomclosestnode>
+            </room>
+        </floor>
     </building>
-
-
     <building buildingname="B-Bau">
         <floor floorname="EG">
-            <room roomname="B0.01">
-                <roomname></roomname>
-                <roomalias>Butze</roomalias>
-                <roomclosestnode>B01</roomclosestnode>
+            <room roomname="B0.03">
+                <roomalias>AStA</roomalias>
+                <roomclosestnode>37/32/0</roomclosestnode>
+            </room>
+            <room roomname="B0.07">
+                <roomalias>Alte Cafeteria</roomalias>
+                <roomclosestnode>25/32/0</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="1. OG">
+            <room roomname="B1.01">
+                <roomalias>Magazin</roomalias>
+                <roomclosestnode>50/50/1</roomclosestnode>
+            </room>
+            <room roomname="B1.15">
+                <roomalias>Aula</roomalias>
+                <roomclosestnode>27/33/1</roomclosestnode>
+            </room>
+            <room roomname="B1.28">
+                <roomalias>Elektroniklabor</roomalias>
+                <roomclosestnode>59/17/1</roomclosestnode>
+            </room>
+            <room roomname="B1.32">
+                <roomalias></roomalias>
+                <roomclosestnode>53/17/1</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="2. OG">
+            <room roomname="B2.01">
+                <roomalias>Smart-Lab</roomalias>
+                <roomclosestnode>59/14/2</roomclosestnode>
+            </room>
+            <room roomname="B2.02/03">
+                <roomalias>Seketariat</roomalias>
+                <roomclosestnode>59/14/2</roomclosestnode>
+            </room>
+            <room roomname="B2.04">
+                <roomalias></roomalias>
+                <roomclosestnode>60/18/2</roomclosestnode>
+            </room>
+            <room roomname="B2.05">
+                <roomalias></roomalias>
+                <roomclosestnode>60/18/2</roomclosestnode>
+            </room>
+            <room roomname="B2.06">
+                <roomalias></roomalias>
+                <roomclosestnode>60/18/2</roomclosestnode>
+            </room>
+            <room roomname="B2.07">
+                <roomalias></roomalias>
+                <roomclosestnode>60/18/2</roomclosestnode>
+            </room>
+            <room roomname="B2.09">
+                <roomalias></roomalias>
+                <roomclosestnode>50/19/2</roomclosestnode>
+            </room>
+            <room roomname="B2.11-13">
+                <roomalias>Labor / EDV-Pool</roomalias>
+                <roomclosestnode>50/19/2</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="3. OG">
+            <room roomname="B3.01">
+                <roomalias></roomalias>
+                <roomclosestnode>60/20/3</roomclosestnode>
+            </room>
+            <room roomname="B3.05">
+                <roomalias></roomalias>
+                <roomclosestnode>60/20/3</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="4. OG">
+            <room roomname="B4.01">
+                <roomalias></roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+            <room roomname="B4.02">
+                <roomalias></roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+            <room roomname="B4.03">
+                <roomalias></roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+            <room roomname="B4.04">
+                <roomalias></roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+            <room roomname="B4.05">
+                <roomalias></roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="5. OG">
+            <room roomname="B5.01">
+                <roomalias>Elektroniklabor</roomalias>
+                <roomclosestnode></roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="Toiletten">
+            <room roomname="Toiletten">
+                <roomalias>Toiletten 1. OG</roomalias>
+                <roomclosestnode>34/21/1</roomclosestnode>
+            </room>
+        </floor>
+    </building>
+    <building buildingname="C-Bau">
+        <floor floorname="EG">
+            <room roomname="C0.01">
+                <roomalias></roomalias>
+                <roomclosestnode>81/21/0</roomclosestnode>
+            </room>
+            <room roomname="C0.02">
+                <roomalias></roomalias>
+                <roomclosestnode>81/21/0</roomclosestnode>
+            </room>
+            <room roomname="C0.04">
+                <roomalias></roomalias>
+                <roomclosestnode>81/21/0</roomclosestnode>
+            </room>
+            <room roomname="C0.05-07">
+                <roomalias>Frau Kellermann / Treffer</roomalias>
+                <roomclosestnode>88/23/0</roomclosestnode>
+            </room>
+            <room roomname="C0.08">
+                <roomalias></roomalias>
+                <roomclosestnode>97/22/0</roomclosestnode>
+            </room>
+            <room roomname="C0.09">
+                <roomalias></roomalias>
+                <roomclosestnode>103/22/0</roomclosestnode>
+            </room>
+            <room roomname="C0.12">
+                <roomalias></roomalias>
+                <roomclosestnode>108/27/0</roomclosestnode>
+            </room>
+            <room roomname="C0.13">
+                <roomalias></roomalias>
+                <roomclosestnode>101/27/0</roomclosestnode>
+            </room>
+            <room roomname="C0.14">
+                <roomalias></roomalias>
+                <roomclosestnode>97/27/0</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="1. OG">
+            <room roomname="C1.04">
+                <roomalias></roomalias>
+                <roomclosestnode>84/23/1</roomclosestnode>
+            </room>
+            <room roomname="C1.12">
+                <roomalias>Leiter IMZ</roomalias>
+                <roomclosestnode>101/23/1</roomclosestnode>
+            </room>
+            <room roomname="C1.20">
+                <roomalias>CAD-PCs</roomalias>
+                <roomclosestnode>101/28/1</roomclosestnode>
+            </room>
+            <room roomname="B1.32">
+                <roomalias></roomalias>
+                <roomclosestnode>53/17/1</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="2. OG">
+            <room roomname="C2.01">
+                <roomalias>Elektroniklabor</roomalias>
+                <roomclosestnode>95/25/2</roomclosestnode>
+            </room>
+            <room roomname="C2.03">
+                <roomalias>Elektroniklabor</roomalias>
+                <roomclosestnode>89/23/2</roomclosestnode>
+            </room>
+            <room roomname="C2.04">
+                <roomalias>Elektroniklabor</roomalias>
+                <roomclosestnode>89/23/2</roomclosestnode>
+            </room>
+            <room roomname="C2.14">
+                <roomalias>Martin Kramer</roomalias>
+                <roomclosestnode>106/28/2</roomclosestnode>
+            </room>
+            <room roomname="C2.16">
+                <roomalias>UNIX-Labor</roomalias>
+                <roomclosestnode>106/28/2</roomclosestnode>
+            </room>
+        </floor>
+        <floor floorname="Toiletten">
+            <room roomname="A0.10/11">
+                <roomalias>Toiletten EG</roomalias>
+                <roomclosestnode>107/23/0</roomclosestnode>
+            </room>
+            <room roomname="A0.10/11">
+                <roomalias>Toiletten 1. OG</roomalias>
+                <roomclosestnode>107/28/1</roomclosestnode>
+            </room>
+            <room roomname="A0.10/11">
+                <roomalias>Toiletten 2. OG</roomalias>
+                <roomclosestnode>106/28/2</roomclosestnode>
             </room>
         </floor>
     </building>

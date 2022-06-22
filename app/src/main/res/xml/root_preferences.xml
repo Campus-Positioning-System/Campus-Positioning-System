@@ -32,4 +32,22 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="Lokalisierung">
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Verhalten">
+        <SwitchPreferenceCompat
+            app:key="display_on"
+            app:summaryOff="Normales Display verhalten"
+            app:summaryOn="Display eingeschaltet"
+            app:title="Display während der Nutzung eingeschaltet lassen" />
+    </PreferenceCategory>
+
+    <Preference
+        app:key="feedback"
+        app:title="Feedback geben"
+        app:summary="@string/preferences_feedback_summary"/>
+
+
 </PreferenceScreen>

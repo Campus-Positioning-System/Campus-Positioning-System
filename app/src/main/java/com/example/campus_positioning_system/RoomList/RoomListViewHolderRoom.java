@@ -57,17 +57,9 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
                     String [] coords = ((Element) (node.getValue())).getElementsByTagName("roomclosestnode").item(0).getTextContent().split("/");
                     Node targetNode = new Node("",Integer.parseInt(coords[0]), Integer.parseInt(coords[1]), Integer.parseInt(coords[2]));
                     System.out.println("Target node is: " + targetNode);
-                    Node currentPosition = new Node("PointZero",62,56,1);
-                    // Set current location im Pathfinding control
-                    System.out.println("Updating current Position of PathfindingControl");
-                    PathfindingControl.updateCurrentLocation(currentPosition);
-                    // Set target location
+
                     System.out.println("Updating target location of PathfindingControl");
                     PathfindingControl.updateTargetLocation(targetNode);
-                    // Set current position im Drawing assistant
-                    System.out.println("Setting current Position of DrawingAssistant");
-                    DrawingAssistant.setCurrentPosition(currentPosition);
-                    // Calculate Path
 
                     // Set path to destination with Path
                     System.out.println("Calculating Path");
@@ -75,7 +67,6 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
                     List<Node> path = PathfindingControl.calculatePath();
                     System.out.println("Setting Path to Destination in DrawingAssistant");
                     DrawingAssistant.setPathToDestination(path);
-                    //Erstmal innerhalb des ersten 1.OG
                 }).start();
                 System.out.println("User wants to start navigating to " + ((Element) (node.getValue())).getElementsByTagName("roomclosestnode").item(0).getTextContent());
             }
@@ -85,6 +76,8 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
             public void onClick(View v) {
                 //ToDo Add item to Favorites
                 System.out.println("User wants to favorite Room " + ((Element) (node.getValue())).getAttribute("roomname"));
+                RoomListConverter.addFavorite(node);
+
             }
         });
     }
