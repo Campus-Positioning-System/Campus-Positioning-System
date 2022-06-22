@@ -48,6 +48,9 @@ public class DrawingAssistant extends Thread{
     //Map Converter Node to Px on Screen
     private static MapConverter mapConverter;
 
+    //All Map Bitmaps
+    private static List<Bitmap> allBitmaps = new LinkedList<>();
+
     public DrawingAssistant(TouchImageView dotView, TouchImageView mapView) {
         DrawingAssistant.mapView = mapView;
         this.dotView = dotView;
@@ -58,7 +61,21 @@ public class DrawingAssistant extends Thread{
         currentPosition = currentPosition1;
         // Hier fehlt noch ein Argument, dass die Image Source nur geaendert werden kann, wenn
         // der Path nicht angezeigt werden muss.
-        if(!pathDrawn) {
+        if(pathDrawn) {
+            if(currentPosition.getZ() == 0) {
+                mapView.setImageBitmap(allBitmaps.get(0));
+                currentMap = R.drawable.eg;
+            } else if(currentPosition.getZ() == 1) {
+                mapView.setImageBitmap(allBitmaps.get(1));
+                currentMap = R.drawable.og1example;
+            } else if(currentPosition.getZ() == 2) {
+                mapView.setImageBitmap(allBitmaps.get(2));
+                currentMap = R.drawable.og2;
+            } else if(currentPosition.getZ() == 3) {
+                mapView.setImageBitmap(allBitmaps.get(3));
+                currentMap = R.drawable.og345;
+            }
+        } else {
             if(currentPosition.getZ() == 0) {
                 mapView.setImageResource(R.drawable.eg);
                 currentMap = R.drawable.eg;
@@ -88,36 +105,33 @@ public class DrawingAssistant extends Thread{
     }
 
     public void drawPath() {
-        Bitmap mapBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), currentMap);
-
-        float einx = (float) mapBitmap.getWidth()/124f;
-        float einy = (float) mapBitmap.getHeight()/88f;
-
-        Bitmap mutableBitmap = mapBitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Canvas canvas = new Canvas(mutableBitmap);
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStrokeWidth(15);
 
+        Bitmap mutableBitmap = allBitmaps.get(0);
+        float einx = (float)  mutableBitmap.getWidth()/124f;
+        float einy = (float)  mutableBitmap.getHeight()/88f;
+
         List<MapPosition> mapPositions = new LinkedList<>();
 
         for(int i = 0; i< path.size(); i++) {
-            System.out.println(path.getClass());
             Node n = path.get(i);
-            System.out.println("Da: " + n.getX() + " " + n.getY());
             MapPosition mapPosition = new MapPosition();
             mapPosition.setX(n.getX()*einx);
             mapPosition.setY(n.getY()*einy);
+            mapPosition.setZ(n.getZ());
             mapPositions.add(mapPosition);
         }
 
         System.out.println(mapPositions.size());
         for(int i=0;i<(mapPositions.size()-1); i++) {
-            System.out.println("Hier: " +  mapPositions.get(i).getX() + " " + mapPositions.get(i).getY());
-            System.out.println("Hier: " +  mapPositions.get(i+1).getX() + " " + mapPositions.get(i+1).getY());
+            mutableBitmap = allBitmaps.get(mapPositions.get(i).getZ());
+            Canvas canvas = new Canvas(mutableBitmap);
             canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paint);
         }
         pathDrawn = true;
+        mutableBitmap = allBitmaps.get(currentPosition.getZ());
         mapView.setImageBitmap(mutableBitmap);
     }
 
@@ -162,6 +176,21 @@ public class DrawingAssistant extends Thread{
                 mapView.setMaxWidth(mapWidth);
 
                 mapConverter = new MapConverter(mapHeight, mapWidth, dotHeight, dotWidth, mapView);
+
+
+                Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
+                Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
+                Bitmap mutableBitmapOG1 = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2);
+                Bitmap mutableBitmapOG2 = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og345);
+                Bitmap mutableBitmapOG3 = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+                allBitmaps.add(mutableBitmapEG);
+                allBitmaps.add(mutableBitmapOG1);
+                allBitmaps.add(mutableBitmapOG2);
+                allBitmaps.add(mutableBitmapOG3);
+
                 setHW = true;
             }
         }
