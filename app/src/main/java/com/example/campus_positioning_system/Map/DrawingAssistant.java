@@ -64,16 +64,16 @@ public class DrawingAssistant extends Thread{
         currentPosition = currentPosition1;
         if(!pathDrawn) {
             if(currentPosition.getZ() == 0) {
-                mapView.setImageBitmap(allBitmapsOriginal.get(0));
+                mapView.setImageResource(MAP_EG);
                 currentMap = MAP_EG;
             } else if(currentPosition.getZ() == 1) {
-                mapView.setImageBitmap(allBitmapsOriginal.get(1));
+                mapView.setImageResource(MAP_OG1);
                 currentMap = MAP_OG1;
             } else if(currentPosition.getZ() == 2) {
-                mapView.setImageBitmap(allBitmapsOriginal.get(2));
+                mapView.setImageResource(MAP_OG2);
                 currentMap = MAP_OG2;
             } else if(currentPosition.getZ() == 3) {
-                mapView.setImageBitmap(allBitmapsOriginal.get(3));
+                mapView.setImageResource(MAP_OG3);
                 currentMap = MAP_OG3;
             }
         }
@@ -93,7 +93,7 @@ public class DrawingAssistant extends Thread{
             }
         }*/
         if(mapConverter != null) {
-            mapConverter.setMapView(MainFragment.getMapView());
+            //mapConverter.setMapView(MainFragment.getMapView());
         }
     }
 
@@ -149,11 +149,10 @@ public class DrawingAssistant extends Thread{
             } else {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintEG);
             }
-
         }
-        mutableBitmap = allBitmapsOriginal.get(currentPosition.getZ());
+        mutableBitmap = bitmapsWithPath.get(currentPosition.getZ());
         mapView.setImageBitmap(mutableBitmap);
-        mapConverter.setMapView(MainFragment.getMapView());
+        //mapConverter.setMapView(MainFragment.getMapView());
     }
 
     public void removePath() {
@@ -195,15 +194,15 @@ public class DrawingAssistant extends Thread{
 
 
                 mapConverter = new MapConverter(mapHeight, mapWidth, dotHeight, dotWidth, mapView);
-                mapConverter.setMapView(MainFragment.getMapView());
+                //mapConverter.setMapView(MainFragment.getMapView());
 
-                Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
+                Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), MAP_EG);
                 Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
-                Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
+                Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), MAP_OG1);
                 Bitmap mutableBitmapOG1 = og1Bitmap.copy(Bitmap.Config.ARGB_8888, true);
-                Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2);
+                Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), MAP_OG2);
                 Bitmap mutableBitmapOG2 = og2Bitmap.copy(Bitmap.Config.ARGB_8888, true);
-                Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og345);
+                Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), MAP_OG3);
                 Bitmap mutableBitmapOG3 = og345Bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 allBitmapsOriginal.add(mutableBitmapEG);
                 allBitmapsOriginal.add(mutableBitmapOG1);
@@ -223,7 +222,7 @@ public class DrawingAssistant extends Thread{
                 drawPath();
             }
             //System.out.println(mapView.getScrollPosition().x);
-            mapConverter.setMapView(MainFragment.getMapView());
+            //mapConverter.setMapView(MainFragment.getMapView());
             MapPosition position = mapConverter.convertNode(currentPosition);
 
             dotMover.setNewPosition(position.getX(), position.getY());

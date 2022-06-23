@@ -36,11 +36,13 @@ public class PathfindingControl{
     private static TreeSet<Node> tree;
 
     public static synchronized Node updateCurrentLocation(Node newLocation){
-            if(currentLocation == null)
+            if(currentLocation == null) {
                 return currentLocation = newLocation;
-            if (!(euclideanDistance(currentLocation, newLocation) > distanceMetric))
-             return currentLocation = newLocation;
-            return null;
+            }
+            if (!(euclideanDistance(currentLocation, newLocation) > distanceMetric)) {
+                return currentLocation = newLocation;
+            }
+            return currentLocation = newLocation;
     }
 
     public static synchronized Node updateTargetLocation(Node newLocation){
@@ -95,11 +97,10 @@ public class PathfindingControl{
 
 
     public static List<Node> calculatePath(){
+        System.out.println("Calculating Path from: " + currentLocation.toString() + " to: " + targetLocation);
         SearchProblem p = GraphSearchProblem.startingFrom(tree.floor(currentLocation)).in(graph).takeCostsFromEdges().build();
-        List listTest = Hipster.createAStar(p).search(tree.floor(targetLocation)).getOptimalPaths();
-        if(listTest.get(0) instanceof Node)
-            return (List<Node>)listTest;
-        return new LinkedList<>();
+        List<List<Node>> listTest = Hipster.createAStar(p).search(tree.floor(targetLocation)).getOptimalPaths();
+        return listTest.get(0);
     }
 
 
