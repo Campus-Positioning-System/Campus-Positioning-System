@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     case R.id.nav_settings:
                         switchActivities(SettingsActivity.class);
                         break;
+
+                    case R.id.nav_favorites:
+                        switchActivities(FavoritesActivity.class);
+                        break;
                 }
                 return false;
             }

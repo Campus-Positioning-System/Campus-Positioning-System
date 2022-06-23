@@ -1,15 +1,21 @@
 package com.example.campus_positioning_system.RoomList;
 
 
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatDrawableManager;
 
 import com.amrdeveloper.treeview.TreeNode;
 import com.amrdeveloper.treeview.TreeViewHolder;
+import com.example.campus_positioning_system.Activitys.MainActivity;
+import com.example.campus_positioning_system.Activitys.RoomSelectionActivity;
 import com.example.campus_positioning_system.LocationNavigation.PathfindingControl;
 import com.example.campus_positioning_system.Map.DrawingAssistant;
 import com.example.campus_positioning_system.Node;
@@ -31,7 +37,6 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
 
     public RoomListViewHolderRoom(@NonNull View itemView) {
         super(itemView);
-
         roomName = itemView.findViewById(R.id.room_item_name);
         icon = itemView.findViewById(R.id.list_icon);
         start_button = itemView.findViewById(R.id.item_start_icon);
@@ -48,6 +53,8 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
 
         roomName.setText(((Element) (node.getValue())).getAttribute("roomname"));
 
+        if(RoomListConverter.getFavorites().contains(node))
+            icon.setImageDrawable(AppCompatResources.getDrawable(MainActivity.mainContext(),R.drawable.ic_baseline_favorite_24));
 
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +76,7 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
                     DrawingAssistant.setPathToDestination(path);
                 }).start();
                 System.out.println("User wants to start navigating to " + ((Element) (node.getValue())).getElementsByTagName("roomclosestnode").item(0).getTextContent());
+
             }
         });
         icon.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +84,17 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
             public void onClick(View v) {
                 //ToDo Add item to Favorites
                 System.out.println("User wants to favorite Room " + ((Element) (node.getValue())).getAttribute("roomname"));
-                RoomListConverter.addFavorite(node);
+
+                if(RoomListConverter.getFavorites().contains(node)){
+                    System.out.println("Removing favorite");
+                    RoomListConverter.removeFavorite(node);
+                    icon.setImageDrawable(AppCompatResources.getDrawable(MainActivity.mainContext(),R.drawable.ic_baseline_favorite_border_24));
+                }else {
+                    System.out.println("Adding to favorites");
+                    RoomListConverter.addFavorite(node);
+                    icon.setImageDrawable(AppCompatResources.getDrawable(MainActivity.mainContext(),R.drawable.ic_baseline_favorite_24));
+                }
+
 
             }
         });

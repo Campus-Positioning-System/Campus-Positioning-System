@@ -16,6 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CampusPositioningSystem">
+        <activity android:name=".Activitys.FavoritesActivity"
+            android:exported="false"
+            android:label="Room Favorites Activity"
+            android:theme="@style/Theme.CampusPositioningSystem.NoActionBar"/>
         <activity
             android:name=".Activitys.RoomSelectionActivity"
             android:exported="false"

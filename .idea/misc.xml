@@ -30,6 +30,7 @@
         <entry key="app/src/main/res/layout/recycler_view_item_1.xml" value="0.24739583333333334" />
         <entry key="app/src/main/res/layout/room_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/room_list_item.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/room_list_room_favorite.xml" value="0.1328125" />
         <entry key="app/src/main/res/layout/room_list_room_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/room_selection_activity.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/sensor_activity.xml" value="0.22037037037037038" />

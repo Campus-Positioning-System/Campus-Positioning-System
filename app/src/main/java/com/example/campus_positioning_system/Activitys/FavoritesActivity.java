@@ -3,19 +3,47 @@ package com.example.campus_positioning_system.Activitys;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.amrdeveloper.treeview.TreeViewAdapter;
+import com.amrdeveloper.treeview.TreeViewHolderFactory;
 import com.example.campus_positioning_system.Fragments.SettingsFragment;
+import com.example.campus_positioning_system.R;
+import com.example.campus_positioning_system.RoomList.RoomListConverter;
+import com.example.campus_positioning_system.RoomList.RoomListViewHolderBuilding;
+import com.example.campus_positioning_system.RoomList.RoomListViewHolderLevel;
+import com.example.campus_positioning_system.RoomList.RoomListViewHolderRoom;
 
 public class FavoritesActivity extends AppCompatActivity {
+
+    RecyclerView list;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        System.out.println("On Create Settings Activity");
+        System.out.println("On Create Favorites Activity");
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction()
-                    .add(android.R.id.content, new SettingsFragment()).commit();
-        }
+        setContentView(R.layout.fragment_favorites_list);
+
+        list = findViewById(R.id.favorites_recycler_view);
+        list.setLayoutManager(new LinearLayoutManager(this));
+
+        TreeViewHolderFactory factory = (v, layout) -> {
+            if (layout == R.layout.room_list_building_item)
+                return new RoomListViewHolderBuilding(v);
+            else if (layout == R.layout.room_list_level_item)
+                return new RoomListViewHolderLevel(v);
+            else
+                return new RoomListViewHolderRoom(v);
+        };
+        TreeViewAdapter treeViewAdapter = new TreeViewAdapter(factory);
+        list.setAdapter(treeViewAdapter);
+
+        treeViewAdapter.updateTreeNodes(RoomListConverter.getFavorites());
+
+        RoomListConverter.printList(this);
+
     }
 
     @Override
