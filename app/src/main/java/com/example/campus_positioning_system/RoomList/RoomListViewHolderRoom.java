@@ -81,7 +81,9 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
                     DrawingAssistant.setPathToDestination(path);
                 }).start();
                 System.out.println("User wants to start navigating to " + ((Element) (node.getValue())).getElementsByTagName("roomclosestnode").item(0).getTextContent());
-                roomSelectionActivity.finish();
+                if(roomSelectionActivity != null) {
+                    roomSelectionActivity.finish();
+                }
             }
         });
         icon.setOnClickListener(new View.OnClickListener() {
