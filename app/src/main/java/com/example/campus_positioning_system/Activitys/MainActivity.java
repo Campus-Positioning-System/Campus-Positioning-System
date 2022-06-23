@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private static WifiManager wifiManager;
     private static List<ScanResult> availableNetworks;
 
-    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void onCreate(Bundle savedInstanceState) {
 

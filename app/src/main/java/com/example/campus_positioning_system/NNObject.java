@@ -58,11 +58,12 @@ public class NNObject implements Comparable<NNObject> {
 
     // Sort lexicographic First Mac-Adress, then Rssi
     public int compareTo(NNObject other) {
-       /* int b = this.getMac().compareTo(other.getMac());
+       int b = this.getMac().compareTo(other.getMac());
         if (b == 0)
             return this.getAngle().equals(other.getAngle()) ? this.getRssi().compareTo(other.getRssi())
                     : this.getAngle().compareTo(other.getAngle());
-        return b;*/
+        return b;
+        /*
         if(this.getMac().equals(other.getMac()))
             if(this.getAngle().equals(other.getAngle()))
                 return this.getRssi().equals(other.getRssi()) ? this.getLocation().compareTo(other.getLocation())
@@ -71,7 +72,7 @@ public class NNObject implements Comparable<NNObject> {
                 return this.getAngle().compareTo(other.getAngle());
             else
                 return this.getMac().compareTo(other.getMac());
-
+           */
     }
 
     public String toString() {

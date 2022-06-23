@@ -56,8 +56,9 @@ public class LocationControl {
         /*Was relevant for testing....
         TreeSet<NNObject> tree = DBMock.getTree();*/
         List<String> outOf = new LinkedList<>();
-        for(NNObject s: search)
-            outOf.add(s.getMac().toUpperCase());
+        for(NNObject s: search) {
+            outOf.add(s.getMac());
+        }
         TreeSet<NNObject> tree = new TreeSet<>(dao.getRelevantData(outOf));
 
         List<NNObject> found = new LinkedList<NNObject>();

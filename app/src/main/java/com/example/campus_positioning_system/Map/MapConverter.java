@@ -23,7 +23,7 @@ public class MapConverter {
     private final int y = 88;
     private final int z = 5;
 
-    private final TouchImageView mapView;
+    private TouchImageView mapView;
 
     private float currentZoom;
 
@@ -51,6 +51,10 @@ public class MapConverter {
         this.mapWidth = mapWidth;
         this.dotHeight = dotHeight;
         this.dotWidth = dotWidth;
+    }
+
+    public void setMapView(TouchImageView newMapView) {
+        this.mapView = newMapView;
     }
 
     public MapPosition convertNode(Node toConvert) {

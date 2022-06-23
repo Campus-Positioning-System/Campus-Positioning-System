@@ -111,7 +111,6 @@ public class WifiScanner extends Thread{
 
 
 
-    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void run() {
         IntentFilter intentFilter = new IntentFilter();

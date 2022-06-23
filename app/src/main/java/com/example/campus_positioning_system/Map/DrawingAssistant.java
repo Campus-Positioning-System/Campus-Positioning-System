@@ -67,10 +67,10 @@ public class DrawingAssistant extends Thread{
                 currentMap = R.drawable.eg;
             } else if(currentPosition.getZ() == 1) {
                 mapView.setImageBitmap(allBitmaps.get(1));
-                currentMap = R.drawable.og1fancy;
+                currentMap = R.drawable.og1example;
             } else if(currentPosition.getZ() == 2) {
                 mapView.setImageBitmap(allBitmaps.get(2));
-                currentMap = R.drawable.og2fancy;
+                currentMap = R.drawable.og2;
             } else if(currentPosition.getZ() == 3) {
                 mapView.setImageBitmap(allBitmaps.get(3));
                 currentMap = R.drawable.og345;
@@ -80,15 +80,18 @@ public class DrawingAssistant extends Thread{
                 mapView.setImageResource(R.drawable.eg);
                 currentMap = R.drawable.eg;
             } else if(currentPosition.getZ() == 1) {
-                mapView.setImageResource(R.drawable.og1fancy);
-                currentMap = R.drawable.og1fancy;
+                mapView.setImageResource(R.drawable.og1example);
+                currentMap = R.drawable.og1example;
             } else if(currentPosition.getZ() == 2) {
-                mapView.setImageResource(R.drawable.og2fancy);
-                currentMap = R.drawable.og2fancy;
+                mapView.setImageResource(R.drawable.og2);
+                currentMap = R.drawable.og2;
             } else if(currentPosition.getZ() == 3) {
                 mapView.setImageResource(R.drawable.og345);
                 currentMap = R.drawable.og345;
             }
+        }
+        if(mapConverter != null) {
+            mapConverter.setMapView(mapView);
         }
     }
 
@@ -105,7 +108,19 @@ public class DrawingAssistant extends Thread{
     }
 
     public void drawPath() {
-        removePath();
+        allBitmaps = new LinkedList<>();
+        Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
+        Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
+        Bitmap mutableBitmapOG1 = og1Bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2);
+        Bitmap mutableBitmapOG2 = og2Bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og345);
+        Bitmap mutableBitmapOG3 = og345Bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        allBitmaps.add(mutableBitmapEG);
+        allBitmaps.add(mutableBitmapOG1);
+        allBitmaps.add(mutableBitmapOG2);
+        allBitmaps.add(mutableBitmapOG3);
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStrokeWidth(15);
@@ -134,25 +149,13 @@ public class DrawingAssistant extends Thread{
         pathDrawn = true;
         mutableBitmap = allBitmaps.get(currentPosition.getZ());
         mapView.setImageBitmap(mutableBitmap);
+        mapConverter.setMapView(mapView);
     }
 
     public void removePath() {
         pathDrawn = false;
         path = new LinkedList<>();
         setCurrentPosition(currentPosition);
-        allBitmaps = new LinkedList<>();
-        Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
-        Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1fancy);
-        Bitmap mutableBitmapOG1 = og1Bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2fancy);
-        Bitmap mutableBitmapOG2 = og2Bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og345);
-        Bitmap mutableBitmapOG3 = og345Bitmap.copy(Bitmap.Config.ARGB_8888, true);
-        allBitmaps.add(mutableBitmapEG);
-        allBitmaps.add(mutableBitmapOG1);
-        allBitmaps.add(mutableBitmapOG2);
-        allBitmaps.add(mutableBitmapOG3);
     }
 
     @Override
@@ -191,14 +194,15 @@ public class DrawingAssistant extends Thread{
                 mapView.setMaxHeight(mapHeight);
                 mapView.setMaxWidth(mapWidth);
 
+                mapConverter.setMapView(mapView);
                 mapConverter = new MapConverter(mapHeight, mapWidth, dotHeight, dotWidth, mapView);
 
 
                 Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
                 Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
-                Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1fancy);
+                Bitmap og1Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og1example);
                 Bitmap mutableBitmapOG1 = og1Bitmap.copy(Bitmap.Config.ARGB_8888, true);
-                Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2fancy);
+                Bitmap og2Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og2);
                 Bitmap mutableBitmapOG2 = og2Bitmap.copy(Bitmap.Config.ARGB_8888, true);
                 Bitmap og345Bitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.og345);
                 Bitmap mutableBitmapOG3 = og345Bitmap.copy(Bitmap.Config.ARGB_8888, true);
@@ -220,6 +224,7 @@ public class DrawingAssistant extends Thread{
                 drawPath();
             }
             //System.out.println(mapView.getScrollPosition().x);
+            mapConverter.setMapView(mapView);
             MapPosition position = mapConverter.convertNode(currentPosition);
 
             dotMover.setNewPosition(position.getX(), position.getY());

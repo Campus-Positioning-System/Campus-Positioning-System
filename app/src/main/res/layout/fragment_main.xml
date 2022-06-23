@@ -29,4 +29,13 @@
         android:textColor="@color/black"
         android:textSize="30dp"
         />
+
+    <!--TextView
+        android:id="@+id/testView1"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_gravity="right"
+        android:text="Gradzahl"
+        android:textColor="@color/black"
+        android:textSize="30sp" /-->
 </FrameLayout>
