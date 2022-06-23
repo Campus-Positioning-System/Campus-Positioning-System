@@ -21,6 +21,7 @@ import com.example.campus_positioning_system.Map.DrawingAssistant;
 import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
 
+import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Element;
 
 import java.util.List;
@@ -31,16 +32,20 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
     private TextView roomName, alias;
     private ImageView icon, start_button;
 
+    private RoomSelectionActivity roomSelectionActivity;
+
     //ToDo Fill other fields with text
     //ToDo add eventListener for navigation start
     //ToDo Styling
 
-    public RoomListViewHolderRoom(@NonNull View itemView) {
+    public RoomListViewHolderRoom(@NonNull View itemView,@Nullable RoomSelectionActivity roomSelectionActivity) {
         super(itemView);
         roomName = itemView.findViewById(R.id.room_item_name);
         icon = itemView.findViewById(R.id.list_icon);
         start_button = itemView.findViewById(R.id.item_start_icon);
         alias = itemView.findViewById(R.id.room_item_alias);
+
+        this.roomSelectionActivity = roomSelectionActivity;
     }
 
     @Override
@@ -76,7 +81,9 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
                     DrawingAssistant.setPathToDestination(path);
                 }).start();
                 System.out.println("User wants to start navigating to " + ((Element) (node.getValue())).getElementsByTagName("roomclosestnode").item(0).getTextContent());
-
+                if(roomSelectionActivity != null) {
+                    roomSelectionActivity.finish();
+                }
             }
         });
         icon.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +101,6 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
                     RoomListConverter.addFavorite(node);
                     icon.setImageDrawable(AppCompatResources.getDrawable(MainActivity.mainContext(),R.drawable.ic_baseline_favorite_24));
                 }
-
-
             }
         });
     }

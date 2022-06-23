@@ -35,7 +35,7 @@ public class FavoritesActivity extends AppCompatActivity {
             else if (layout == R.layout.room_list_level_item)
                 return new RoomListViewHolderLevel(v);
             else
-                return new RoomListViewHolderRoom(v);
+                return new RoomListViewHolderRoom(v,null);
         };
         TreeViewAdapter treeViewAdapter = new TreeViewAdapter(factory);
         list.setAdapter(treeViewAdapter);
