@@ -10,6 +10,7 @@ import com.example.campus_positioning_system.Node;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -22,7 +23,7 @@ import es.usc.citius.hipster.model.problem.SearchProblem;
 
 public class PathfindingControl{
     //If Distance to last location is larger than the Metric, the new Location is invalid
-    private static final double distanceMetric = 200.0;
+    private static final double distanceMetric = 50.0;
 
     //Scaling factor to get true Distance values
     private static final double distanceScale = 1.0;
@@ -95,8 +96,10 @@ public class PathfindingControl{
 
     public static List<Node> calculatePath(){
         SearchProblem p = GraphSearchProblem.startingFrom(tree.floor(currentLocation)).in(graph).takeCostsFromEdges().build();
-        List<List<Node>> listTest = Hipster.createAStar(p).search(tree.floor(targetLocation)).getOptimalPaths();
-        return listTest.get(0);
+        List listTest = Hipster.createAStar(p).search(tree.floor(targetLocation)).getOptimalPaths();
+        if(listTest.get(0) instanceof Node)
+            return (List<Node>)listTest;
+        return new LinkedList<>();
     }
 
 

@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
 
     public static NNObjectDao getNNObjectDaoFromDB(){
-        return db.k();
+        return db.nnObjectDao();
     }
 
     public static AppDatabase getDb(){
