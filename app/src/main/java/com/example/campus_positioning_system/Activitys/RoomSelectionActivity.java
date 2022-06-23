@@ -24,6 +24,8 @@ public class RoomSelectionActivity extends AppCompatActivity {
 
     RecyclerView list;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class RoomSelectionActivity extends AppCompatActivity {
             else if (layout == R.layout.room_list_level_item)
                 return new RoomListViewHolderLevel(v);
             else
-                return new RoomListViewHolderRoom(v);
+                return new RoomListViewHolderRoom(v,this);
         };
         TreeViewAdapter treeViewAdapter = new TreeViewAdapter(factory);
         list.setAdapter(treeViewAdapter);
