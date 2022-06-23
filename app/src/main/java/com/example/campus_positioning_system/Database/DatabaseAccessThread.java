@@ -9,6 +9,7 @@ import com.example.campus_positioning_system.NNObject;
 import com.example.campus_positioning_system.Node;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class DatabaseAccessThread extends Thread{
@@ -34,7 +35,7 @@ public class DatabaseAccessThread extends Thread{
             System.out.println(s.level);
         }
         List<NNObject> nearestWifiList = availableNetworks.stream()
-                .map(v -> new NNObject(v.BSSID, (float) v.level, null, scanAngle))
+                .map(v -> new NNObject(v.BSSID.toUpperCase(), (float) v.level, null, scanAngle))
                 .collect(Collectors.toList());
 
         //if(!() == null))

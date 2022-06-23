@@ -1,32 +1,15 @@
 package com.example.campus_positioning_system.RoomList;
 
-import static android.provider.Settings.System.getString;
-
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.FileUtils;
 
 import com.amrdeveloper.treeview.TreeNode;
-import com.example.campus_positioning_system.Activitys.MainActivity;
-import com.example.campus_positioning_system.Database.AppDatabase;
 import com.example.campus_positioning_system.R;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,16 +21,10 @@ public class RoomListConverter {
 
     static List<TreeNode> favorites;
 
-
-
     public static List<TreeNode> getFavorites() {
 
         if (favorites != null)
             return favorites;
-
-
-        //RoomFavoriteDao favoriteDao = AppDatabase.getInstance().roomFavoriteDao();
-
 
         favorites = new ArrayList<>();
 
@@ -55,6 +32,7 @@ public class RoomListConverter {
     }
 
     static void saveFavorites() {
+        //ToDo make persistent with RoomDB bzc everything else doesnt want to save TreeNodes smh
         /*RoomFavoriteDao favoriteDao = AppDatabase.getInstance().roomFavoriteDao();
         RoomFavorite toInsert = new RoomFavorite();
         toInsert.favoriteNodes = favorites;

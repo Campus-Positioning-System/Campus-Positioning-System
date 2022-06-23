@@ -194,9 +194,9 @@ public class DrawingAssistant extends Thread{
                 mapView.setMaxHeight(mapHeight);
                 mapView.setMaxWidth(mapWidth);
 
-                mapConverter.setMapView(mapView);
-                mapConverter = new MapConverter(mapHeight, mapWidth, dotHeight, dotWidth, mapView);
 
+                mapConverter = new MapConverter(mapHeight, mapWidth, dotHeight, dotWidth, mapView);
+                mapConverter.setMapView(mapView);
 
                 Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
                 Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
