@@ -53,11 +53,11 @@ public class MapConverter {
         this.dotWidth = dotWidth;
     }
 
-    public void setMapView(TouchImageView newMapView) {
-        this.mapView = newMapView;
+    public synchronized void setMapView(TouchImageView newMapView) {
+        //this.mapView = newMapView;
     }
 
-    public MapPosition convertNode(Node toConvert) {
+    public synchronized MapPosition convertNode(Node toConvert) {
         MapPosition mapPos = new MapPosition();
         PointF mapViewCenter = mapView.getScrollPosition();
 

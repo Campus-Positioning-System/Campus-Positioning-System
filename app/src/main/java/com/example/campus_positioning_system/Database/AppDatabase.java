@@ -26,8 +26,8 @@ public abstract class AppDatabase extends RoomDatabase {
         if(db == null){
             Context context = MainActivity.mainContext();
             db = Room.databaseBuilder(context, AppDatabase.class,"ReferenceData").build();
-            db.clearAllTables();
             if(db.nnObjectDao().getRelevantData(sample()).size() == 0)
+                db.clearAllTables();
                 DatabaseImporter.readFile(db);
         }
         return db;
