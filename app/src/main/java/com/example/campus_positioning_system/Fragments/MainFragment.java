@@ -67,6 +67,12 @@ public class MainFragment extends Fragment {
         }
     }
 
+    public static View rootViewSave;
+
+    public static TouchImageView getMapView() {
+        return rootViewSave.findViewById(R.id.map1);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         /*
@@ -75,6 +81,7 @@ public class MainFragment extends Fragment {
          */
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        rootViewSave = rootView;
 
         if(onlyOnce) {
             TouchImageView mapView = rootView.findViewById(R.id.map1);

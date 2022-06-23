@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.view.View;
 
 import com.example.campus_positioning_system.Activitys.MainActivity;
+import com.example.campus_positioning_system.Fragments.MainFragment;
 import com.example.campus_positioning_system.LocationNavigation.WifiScanner;
 import com.example.campus_positioning_system.Node;
 import com.example.campus_positioning_system.R;
@@ -91,7 +92,7 @@ public class DrawingAssistant extends Thread{
             }
         }
         if(mapConverter != null) {
-            mapConverter.setMapView(mapView);
+            mapConverter.setMapView(MainFragment.getMapView());
         }
     }
 
@@ -149,7 +150,7 @@ public class DrawingAssistant extends Thread{
         pathDrawn = true;
         mutableBitmap = allBitmaps.get(currentPosition.getZ());
         mapView.setImageBitmap(mutableBitmap);
-        mapConverter.setMapView(mapView);
+        mapConverter.setMapView(MainFragment.getMapView());
     }
 
     public void removePath() {
@@ -196,7 +197,7 @@ public class DrawingAssistant extends Thread{
 
 
                 mapConverter = new MapConverter(mapHeight, mapWidth, dotHeight, dotWidth, mapView);
-                mapConverter.setMapView(mapView);
+                mapConverter.setMapView(MainFragment.getMapView());
 
                 Bitmap egBitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.eg);
                 Bitmap mutableBitmapEG = egBitmap.copy(Bitmap.Config.ARGB_8888, true);
@@ -224,7 +225,7 @@ public class DrawingAssistant extends Thread{
                 drawPath();
             }
             //System.out.println(mapView.getScrollPosition().x);
-            mapConverter.setMapView(mapView);
+            mapConverter.setMapView(MainFragment.getMapView());
             MapPosition position = mapConverter.convertNode(currentPosition);
 
             dotMover.setNewPosition(position.getX(), position.getY());
