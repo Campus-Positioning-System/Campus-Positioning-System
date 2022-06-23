@@ -24,6 +24,7 @@ public class DatabaseImporter {
         return context.getAssets().open(s);
     }
 
+
     public static List<NNObject> getTestData(String filepath){
         List<NNObject> res = new LinkedList<>();
         try {
@@ -45,7 +46,7 @@ public class DatabaseImporter {
            reader.lines()
                    .map(v->v.split("[!;]+"))
                     .forEach(v->dao.insert(new NNObject
-                            (v[3],Float.parseFloat(v[4]),
+                            (v[3].trim(),Float.parseFloat(v[4]),
                                     Converters.fromString(v[0]),Integer.parseInt(v[1]))));
         }catch(IOException e){
             System.out.println(e.getMessage());

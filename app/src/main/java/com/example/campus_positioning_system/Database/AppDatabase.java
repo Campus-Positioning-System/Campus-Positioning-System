@@ -34,6 +34,5 @@ public abstract class AppDatabase extends RoomDatabase {
                 DatabaseImporter.readFile(db);
         }
         return db;
-
     }
 }
