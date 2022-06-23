@@ -61,6 +61,7 @@ public class DrawingAssistant extends Thread{
     }
 
     public static void setCurrentPosition(Node currentPosition1) {
+        System.out.println("Drawing Assistant received current position: " + currentPosition1.toString());
         currentPosition = currentPosition1;
         if(!pathDrawn) {
             if(currentPosition.getZ() == 0) {
@@ -99,6 +100,7 @@ public class DrawingAssistant extends Thread{
 
     public static void setPathToDestination(List<Node> pathToDestination) {
         System.out.println("DrawingAssistant received Path reaching from Point: "+ pathToDestination.get(0) + " to: " + pathToDestination.get((pathToDestination.size()-1)));
+        pathDrawn = false;
         path =  new ArrayList<>(pathToDestination);
     }
 
@@ -144,7 +146,7 @@ public class DrawingAssistant extends Thread{
         for(int i=0;i<(mapPositions.size()-1); i++) {
             mutableBitmap = bitmapsWithPath.get(mapPositions.get(i).getZ());
             Canvas canvas = new Canvas(mutableBitmap);
-            if(mapPositions.get(i+1).getY() != mapPositions.get(i).getZ()) {
+            if(mapPositions.get(i+1).getY() > mapPositions.get(i).getZ()) {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintNewFloor);
             } else {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintEG);
