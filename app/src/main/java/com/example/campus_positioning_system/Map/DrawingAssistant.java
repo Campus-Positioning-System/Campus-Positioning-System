@@ -100,6 +100,11 @@ public class DrawingAssistant extends Thread{
 
     public static void setPathToDestination(List<Node> pathToDestination) {
         System.out.println("DrawingAssistant received Path reaching from Point: "+ pathToDestination.get(0) + " to: " + pathToDestination.get((pathToDestination.size()-1)));
+        /*
+        for(Node n : pathToDestination) {
+            System.out.println(n.toString());
+        }
+         */
         pathDrawn = false;
         path =  new ArrayList<>(pathToDestination);
     }

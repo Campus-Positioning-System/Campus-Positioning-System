@@ -87,7 +87,7 @@ Room:
         <floor floorname="3. OG">
             <room roomname="A3.02">
                 <roomalias>Bibliothek</roomalias>
-                <roomclosestnode>55/51/3</roomclosestnode>
+                <roomclosestnode>58/57/3</roomclosestnode>
             </room>
             <room roomname="A2.11">
                 <roomalias></roomalias>
