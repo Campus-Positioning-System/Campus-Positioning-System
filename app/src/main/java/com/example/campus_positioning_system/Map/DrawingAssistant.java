@@ -47,7 +47,7 @@ public class DrawingAssistant extends Thread{
 
     //All Map Bitmaps from Original Maps
     private static final List<Bitmap> allBitmapsOriginal = new LinkedList<>();
-    private List<Bitmap> bitmapsWithPath;
+    private static List<Bitmap> bitmapsWithPath;
 
     private final static int MAP_EG = R.drawable.eg;
     private final static int MAP_OG1 = R.drawable.og1fancy;
@@ -77,22 +77,21 @@ public class DrawingAssistant extends Thread{
                 mapView.setImageResource(MAP_OG3);
                 currentMap = MAP_OG3;
             }
-        }
-        /*else {
+        } else {
             if(currentPosition.getZ() == 0) {
-                mapView.setImageResource(R.drawable.eg);
+                mapView.setImageBitmap(bitmapsWithPath.get(0));
                 currentMap = R.drawable.eg;
             } else if(currentPosition.getZ() == 1) {
-                mapView.setImageResource(R.drawable.og1example);
+                mapView.setImageBitmap(bitmapsWithPath.get(1));
                 currentMap = R.drawable.og1example;
             } else if(currentPosition.getZ() == 2) {
-                mapView.setImageResource(R.drawable.og2);
+                mapView.setImageBitmap(bitmapsWithPath.get(2));
                 currentMap = R.drawable.og2;
             } else if(currentPosition.getZ() == 3) {
-                mapView.setImageResource(R.drawable.og345);
+                mapView.setImageBitmap(bitmapsWithPath.get(3));
                 currentMap = R.drawable.og345;
             }
-        }*/
+        }
         if(mapConverter != null) {
             //mapConverter.setMapView(MainFragment.getMapView());
         }
