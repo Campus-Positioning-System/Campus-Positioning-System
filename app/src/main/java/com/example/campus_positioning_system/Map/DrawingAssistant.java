@@ -121,10 +121,10 @@ public class DrawingAssistant extends Thread{
         Paint paintNewFloor = new Paint();
 
         paintEG.setColor(Color.RED);
-        paintEG.setStrokeWidth(15);
+        paintEG.setStrokeWidth(10);
 
         paintNewFloor.setColor(Color.BLUE);
-        paintNewFloor.setStrokeWidth(15);
+        paintNewFloor.setStrokeWidth(10);
 
         Bitmap mutableBitmap = allBitmapsOriginal.get(0);
         float oneX = (float)  mutableBitmap.getWidth()/124f;
@@ -153,10 +153,10 @@ public class DrawingAssistant extends Thread{
             Canvas canvas = new Canvas(mutableBitmap);
             if(mapPositions.get(i+1).getZ() != mapPositions.get(i).getZ()) {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintEG);
-                canvas.drawCircle(mapPositions.get(i).getX(),mapPositions.get(i).getY(),7f,paintEG);
+                canvas.drawCircle(mapPositions.get(i).getX(),mapPositions.get(i).getY(),5f,paintEG);
             } else {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintNewFloor);
-                canvas.drawCircle(mapPositions.get(i).getX(),mapPositions.get(i).getY(),7f,paintNewFloor);
+                canvas.drawCircle(mapPositions.get(i).getX(),mapPositions.get(i).getY(),5f,paintNewFloor);
             }
         }
 

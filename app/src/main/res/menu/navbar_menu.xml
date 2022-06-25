@@ -12,7 +12,7 @@
     <item
         android:id="@+id/nav_room_list"
         android:enabled="true"
-        android:title="@string/nav_room_list"
+        android:title="@string/r_ume"
         android:icon="@drawable/nav_icon_room_list"
         />
 

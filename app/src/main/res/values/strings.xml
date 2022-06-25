@@ -35,4 +35,5 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="dot">Dot</string>
     <string name="preferences_feedback_summary">Fehler melden oder Verbesserungen vorschlagen</string>
+    <string name="r_ume">Räume</string>
 </resources>
