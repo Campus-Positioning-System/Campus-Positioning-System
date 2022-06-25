@@ -43,7 +43,15 @@ public class DatabaseAccessThread extends Thread{
         currentPosition = new LocationControl().locate(nearestWifiList);
         DrawingAssistant.setCurrentPosition(currentPosition);
         if(stockwerkView != null) {
-            stockwerkView.setText(currentPosition.toString());
+            if(currentPosition.getZ() == 0) {
+                stockwerkView.setText("Erdgeschoss");
+            } else if(currentPosition.getZ() == 1) {
+                stockwerkView.setText("1. Obergeschoss");
+            } else if(currentPosition.getZ() == 2) {
+                stockwerkView.setText("2. Obergeschoss");
+            } else if(currentPosition.getZ() == 3) {
+                stockwerkView.setText("3. Obergeschoss");
+            }
         }
     }
 }

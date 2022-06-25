@@ -151,7 +151,7 @@ public class DrawingAssistant extends Thread{
         for(int i=0;i<(mapPositions.size()-1); i++) {
             mutableBitmap = bitmapsWithPath.get(mapPositions.get(i).getZ());
             Canvas canvas = new Canvas(mutableBitmap);
-            if(mapPositions.get(i+1).getZ() > mapPositions.get(i).getZ()) {
+            if(mapPositions.get(i+1).getZ() != mapPositions.get(i).getZ()) {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintEG);
                 canvas.drawCircle(mapPositions.get(i).getX(),mapPositions.get(i).getY(),7f,paintEG);
             } else {
