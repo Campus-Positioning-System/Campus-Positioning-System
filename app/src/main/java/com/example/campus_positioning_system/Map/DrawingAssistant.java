@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 
 import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.Fragments.MainFragment;
@@ -152,10 +153,14 @@ public class DrawingAssistant extends Thread{
             Canvas canvas = new Canvas(mutableBitmap);
             if(mapPositions.get(i+1).getZ() > mapPositions.get(i).getZ()) {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintEG);
+                canvas.drawCircle(mapPositions.get(i).getX(),mapPositions.get(i).getY(),7f,paintEG);
             } else {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintNewFloor);
+                canvas.drawCircle(mapPositions.get(i).getX(),mapPositions.get(i).getY(),7f,paintNewFloor);
             }
         }
+
+
         mutableBitmap = bitmapsWithPath.get(currentPosition.getZ());
         mapView.setImageBitmap(mutableBitmap);
         //mapConverter.setMapView(MainFragment.getMapView());
