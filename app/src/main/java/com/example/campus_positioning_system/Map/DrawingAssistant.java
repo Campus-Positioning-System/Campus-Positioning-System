@@ -150,10 +150,10 @@ public class DrawingAssistant extends Thread{
         for(int i=0;i<(mapPositions.size()-1); i++) {
             mutableBitmap = bitmapsWithPath.get(mapPositions.get(i).getZ());
             Canvas canvas = new Canvas(mutableBitmap);
-            if(mapPositions.get(i+1).getY() > mapPositions.get(i).getZ()) {
-                canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintNewFloor);
-            } else {
+            if(mapPositions.get(i+1).getZ() > mapPositions.get(i).getZ()) {
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintEG);
+            } else {
+                canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintNewFloor);
             }
         }
         mutableBitmap = bitmapsWithPath.get(currentPosition.getZ());
@@ -222,6 +222,7 @@ public class DrawingAssistant extends Thread{
         while(true) {
             //System.out.println("----------------------------------------------------------------------");
             dotView.setZoom((float) (2-mapView.getCurrentZoom()));
+            dotView.setRotation(MainActivity.getAngle());
 
             if(!path.isEmpty() && !pathDrawn) {
                 mapView.setZoom(1.0f);
