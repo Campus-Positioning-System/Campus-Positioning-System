@@ -65,6 +65,18 @@ public class LocationControl {
         if(tree.isEmpty() || search.isEmpty()) {
             System.out.println("Location not found -> Current Location is set to Default (55/67/1)");
             Node defaultNode = new Node("default",55,67,1);
+            /*  //Demo
+            if(test == 0) {
+                defaultNode = new Node("default",100,67,1);
+                test++;
+            } else if(test == 1) {
+                defaultNode = new Node("default",20,67,0);
+                test++;
+            } else {
+                defaultNode = new Node("default",30,67,2);
+                test = 0;
+            }
+            */
             PathfindingControl.updateCurrentLocation(defaultNode);
             return defaultNode;
         }
@@ -76,5 +88,5 @@ public class LocationControl {
         System.out.println("Location located at: " + loc.toString());
         return loc;
     }
-
+    //public static int test = 0;   //For Demo Use
 }

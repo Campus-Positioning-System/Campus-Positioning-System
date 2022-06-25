@@ -50,10 +50,10 @@ public class DrawingAssistant extends Thread{
     private static final List<Bitmap> allBitmapsOriginal = new LinkedList<>();
     private static List<Bitmap> bitmapsWithPath;
 
-    private final static int MAP_EG = R.drawable.eg;
+    private final static int MAP_EG = R.drawable.egfancy;
     private final static int MAP_OG1 = R.drawable.og1fancy;
     private final static int MAP_OG2 = R.drawable.og2fancy;
-    private final static int MAP_OG3 = R.drawable.og345;
+    private final static int MAP_OG3 = R.drawable.og3fancy;
 
     public DrawingAssistant(TouchImageView dotView, TouchImageView mapView) {
         DrawingAssistant.mapView = mapView;
@@ -236,7 +236,6 @@ public class DrawingAssistant extends Thread{
             //System.out.println(mapView.getScrollPosition().x);
             //mapConverter.setMapView(MainFragment.getMapView());
             MapPosition position = mapConverter.convertNode(currentPosition);
-
             dotMover.setNewPosition(position.getX(), position.getY());
             dotMover.animationStart();
             try {

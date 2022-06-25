@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.ortiz.touchview.TouchImageView;
 
+import java.util.Objects;
+
 
 /*
 *   Moves a given View to a given Position
@@ -74,18 +76,20 @@ public class Mover extends HandlerThread {
         //System.out.println("Dot moving to: " + x + " " + y);
         //System.out.println("From: " + lastX + " " + lastY);
         this.path = new Path();
+        if(Objects.equals(lastX, x) && Objects.equals(lastY, y)) {
+        } else {
+            path.moveTo(lastX,lastY);
+            path.lineTo(x,y);
+            path.moveTo(x,y);
 
-        path.moveTo(lastX,lastY);
-        path.lineTo(x,y);
-        path.moveTo(x,y);
+            path.close();
+            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path).setDuration(1000);
 
-        path.close();
-        animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path).setDuration(9);
-
-        handler.post(() -> {
-            animator.start();
-        });
-        view.setX(x);
-        view.setY(y);
+            handler.post(() -> {
+                animator.start();
+            });
+            view.setX(x);
+            view.setY(y);
+        }
     }
 }
