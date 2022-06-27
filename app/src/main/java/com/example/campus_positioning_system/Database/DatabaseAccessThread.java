@@ -30,10 +30,13 @@ public class DatabaseAccessThread extends Thread{
     @Override
     public void run() {
         System.out.println(availableNetworks.size());
+        /*
         for(ScanResult s : availableNetworks) {
             System.out.print(s.BSSID + " ");
             System.out.println(s.level);
         }
+
+         */
         List<NNObject> nearestWifiList = availableNetworks.stream()
                 .map(v -> new NNObject(v.BSSID.toUpperCase(), (float) v.level, null, scanAngle))
                 .collect(Collectors.toList());

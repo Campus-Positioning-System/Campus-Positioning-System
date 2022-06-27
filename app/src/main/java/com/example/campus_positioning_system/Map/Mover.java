@@ -5,6 +5,7 @@ import android.graphics.Path;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.Message;
 import android.view.View;
 
 import com.ortiz.touchview.TouchImageView;
@@ -34,7 +35,7 @@ public class Mover extends HandlerThread {
     private Float x,y;
     private Float lastX,lastY;
 
-    private Handler handler;
+    private static Handler handler;
 
     private Path path;
 
@@ -68,7 +69,8 @@ public class Mover extends HandlerThread {
     @Override
     public void run() {
         Looper.prepare();
-        this.handler = new Handler();
+        if (handler == null)
+            handler = new Handler();
         Looper.loop();
     }
 
@@ -76,16 +78,17 @@ public class Mover extends HandlerThread {
         //System.out.println("Dot moving to: " + x + " " + y);
         //System.out.println("From: " + lastX + " " + lastY);
         this.path = new Path();
+
         if(Objects.equals(lastX, x) && Objects.equals(lastY, y)) {
         } else {
-            path.moveTo(lastX,lastY);
-            path.lineTo(x,y);
-            path.moveTo(x,y);
-
-            path.close();
-            animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path).setDuration(1000);
 
             handler.post(() -> {
+                path.moveTo(lastX,lastY);
+                path.lineTo(x,y);
+                path.moveTo(x,y);
+
+                path.close();
+                animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path).setDuration(10);
                 animator.start();
             });
             view.setX(x);

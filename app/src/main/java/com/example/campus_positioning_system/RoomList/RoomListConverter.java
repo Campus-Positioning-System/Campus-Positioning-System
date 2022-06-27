@@ -5,11 +5,18 @@ import android.content.Context;
 import com.amrdeveloper.treeview.TreeNode;
 import com.example.campus_positioning_system.R;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +27,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class RoomListConverter {
 
     static List<TreeNode> favorites;
+    static Context myContext;
 
     public static List<TreeNode> getFavorites() {
 
@@ -32,11 +40,19 @@ public class RoomListConverter {
     }
 
     static void saveFavorites() {
-        //ToDo make persistent with RoomDB bzc everything else doesnt want to save TreeNodes smh
-        /*RoomFavoriteDao favoriteDao = AppDatabase.getInstance().roomFavoriteDao();
-        RoomFavorite toInsert = new RoomFavorite();
-        toInsert.favoriteNodes = favorites;
-        favoriteDao.insertAll(toInsert);*/
+
+        for(TreeNode node : favorites){
+            try (FileOutputStream fos = myContext.openFileOutput("favorites.data", Context.MODE_PRIVATE)) {
+                fos.write(SerializationUtils.serialize(((Element)node.getValue()).toString()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    static void readFavorites(){
+
     }
 
     public static void addFavorite(TreeNode nodeItem) {
@@ -51,6 +67,7 @@ public class RoomListConverter {
     }
 
     public static List<TreeNode> printList(Context c) {
+        myContext = c;
         List<TreeNode> roots = new ArrayList<>();
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

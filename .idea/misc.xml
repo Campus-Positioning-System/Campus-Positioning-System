@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/layout/fragment_favorites_list.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/layout/fragment_room_selection.xml" value="0.1734375" />
-        <entry key="app/src/main/res/layout/main_activity.xml" value="0.29270833333333335" />
+        <entry key="app/src/main/res/layout/main_activity.xml" value="0.75" />
         <entry key="app/src/main/res/layout/nested_recycler_item_child.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/nested_recycler_item_parent.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/recycler_view_item.xml" value="0.24739583333333334" />

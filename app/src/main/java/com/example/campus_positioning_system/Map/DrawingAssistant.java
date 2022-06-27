@@ -172,6 +172,16 @@ public class DrawingAssistant extends Thread{
         setCurrentPosition(currentPosition);
     }
 
+    public int adjustAngle(int angle){
+        if(angle >= -45 && angle < 45)
+            return 0;
+        if(angle >= 45 && angle < 135)
+            return 90;
+        if(angle < -45 && angle >= -135)
+            return 270;
+        return 180;
+    }
+
     @Override
     public void run() {
         float newX = (float) 0;
@@ -227,8 +237,8 @@ public class DrawingAssistant extends Thread{
         while(true) {
             //System.out.println("----------------------------------------------------------------------");
             dotView.setZoom((float) (2-mapView.getCurrentZoom()));
-            dotView.setRotation(MainActivity.getAngle());
-
+            dotView.setRotation(adjustAngle(-MainActivity.getAngle()));
+            System.out.println("Angle is : " + MainActivity.getAngle());
             if(!path.isEmpty() && !pathDrawn) {
                 mapView.setZoom(1.0f);
                 drawPath();
@@ -243,6 +253,7 @@ public class DrawingAssistant extends Thread{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
     }
 }

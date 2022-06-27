@@ -59,6 +59,14 @@ public class MapConverter {
 
     public synchronized MapPosition convertNode(Node toConvert) {
         MapPosition mapPos = new MapPosition();
+
+
+        if(mapView.getScrollPosition() == null){
+            mapPos.setX(0);
+            mapPos.setY(0);
+            return mapPos;
+        }
+
         PointF mapViewCenter = mapView.getScrollPosition();
 
         float xShift;
