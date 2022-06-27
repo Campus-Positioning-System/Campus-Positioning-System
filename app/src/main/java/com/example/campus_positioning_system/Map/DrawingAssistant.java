@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Picture;
 
 import com.example.campus_positioning_system.Activitys.MainActivity;
 import com.example.campus_positioning_system.Fragments.MainFragment;
@@ -148,7 +149,7 @@ public class DrawingAssistant extends Thread{
         bitmapsWithPath.add(allBitmapsOriginal.get(3).copy(Bitmap.Config.ARGB_8888, true));
 
 
-        for(int i=0;i<(mapPositions.size()-1); i++) {
+        for(int i=0;i < mapPositions.size()-1; i++) {
             mutableBitmap = bitmapsWithPath.get(mapPositions.get(i).getZ());
             Canvas canvas = new Canvas(mutableBitmap);
             if(mapPositions.get(i+1).getZ() != mapPositions.get(i).getZ()) {
@@ -158,6 +159,13 @@ public class DrawingAssistant extends Thread{
                 canvas.drawLine(mapPositions.get(i).getX(),mapPositions.get(i).getY(),mapPositions.get(i+1).getX(),mapPositions.get(i+1).getY(),paintNewFloor);
                 canvas.drawCircle(mapPositions.get(i).getX(),mapPositions.get(i).getY(),5f,paintNewFloor);
             }
+            if(i == mapPositions.size()-2){
+                Bitmap ogbitmap = BitmapFactory.decodeResource(MainActivity.mainContext().getResources(), R.drawable.map_finish);
+                Bitmap mutmap = ogbitmap.copy(Bitmap.Config.ARGB_8888, true);
+                canvas.drawBitmap(mutmap,mapPositions.get(i+1).getX()-75,mapPositions.get(i+1).getY()-140,paintEG);
+            }
+
+
         }
 
 
