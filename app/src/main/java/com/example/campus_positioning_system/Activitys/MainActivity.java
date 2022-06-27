@@ -163,8 +163,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Do something here if sensor accuracy changes.
-        // You must implement this callback in your code.
+        switch(sensor.getType()){
+            case Sensor.TYPE_MAGNETIC_FIELD :
+                switch(accuracy) {
+                    case SensorManager.SENSOR_STATUS_ACCURACY_LOW :
+                        System.out.println("Sensor is not accurate");
+                        break;
+                    case SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM :
+                        System.out.println("Sensor is mediumly accurate");
+                        break;
+                    case SensorManager.SENSOR_STATUS_ACCURACY_HIGH :
+                        System.out.println("Sensor is accurate");
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
