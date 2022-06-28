@@ -22,9 +22,9 @@ public class FavoritesActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        System.out.println("On Create Favorites Activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_favorites_list);
+        RoomListConverter.setMyContext(MainActivity.mainContext());
 
         list = findViewById(R.id.favorites_recycler_view);
         list.setLayoutManager(new LinearLayoutManager(this));
@@ -40,7 +40,7 @@ public class FavoritesActivity extends AppCompatActivity {
         TreeViewAdapter treeViewAdapter = new TreeViewAdapter(factory);
         list.setAdapter(treeViewAdapter);
 
-        treeViewAdapter.updateTreeNodes(RoomListConverter.getFavorites());
+        treeViewAdapter.updateTreeNodes(RoomListConverter.getFavoritesAsNodes());
 
         RoomListConverter.printList(this);
 

@@ -1,69 +1,125 @@
 package com.example.campus_positioning_system.RoomList;
 
+import android.app.Instrumentation;
 import android.content.Context;
+
+import androidx.room.Room;
 
 import com.amrdeveloper.treeview.TreeNode;
 import com.example.campus_positioning_system.R;
 
 import org.apache.commons.lang3.SerializationUtils;
+import org.w3c.dom.Attr;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.TypeInfo;
+import org.w3c.dom.UserDataHandler;
 
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import org.xml.sax.InputSource;
+
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.google.gson.Gson;
 
 public class RoomListConverter {
 
-    static List<TreeNode> favorites;
+    static List<RoomItem> favorites;
     static Context myContext;
 
-    public static List<TreeNode> getFavorites() {
+    public static List<RoomItem> getFavorites() {
 
         if (favorites != null)
             return favorites;
 
-        favorites = new ArrayList<>();
+        readFavorites();
 
         return favorites;
     }
 
-    static void saveFavorites() {
+    public static void setMyContext(Context c){
+        if(myContext == null)
+            myContext = c;
+    }
 
-        for(TreeNode node : favorites){
-            try (FileOutputStream fos = myContext.openFileOutput("favorites.data", Context.MODE_PRIVATE)) {
-                fos.write(SerializationUtils.serialize(((Element)node.getValue()).toString()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public static List<TreeNode> getFavoritesAsNodes() {
 
+
+        List<TreeNode> ret = new ArrayList<>();
+        readFavorites();
+        if(favorites == null)
+            return ret;
+
+
+
+        for (RoomItem r : favorites)
+            ret.add(new TreeNode(r,R.layout.room_list_room_item));
+
+        return ret;
+    }
+
+    static synchronized void saveFavorites() {
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(myContext.openFileOutput("favorites.data", Context.MODE_PRIVATE))) {
+            oos.writeObject(favorites);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
     static void readFavorites(){
 
+        try (ObjectInputStream oos = new ObjectInputStream(myContext.openFileInput("favorites.data"))) {
+            favorites = (List<RoomItem>) oos.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
+
 
     public static void addFavorite(TreeNode nodeItem) {
 
-        getFavorites().add(new TreeNode(nodeItem.getValue(), R.layout.room_list_room_favorite));
+        getFavorites().add((RoomItem) nodeItem.getValue());
         saveFavorites();
     }
 
     public static void removeFavorite(TreeNode nodeItem) {
-        getFavorites().remove(nodeItem);
+        getFavorites().remove((RoomItem)nodeItem.getValue());
         saveFavorites();
+    }
+
+    public static boolean isFavorite(TreeNode node){
+        if (favorites == null)
+            return false;
+        return favorites.contains((RoomItem) node.getValue());
     }
 
     public static List<TreeNode> printList(Context c) {
@@ -94,14 +150,12 @@ public class RoomListConverter {
                             for (int j = 0; j < floors.getLength(); j++) {
                                 if (floors.item(j).getNodeType() == Node.ELEMENT_NODE) {
                                     System.out.println("\t\tWe are in room " + ((Element) floors.item(j)).getAttribute("roomname"));
-                                    TreeNode roomNode = new TreeNode(((Element) floors.item(j)), R.layout.room_list_room_item);
-
-                                    NodeList roomAttributes = floors.item(j).getChildNodes();
-                                    for (int k = 0; k < roomAttributes.getLength(); k++) {
-                                        if (roomAttributes.item(k).getNodeType() == Node.ELEMENT_NODE) {
-                                            System.out.println("\t\t\tAttribute : " + roomAttributes.item(k).getNodeName() + " has value " + roomAttributes.item(k).getTextContent());
-                                        }
-                                    }
+                                    RoomItem roomAttributes = new RoomItem(
+                                            ((Element) floors.item(j)).getAttribute("roomname"),
+                                            floors.item(j).getChildNodes().item(1).getTextContent(),
+                                            floors.item(j).getChildNodes().item(3).getTextContent()
+                                    );
+                                    TreeNode roomNode = new TreeNode(roomAttributes, R.layout.room_list_room_item);
                                     floorNode.addChild(roomNode);
                                 }
                             }
