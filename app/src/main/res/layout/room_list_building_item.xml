@@ -20,7 +20,7 @@
         android:src="@drawable/ic_baseline_house_24" />
 
     <TextView
-        android:id="@+id/room_list_building_item_desc"
+        android:id="@+id/room_list_building_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -32,7 +32,7 @@
 
 
     <TextView
-        android:id="@+id/room_list_building_value"
+        android:id="@+id/room_list_building_alias"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"

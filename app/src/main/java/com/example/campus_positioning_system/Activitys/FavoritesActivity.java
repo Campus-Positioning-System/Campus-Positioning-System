@@ -15,6 +15,11 @@ import com.example.campus_positioning_system.RoomList.RoomListViewHolderBuilding
 import com.example.campus_positioning_system.RoomList.RoomListViewHolderLevel;
 import com.example.campus_positioning_system.RoomList.RoomListViewHolderRoom;
 
+/**
+ * @author Ben Lutz
+ * @since 1.0
+ */
+
 public class FavoritesActivity extends AppCompatActivity {
 
     RecyclerView list;
@@ -29,27 +34,22 @@ public class FavoritesActivity extends AppCompatActivity {
         list = findViewById(R.id.favorites_recycler_view);
         list.setLayoutManager(new LinearLayoutManager(this));
 
-        TreeViewHolderFactory factory = (v, layout) -> {
-            if (layout == R.layout.room_list_building_item)
-                return new RoomListViewHolderBuilding(v);
-            else if (layout == R.layout.room_list_level_item)
-                return new RoomListViewHolderLevel(v);
-            else
-                return new RoomListViewHolderRoom(v,null);
-        };
-        TreeViewAdapter treeViewAdapter = new TreeViewAdapter(factory);
-        list.setAdapter(treeViewAdapter);
+        TreeViewHolderFactory factory = (v, layout) -> new RoomListViewHolderRoom(v,this);
+        TreeViewAdapter listadapter = new TreeViewAdapter(factory);
+        list.setAdapter(listadapter);
 
-        treeViewAdapter.updateTreeNodes(RoomListConverter.getFavoritesAsNodes());
+        listadapter.updateTreeNodes(RoomListConverter.getFavoritesAsNodes());
 
-        RoomListConverter.printList(this);
+        //RoomListConverter.printList(this);
 
     }
 
+    /**
+     * Navigates back to map if the user presses the back button
+     */
     @Override
     public void onBackPressed() {
-        System.out.println("User wants to go back from Room list");
-        System.out.println("Navigating from Room List back to Main");
         finish();
     }
+
 }

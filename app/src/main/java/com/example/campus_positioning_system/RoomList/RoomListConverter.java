@@ -98,21 +98,29 @@ public class RoomListConverter {
 
         try (ObjectInputStream oos = new ObjectInputStream(myContext.openFileInput("favorites.data"))) {
             favorites = (List<RoomItem>) oos.readObject();
+            if(favorites == null)
+                favorites = new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        }finally{
+            if(favorites == null)
+                favorites = new ArrayList<>();
         }
 
     }
 
 
     public static void addFavorite(TreeNode nodeItem) {
-
-        getFavorites().add((RoomItem) nodeItem.getValue());
+        if(favorites == null)
+            getFavorites();
+        favorites.add((RoomItem) nodeItem.getValue());
         saveFavorites();
     }
 
     public static void removeFavorite(TreeNode nodeItem) {
-        getFavorites().remove((RoomItem)nodeItem.getValue());
+        if(favorites == null)
+            getFavorites();
+        favorites.remove((RoomItem)nodeItem.getValue());
         saveFavorites();
     }
 
