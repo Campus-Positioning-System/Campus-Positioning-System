@@ -192,7 +192,7 @@ public class DrawingAssistant extends Thread{
         dotMover.start();
 
         while(!setHW) {
-            if(mapView.getHeight() != 0.0) {
+            if((mapView.getHeight() != 0.0) && (dotView.getHeight() != 0.0f)) {
                 displayHeight = MainActivity.height;
                 displayWidth = MainActivity.width;
 

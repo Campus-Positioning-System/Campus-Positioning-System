@@ -26,7 +26,7 @@ public abstract class AppDatabase extends RoomDatabase {
         if(db == null){
             Context context = MainActivity.mainContext();
             db = Room.databaseBuilder(context, AppDatabase.class,"ReferenceData").build();
-            if(db.nnObjectDao().getRelevantData(sample()).size() == 0) {
+            if(db.nnObjectDao().getRelevantData(sample()).size() == 0 && false) {
                 db.clearAllTables();
                 DatabaseImporter.readFile(db);
             }
@@ -46,11 +46,11 @@ public abstract class AppDatabase extends RoomDatabase {
         */
 
         List<String> res = new LinkedList<String>();
-        res.add("C2:FB:E4:84:75:A4");
-        res.add("C2:FB:E4:84:72:FD");
-        res.add("BE:FB:E4:84:78:80");
-        res.add("BE:FB:E4:84:72:FC");
-        res.add("BE:FB:E4:84:78:81");
+        res.add("F0:9F:C2:FE:36:9D");
+        res.add("E2:63:DA:A1:63:07");
+        res.add("C2:FB:E4:C8:5F:5B");
+        res.add("22:E8:29:EE:2F:1B");
+        res.add("18:E8:29:ED:30:81");
 
         return res;
     }

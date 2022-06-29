@@ -91,6 +91,7 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Handle the pathfinding and drawing on a new thread for responsiveness
                 new Thread(() -> {
                     // Update the target location to the closest node of the selected room
