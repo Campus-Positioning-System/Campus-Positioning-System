@@ -62,7 +62,7 @@ public class DrawingAssistant extends Thread{
         currentPosition = new Node("PointZero",62,44,1);
     }
 
-    public static void setCurrentPosition(Node currentPosition1) {
+    public static synchronized void setCurrentPosition(Node currentPosition1) {
         System.out.println("Drawing Assistant received current position: " + currentPosition1.toString());
         currentPosition = currentPosition1;
         if(!pathDrawn) {
@@ -93,9 +93,6 @@ public class DrawingAssistant extends Thread{
                 mapView.setImageBitmap(bitmapsWithPath.get(3));
                 currentMap = R.drawable.og345;
             }
-        }
-        if(mapConverter != null) {
-            //mapConverter.setMapView(MainFragment.getMapView());
         }
     }
 
@@ -147,7 +144,6 @@ public class DrawingAssistant extends Thread{
         bitmapsWithPath.add(allBitmapsOriginal.get(1).copy(Bitmap.Config.ARGB_8888, true));
         bitmapsWithPath.add(allBitmapsOriginal.get(2).copy(Bitmap.Config.ARGB_8888, true));
         bitmapsWithPath.add(allBitmapsOriginal.get(3).copy(Bitmap.Config.ARGB_8888, true));
-
 
         for(int i=0;i < mapPositions.size()-1; i++) {
             mutableBitmap = bitmapsWithPath.get(mapPositions.get(i).getZ());

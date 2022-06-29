@@ -2,10 +2,13 @@ package com.example.campus_positioning_system.Activitys;
 
 // Standard Activity Library's
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -129,6 +132,26 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
                 return false;
             }
+        });
+
+        ActivityResultLauncher<String[]> locationPermissionRequest = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result ->
+        {
+            Boolean fineLocationGranted = result.getOrDefault(
+                    Manifest.permission.ACCESS_FINE_LOCATION, false);
+            Boolean coarseLocationGranted = result.getOrDefault(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,false);
+            if (fineLocationGranted != null && fineLocationGranted) {
+                // Precise location access granted.
+            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+                // Only approximate location access granted.
+            } else {
+                // No location access granted.
+            }
+        });
+
+        locationPermissionRequest.launch(new String[] {
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
         });
 
         System.out.println("On Create Ende Main Activity");
