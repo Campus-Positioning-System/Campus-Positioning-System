@@ -25,6 +25,9 @@ public class RoomListViewHolderBuilding extends TreeViewHolder {
      * corresponding faculty to a building
      */
     private TextView alias_name, buildingName;
+    /**
+     * Icon displayed at the beginning of the row
+     */
     private ImageView icon;
 
     /** Constructor called on list creation. Selects displayed data elements

@@ -31,13 +31,15 @@
         <entry key="app/src/main/res/layout/fragment_favorites_list.xml" value="0.1875" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.13177083333333334" />
         <entry key="app/src/main/res/layout/fragment_room_selection.xml" value="0.1734375" />
-        <entry key="app/src/main/res/layout/main_activity.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/main_activity.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/nested_recycler_item_child.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/nested_recycler_item_parent.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/recycler_view_item.xml" value="0.24739583333333334" />
         <entry key="app/src/main/res/layout/recycler_view_item_1.xml" value="0.24739583333333334" />
         <entry key="app/src/main/res/layout/room_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/room_list_building_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/room_list_item.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/room_list_level_item.xml" value="0.3645833333333333" />
         <entry key="app/src/main/res/layout/room_list_room_favorite.xml" value="0.1328125" />
         <entry key="app/src/main/res/layout/room_list_room_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/room_selection_activity.xml" value="0.21354166666666666" />
@@ -47,6 +49,7 @@
         <entry key="app/src/main/res/layout/text_row_item.xml" value="0.2125" />
         <entry key="app/src/main/res/menu/navbar_menu.xml" value="0.26197916666666665" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/app_icon.xml" value="0.1465" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.3645833333333333" />
       </map>
     </option>
   </component>

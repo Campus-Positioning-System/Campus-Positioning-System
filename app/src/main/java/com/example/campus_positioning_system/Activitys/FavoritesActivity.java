@@ -16,14 +16,22 @@ import com.example.campus_positioning_system.RoomList.RoomListViewHolderLevel;
 import com.example.campus_positioning_system.RoomList.RoomListViewHolderRoom;
 
 /**
+ * Displays a List of favorites
  * @author Ben Lutz
  * @since 1.0
  */
 
 public class FavoritesActivity extends AppCompatActivity {
 
+    /**
+     * List the Favorites will be displayed in
+     */
     RecyclerView list;
 
+    /**
+     * Creates the favorites list onCreate of the FavoritesActivity
+     * @param savedInstanceState State to restore if there is one
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -45,7 +53,7 @@ public class FavoritesActivity extends AppCompatActivity {
     }
 
     /**
-     * Navigates back to map if the user presses the back button
+     * Handles going back to the map when the user presses the back button
      */
     @Override
     public void onBackPressed() {

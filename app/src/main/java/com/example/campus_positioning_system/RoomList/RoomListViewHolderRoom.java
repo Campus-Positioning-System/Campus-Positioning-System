@@ -46,13 +46,14 @@ public class RoomListViewHolderRoom extends TreeViewHolder {
      */
     private Activity roomSelectionActivity;
 
-    /** Constructor called on list creation. Selects displayed data elements and fills Activity
-     *
+    /**
+     * Constructor called on list creation. Selects displayed data elements and fills Activity
      * @param itemView View the displayed entry will be in
      * @param roomSelectionActivity Activity the list was generated. Also see {@link com.example.campus_positioning_system.RoomList.RoomListViewHolderRoom#roomSelectionActivity}
      */
     public RoomListViewHolderRoom(@NonNull View itemView,@Nullable Activity roomSelectionActivity) {
         super(itemView);
+        //If the Room list was generated in the FavoritesActivity, show items not indented
         if(roomSelectionActivity.getClass() == FavoritesActivity.class)
             ((LinearLayout)itemView.findViewById(R.id.room_list_linear_layout)).setGravity(Gravity.CENTER);
         roomName = itemView.findViewById(R.id.room_item_name);

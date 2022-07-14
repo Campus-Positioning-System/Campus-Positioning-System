@@ -55,7 +55,7 @@ public class WifiScanner extends Thread{
     }
 
     public void setScanIntervall(int intervall){
-        this.scanInterval = intervall;
+        scanInterval = intervall;
     }
 
     public int adjustAngle(int angle){
@@ -78,7 +78,7 @@ public class WifiScanner extends Thread{
         public void onReceive(Context c, Intent intent) {
             boolean success = intent.getBooleanExtra(WifiManager.EXTRA_RESULTS_UPDATED, false);
             if (success) {
-                System.out.println("Scan did succeed in BroadcastReceiver");
+                //System.out.println("Scan did succeed in BroadcastReceiver");
                 scanSuccess();
             } else {
                 System.out.println("Scan did not succeed.");
@@ -89,6 +89,7 @@ public class WifiScanner extends Thread{
     private long lastUpdatedTime = 0;
 
     private void scanSuccess() {
+        System.out.println("Scan did succeed");
         availableNetworks = wifiManager.getScanResults();
         scanAngle = MainActivity.getAngle();
 
@@ -111,7 +112,7 @@ public class WifiScanner extends Thread{
         while(shouldRun){
             boolean success = wifiManager.startScan();
             if (success) {
-                System.out.println("Scan did succeed in run()");
+                //System.out.println("Scan did succeed in run()");
                 scanSuccess();
             } else {
                 System.out.println("Scan did not succeed.");
